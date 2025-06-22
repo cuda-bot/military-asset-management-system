@@ -1,0 +1,223 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Base {
+  id              Int      @id @default(autoincrement())
+  name            String   @unique
+  location        String
+  commanderName   String?  @map("commander_name")
+  contactEmail    String?  @map("contact_email")
+  contactPhone    String?  @map("contact_phone")
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  userBases     UserBase[]
+  assets        Asset[]
+  purchases     Purchase[]
+  transfersFrom Transfer[] @relation("FromBase")
+  transfersTo   Transfer[] @relation("ToBase")
+
+  @@map("bases")
+}
+
+model EquipmentType {
+  id            Int      @id @default(autoincrement())
+  name          String   @unique
+  category      String
+  description   String?
+  unitOfMeasure String   @map("unit_of_measure")
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  assets    Asset[]
+  purchases Purchase[]
+  transfers Transfer[]
+
+  @@map("equipment_types")
+}
+
+model User {
+  id           Int      @id @default(autoincrement())
+  username     String   @unique
+  email        String   @unique
+  passwordHash String   @map("password_hash")
+  firstName    String   @map("first_name")
+  lastName     String   @map("last_name")
+  role         Role
+  isActive     Boolean  @default(true) @map("is_active")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  bases              UserBase[]
+  purchases          Purchase[]
+  transfersCreated   Transfer[] @relation("CreatedBy")
+  transfersApproved  Transfer[] @relation("ApprovedBy")
+  assignmentsCreated Assignment[] @relation("AssignedBy")
+  expendituresCreated Expenditure[] @relation("CreatedBy")
+  expendituresApproved Expenditure[] @relation("ApprovedBy")
+  auditLogs          AuditLog[]
+
+  @@map("users")
+}
+
+model UserBase {
+  id         Int      @id @default(autoincrement())
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId     Int      @map("user_id")
+  base       Base     @relation(fields: [baseId], references: [id], onDelete: Cascade)
+  baseId     Int      @map("base_id")
+  assignedAt DateTime @default(now()) @map("assigned_at")
+
+  @@unique([userId, baseId])
+  @@map("user_bases")
+}
+
+model Asset {
+  id              Int      @id @default(autoincrement())
+  equipmentType   EquipmentType @relation(fields: [equipmentTypeId], references: [id])
+  equipmentTypeId Int      @map("equipment_type_id")
+  base            Base     @relation(fields: [baseId], references: [id])
+  baseId          Int      @map("base_id")
+  serialNumber    String?  @unique @map("serial_number")
+  quantity        Int      @default(0)
+  openingBalance  Int      @default(0) @map("opening_balance")
+  closingBalance  Int      @default(0) @map("closing_balance")
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  assignments  Assignment[]
+  expenditures Expenditure[]
+
+  @@index([baseId])
+  @@index([equipmentTypeId])
+  @@map("assets")
+}
+
+model Purchase {
+  id              Int      @id @default(autoincrement())
+  base            Base     @relation(fields: [baseId], references: [id])
+  baseId          Int      @map("base_id")
+  equipmentType   EquipmentType @relation(fields: [equipmentTypeId], references: [id])
+  equipmentTypeId Int      @map("equipment_type_id")
+  quantity        Int
+  unitPrice       Decimal  @db.Decimal(10, 2) @map("unit_price")
+  totalAmount     Decimal  @db.Decimal(10, 2) @map("total_amount")
+  supplier        String?
+  purchaseDate    DateTime @db.Date @map("purchase_date")
+  invoiceNumber   String?  @map("invoice_number")
+  notes           String?
+  createdBy       User     @relation(fields: [createdById], references: [id])
+  createdById     Int      @map("created_by")
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  @@index([baseId])
+  @@index([purchaseDate])
+  @@map("purchases")
+}
+
+model Transfer {
+  id              Int      @id @default(autoincrement())
+  equipmentType   EquipmentType @relation(fields: [equipmentTypeId], references: [id])
+  equipmentTypeId Int      @map("equipment_type_id")
+  fromBase        Base     @relation("FromBase", fields: [fromBaseId], references: [id])
+  fromBaseId      Int      @map("from_base_id")
+  toBase          Base     @relation("ToBase", fields: [toBaseId], references: [id])
+  toBaseId        Int      @map("to_base_id")
+  quantity        Int
+  transferDate    DateTime @db.Date @map("transfer_date")
+  status          TransferStatus @default(pending)
+  approvedBy      User?    @relation("ApprovedBy", fields: [approvedById], references: [id])
+  approvedById    Int?     @map("approved_by")
+  approvedAt      DateTime?
+  notes           String?
+  createdBy       User     @relation("CreatedBy", fields: [createdById], references: [id])
+  createdById     Int      @map("created_by")
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  @@index([fromBaseId])
+  @@index([toBaseId])
+  @@index([transferDate])
+  @@map("transfers")
+}
+
+model Assignment {
+  id                 Int      @id @default(autoincrement())
+  asset              Asset    @relation(fields: [assetId], references: [id])
+  assetId            Int      @map("asset_id")
+  assignedTo         String   @map("assigned_to")
+  assignedBy         User     @relation("AssignedBy", fields: [assignedById], references: [id])
+  assignedById       Int      @map("assigned_by")
+  quantity           Int
+  assignmentDate     DateTime @db.Date @map("assignment_date")
+  expectedReturnDate DateTime? @db.Date @map("expected_return_date")
+  actualReturnDate   DateTime? @db.Date @map("actual_return_date")
+  status             AssignmentStatus @default(active)
+  notes              String?
+  createdAt          DateTime @default(now()) @map("created_at")
+  updatedAt          DateTime @updatedAt @map("updated_at")
+
+  @@index([assetId])
+  @@index([status])
+  @@map("assignments")
+}
+
+model Expenditure {
+  id             Int      @id @default(autoincrement())
+  asset          Asset    @relation(fields: [assetId], references: [id])
+  assetId        Int      @map("asset_id")
+  quantity       Int
+  expenditureDate DateTime @db.Date @map("expenditure_date")
+  reason         String   @db.VarChar(500)
+  approvedBy     User?    @relation("ApprovedBy", fields: [approvedById], references: [id])
+  approvedById   Int?     @map("approved_by")
+  notes          String?
+  createdBy      User     @relation("CreatedBy", fields: [createdById], references: [id])
+  createdById    Int      @map("created_by")
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  @@index([assetId])
+  @@map("expenditures")
+}
+
+model AuditLog {
+  id         Int      @id @default(autoincrement())
+  user       User?    @relation(fields: [userId], references: [id])
+  userId     Int?     @map("user_id")
+  action     String
+  tableName  String   @map("table_name")
+  recordId   Int?     @map("record_id")
+  oldValues  Json?    @map("old_values")
+  newValues  Json?    @map("new_values")
+  ipAddress  String?  @db.Inet @map("ip_address")
+  userAgent  String?  @map("user_agent")
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  @@index([userId])
+  @@index([createdAt])
+  @@map("audit_logs")
+}
+
+enum Role {
+  admin
+  base_commander
+  logistics_officer
+}
+
+enum TransferStatus {
+  pending
+  approved
+  completed
+  cancelled
+}
+
+enum AssignmentStatus {
+  active
+  returned
+  expired
+} 

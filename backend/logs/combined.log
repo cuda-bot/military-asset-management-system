@@ -1,0 +1,3777 @@
+{"code":"ECONNREFUSED","level":"error","message":"Migration failed:","service":"military-asset-management","stack":"AggregateError [ECONNREFUSED]: \n    at /Users/architrajput/Documents/Desktop - archit’s MacBook Pro/work/devlopment/military-asset-mgmt/backend/node_modules/pg-pool/index.js:45:11\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async Object.getClient (/Users/architrajput/Documents/Desktop - archit’s MacBook Pro/work/devlopment/military-asset-mgmt/backend/config/database.js:52:16)\n    at async createTables (/Users/architrajput/Documents/Desktop - archit’s MacBook Pro/work/devlopment/military-asset-mgmt/backend/scripts/migrate.js:5:20)","timestamp":"2025-06-21 11:51:07"}
+2025-06-21 14:42:11 [32minfo[39m: Start seeding...
+2025-06-21 14:42:13 [31merror[39m: 
+Invalid `prisma.base.createMany()` invocation:
+
+{
+  data: [
+    {
+      name: "Fort Bragg",
+      location: "North Carolina, USA",
+      commanderName: "Col. John Smith",
+      contactEmail: "commander@fortbragg.mil",
+      contactPhone: "+1-910-396-1111"
+    },
+    {
+      name: "Camp Pendleton",
+      location: "California, USA",
+      commanderName: "Col. Sarah Johnson",
+      contactEmail: "commander@camppendleton.mil",
+      contactPhone: "+1-760-725-4111"
+    },
+    {
+      name: "Fort Hood",
+      location: "Texas, USA",
+      commanderName: "Col. Michael Davis",
+      contactEmail: "commander@forthood.mil",
+      contactPhone: "+1-254-287-1111"
+    },
+    {
+      name: "Joint Base Lewis-McChord",
+      location: "Washington, USA",
+      commanderName: "Col. Robert Wilson",
+      contactEmail: "commander@jblm.mil",
+      contactPhone: "+1-253-967-1111"
+    }
+  ],
+  skipDuplicates: true
+}
+
+Unknown argument `commanderName`. Available options are marked with ?.
+2025-06-21 14:42:42 [32minfo[39m: Start seeding...
+2025-06-21 14:42:45 [32minfo[39m: Created 4 bases.
+2025-06-21 14:42:46 [32minfo[39m: Created 10 equipment types.
+2025-06-21 14:42:48 [31merror[39m: 
+Invalid `prisma.user.upsert()` invocation:
+
+{
+  where: {
+    username: "admin"
+  },
+  update: {},
+  create: {
+    username: "admin",
+    email: "admin@military.mil",
+    passwordHash: "$2a$12$QuzgXFTv2RfQXb7YTx.qre7AjwtQ0WjsVlEfDyHmev0WCbNZ55R.C",
+    firstName: "System",
+    lastName: "Administrator",
+    role: "admin",
++   password: String
+  }
+}
+
+Argument `password` is missing.
+2025-06-21 14:43:17 [32minfo[39m: Start seeding...
+2025-06-21 14:43:20 [32minfo[39m: Created 0 bases.
+2025-06-21 14:43:21 [32minfo[39m: Created 0 equipment types.
+2025-06-21 14:43:23 [31merror[39m: 
+Invalid `prisma.user.upsert()` invocation:
+
+{
+  where: {
+    username: "admin"
+  },
+  update: {},
+  create: {
+    username: "admin",
+    email: "admin@military.mil",
+    ~~~~~
+    password: "$2a$12$Hyu3Opt.bRqHUHEEOabwc.VfBtnIz4WhxKVzI9o6pbLjwuUBHNprK",
+    firstName: "System",
+    lastName: "Administrator",
+    role: "admin",
+?   id?: String,
+?   created_at?: DateTime,
+?   updated_at?: DateTime,
+?   base?: BaseCreateNestedOneWithoutUsersInput,
+?   assignments?: AssignmentCreateNestedManyWithoutUserInput
+  }
+}
+
+Unknown argument `email`. Available options are marked with ?.
+2025-06-21 14:44:02 [32minfo[39m: Start seeding...
+2025-06-21 14:44:05 [32minfo[39m: Created 0 bases.
+2025-06-21 14:44:06 [32minfo[39m: Created 0 equipment types.
+2025-06-21 14:44:14 [32minfo[39m: Created/updated 5 users.
+2025-06-21 14:44:17 [32minfo[39m: Assigned users to bases.
+2025-06-21 14:44:19 [32minfo[39m: Created 3 initial assets.
+2025-06-21 14:44:19 [32minfo[39m: Seeding finished.
+2025-06-21 15:45:48 [32minfo[39m: Server running on port 5003
+2025-06-21 15:45:48 [32minfo[39m: Environment: development
+2025-06-21 15:46:17 [32minfo[39m: Server running on port 5003
+2025-06-21 15:46:17 [32minfo[39m: Environment: development
+2025-06-21 16:10:03 [32minfo[39m: Server running on port 5003
+2025-06-21 16:10:03 [32minfo[39m: Environment: development
+2025-06-21 16:18:50 [32minfo[39m: Server running on port 5003
+2025-06-21 16:18:50 [32minfo[39m: Environment: development
+2025-06-21 16:21:01 [32minfo[39m: Server running on port 5003
+2025-06-21 16:21:01 [32minfo[39m: Environment: development
+2025-06-21 16:21:22 [31merror[39m: Login error: 
+Invalid `prisma.user.findUnique()` invocation:
+
+{
+  where: {
+    username: "commander_bragg"
+  },
+  include: {
+    bases: {
+    ~~~~~
+      include: {
+        base: true
+      }
+    },
+?   base?: true,
+?   assignments?: true
+  }
+}
+
+Unknown field `bases` for include statement on model `User`. Available options are marked with ?.
+2025-06-21 16:21:22 [32minfo[39m: ::1 - - [21/Jun/2025:10:51:22 +0000] "POST /api/auth/login HTTP/1.1" 500 24 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:23:11 [32minfo[39m: Server running on port 5003
+2025-06-21 16:23:11 [32minfo[39m: Environment: development
+2025-06-21 16:23:34 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:10:53:34 +0000] "POST /api/auth/login HTTP/1.1" 200 443 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:26:42 [31merror[39m: Token verification error: 
+Invalid `prisma.user.findUnique()` invocation:
+
+{
+  where: {
+    id: "cmc60v4qe000evvfcojm8whzq"
+  },
+  select: {
+    id: true,
+    username: true,
+    email: true,
+    ~~~~~
+    firstName: true,
+    lastName: true,
+    role: true,
+    isActive: true,
+    bases: {
+      select: {
+        base: {
+          select: {
+            id: true,
+            name: true
+          }
+        }
+      }
+    },
+?   password?: true,
+?   base_id?: true,
+?   created_at?: true,
+?   updated_at?: true,
+?   base?: true,
+?   assignments?: true,
+?   _count?: true
+  }
+}
+
+Unknown field `email` for select statement on model `User`. Available options are marked with ?.
+2025-06-21 16:26:42 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:10:56:42 +0000] "GET /api/auth/verify HTTP/1.1" 500 24 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:26:42 [31merror[39m: Token verification error: 
+Invalid `prisma.user.findUnique()` invocation:
+
+{
+  where: {
+    id: "cmc60v4qe000evvfcojm8whzq"
+  },
+  select: {
+    id: true,
+    username: true,
+    email: true,
+    ~~~~~
+    firstName: true,
+    lastName: true,
+    role: true,
+    isActive: true,
+    bases: {
+      select: {
+        base: {
+          select: {
+            id: true,
+            name: true
+          }
+        }
+      }
+    },
+?   password?: true,
+?   base_id?: true,
+?   created_at?: true,
+?   updated_at?: true,
+?   base?: true,
+?   assignments?: true,
+?   _count?: true
+  }
+}
+
+Unknown field `email` for select statement on model `User`. Available options are marked with ?.
+2025-06-21 16:26:42 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:10:56:42 +0000] "GET /api/auth/verify HTTP/1.1" 500 24 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:26:56 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:10:56:56 +0000] "POST /api/auth/login HTTP/1.1" 200 704 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:28:19 [31merror[39m: Token verification error: 
+Invalid `prisma.user.findUnique()` invocation:
+
+{
+  where: {
+    id: "cmc60v68q000fvvfcnwu4eft9"
+  },
+  select: {
+    id: true,
+    username: true,
+    email: true,
+    ~~~~~
+    firstName: true,
+    lastName: true,
+    role: true,
+    isActive: true,
+    bases: {
+      select: {
+        base: {
+          select: {
+            id: true,
+            name: true
+          }
+        }
+      }
+    },
+?   password?: true,
+?   base_id?: true,
+?   created_at?: true,
+?   updated_at?: true,
+?   base?: true,
+?   assignments?: true,
+?   _count?: true
+  }
+}
+
+Unknown field `email` for select statement on model `User`. Available options are marked with ?.
+2025-06-21 16:28:19 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:10:58:19 +0000] "GET /api/auth/verify HTTP/1.1" 500 24 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:28:19 [31merror[39m: Token verification error: 
+Invalid `prisma.user.findUnique()` invocation:
+
+{
+  where: {
+    id: "cmc60v68q000fvvfcnwu4eft9"
+  },
+  select: {
+    id: true,
+    username: true,
+    email: true,
+    ~~~~~
+    firstName: true,
+    lastName: true,
+    role: true,
+    isActive: true,
+    bases: {
+      select: {
+        base: {
+          select: {
+            id: true,
+            name: true
+          }
+        }
+      }
+    },
+?   password?: true,
+?   base_id?: true,
+?   created_at?: true,
+?   updated_at?: true,
+?   base?: true,
+?   assignments?: true,
+?   _count?: true
+  }
+}
+
+Unknown field `email` for select statement on model `User`. Available options are marked with ?.
+2025-06-21 16:28:19 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:10:58:19 +0000] "GET /api/auth/verify HTTP/1.1" 500 24 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:29:00 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:10:59:00 +0000] "POST /api/auth/login HTTP/1.1" 200 711 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:29:33 [31merror[39m: Token verification error: 
+Invalid `prisma.user.findUnique()` invocation:
+
+{
+  where: {
+    id: "cmc60v87l000hvvfcws5b0e6k"
+  },
+  select: {
+    id: true,
+    username: true,
+    email: true,
+    ~~~~~
+    firstName: true,
+    lastName: true,
+    role: true,
+    isActive: true,
+    bases: {
+      select: {
+        base: {
+          select: {
+            id: true,
+            name: true
+          }
+        }
+      }
+    },
+?   password?: true,
+?   base_id?: true,
+?   created_at?: true,
+?   updated_at?: true,
+?   base?: true,
+?   assignments?: true,
+?   _count?: true
+  }
+}
+
+Unknown field `email` for select statement on model `User`. Available options are marked with ?.
+2025-06-21 16:29:33 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:10:59:33 +0000] "GET /api/auth/verify HTTP/1.1" 500 24 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:29:33 [31merror[39m: Token verification error: 
+Invalid `prisma.user.findUnique()` invocation:
+
+{
+  where: {
+    id: "cmc60v87l000hvvfcws5b0e6k"
+  },
+  select: {
+    id: true,
+    username: true,
+    email: true,
+    ~~~~~
+    firstName: true,
+    lastName: true,
+    role: true,
+    isActive: true,
+    bases: {
+      select: {
+        base: {
+          select: {
+            id: true,
+            name: true
+          }
+        }
+      }
+    },
+?   password?: true,
+?   base_id?: true,
+?   created_at?: true,
+?   updated_at?: true,
+?   base?: true,
+?   assignments?: true,
+?   _count?: true
+  }
+}
+
+Unknown field `email` for select statement on model `User`. Available options are marked with ?.
+2025-06-21 16:29:33 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:10:59:33 +0000] "GET /api/auth/verify HTTP/1.1" 500 24 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:29:45 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:10:59:45 +0000] "POST /api/auth/login HTTP/1.1" 200 711 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:30:51 [32minfo[39m: Server running on port 5003
+2025-06-21 16:30:51 [32minfo[39m: Environment: development
+2025-06-21 16:31:04 [31merror[39m: Token verification error: 
+Invalid `prisma.user.findUnique()` invocation:
+
+{
+  where: {
+    id: "cmc60v87l000hvvfcws5b0e6k"
+  },
+  select: {
+    id: true,
+    username: true,
+    email: true,
+    ~~~~~
+    firstName: true,
+    lastName: true,
+    role: true,
+    isActive: true,
+    bases: {
+      select: {
+        base: {
+          select: {
+            id: true,
+            name: true
+          }
+        }
+      }
+    },
+?   password?: true,
+?   base_id?: true,
+?   created_at?: true,
+?   updated_at?: true,
+?   base?: true,
+?   assignments?: true,
+?   _count?: true
+  }
+}
+
+Unknown field `email` for select statement on model `User`. Available options are marked with ?.
+2025-06-21 16:31:04 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:01:04 +0000] "GET /api/auth/verify HTTP/1.1" 500 24 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:31:04 [31merror[39m: Token verification error: 
+Invalid `prisma.user.findUnique()` invocation:
+
+{
+  where: {
+    id: "cmc60v87l000hvvfcws5b0e6k"
+  },
+  select: {
+    id: true,
+    username: true,
+    email: true,
+    ~~~~~
+    firstName: true,
+    lastName: true,
+    role: true,
+    isActive: true,
+    bases: {
+      select: {
+        base: {
+          select: {
+            id: true,
+            name: true
+          }
+        }
+      }
+    },
+?   password?: true,
+?   base_id?: true,
+?   created_at?: true,
+?   updated_at?: true,
+?   base?: true,
+?   assignments?: true,
+?   _count?: true
+  }
+}
+
+Unknown field `email` for select statement on model `User`. Available options are marked with ?.
+2025-06-21 16:31:04 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:01:04 +0000] "GET /api/auth/verify HTTP/1.1" 500 24 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:31:18 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:01:18 +0000] "POST /api/auth/login HTTP/1.1" 200 711 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:32:53 [31merror[39m: Token verification error: 
+Invalid `prisma.user.findUnique()` invocation:
+
+{
+  where: {
+    id: "cmc60v87l000hvvfcws5b0e6k"
+  },
+  select: {
+    id: true,
+    username: true,
+    email: true,
+    ~~~~~
+    firstName: true,
+    lastName: true,
+    role: true,
+    isActive: true,
+    bases: {
+      select: {
+        base: {
+          select: {
+            id: true,
+            name: true
+          }
+        }
+      }
+    },
+?   password?: true,
+?   base_id?: true,
+?   created_at?: true,
+?   updated_at?: true,
+?   base?: true,
+?   assignments?: true,
+?   _count?: true
+  }
+}
+
+Unknown field `email` for select statement on model `User`. Available options are marked with ?.
+2025-06-21 16:32:53 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:02:53 +0000] "GET /api/auth/verify HTTP/1.1" 500 24 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:32:53 [31merror[39m: Token verification error: 
+Invalid `prisma.user.findUnique()` invocation:
+
+{
+  where: {
+    id: "cmc60v87l000hvvfcws5b0e6k"
+  },
+  select: {
+    id: true,
+    username: true,
+    email: true,
+    ~~~~~
+    firstName: true,
+    lastName: true,
+    role: true,
+    isActive: true,
+    bases: {
+      select: {
+        base: {
+          select: {
+            id: true,
+            name: true
+          }
+        }
+      }
+    },
+?   password?: true,
+?   base_id?: true,
+?   created_at?: true,
+?   updated_at?: true,
+?   base?: true,
+?   assignments?: true,
+?   _count?: true
+  }
+}
+
+Unknown field `email` for select statement on model `User`. Available options are marked with ?.
+2025-06-21 16:32:53 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:02:53 +0000] "GET /api/auth/verify HTTP/1.1" 500 24 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:33:14 [32minfo[39m: Server running on port 5003
+2025-06-21 16:33:14 [32minfo[39m: Environment: development
+2025-06-21 16:34:44 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:04:44 +0000] "POST /api/auth/login HTTP/1.1" 200 443 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:37:36 [32minfo[39m: Server running on port 5003
+2025-06-21 16:37:36 [32minfo[39m: Environment: development
+2025-06-21 16:38:02 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:08:02 +0000] "GET /api/auth/verify HTTP/1.1" 200 89 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:38:03 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:08:03 +0000] "GET /api/auth/verify HTTP/1.1" 304 - "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:39:39 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:09:39 +0000] "GET /api/auth/verify HTTP/1.1" 304 - "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:39:39 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:09:39 +0000] "GET /api/auth/verify HTTP/1.1" 304 - "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:39:49 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:09:49 +0000] "POST /api/auth/login HTTP/1.1" 200 443 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:41:07 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:11:07 +0000] "GET /api/auth/verify HTTP/1.1" 304 - "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:41:07 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:11:07 +0000] "GET /api/auth/verify HTTP/1.1" 304 - "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:41:26 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:11:26 +0000] "GET /api/auth/verify HTTP/1.1" 304 - "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:41:26 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:11:26 +0000] "GET /api/auth/verify HTTP/1.1" 304 - "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:41:35 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:11:35 +0000] "POST /api/auth/login HTTP/1.1" 200 443 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:42:48 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:12:48 +0000] "GET /api/auth/verify HTTP/1.1" 304 - "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:42:49 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:12:49 +0000] "GET /api/auth/verify HTTP/1.1" 304 - "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:44:49 [32minfo[39m: Server running on port 5003
+2025-06-21 16:44:49 [32minfo[39m: Environment: development
+2025-06-21 16:45:07 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:15:07 +0000] "GET /api/auth/verify HTTP/1.1" 304 - "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:45:08 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:15:08 +0000] "GET /api/auth/verify HTTP/1.1" 304 - "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:45:17 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:15:17 +0000] "POST /api/auth/login HTTP/1.1" 200 443 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:45:18 [31merror[39m: Error fetching dashboard metrics: 
+Invalid `prisma.purchase.aggregate()` invocation:
+
+{
+  select: {
+    _sum: {
+      select: {
+        quantity: true
+      }
+    }
+  },
+  where: {
+    purchaseDate: {},
+    ~~~~~~~~~~~~
+?   AND?: PurchaseWhereInput | PurchaseWhereInput[],
+?   OR?: PurchaseWhereInput[],
+?   NOT?: PurchaseWhereInput | PurchaseWhereInput[],
+?   id?: StringFilter | String,
+?   asset_id?: StringFilter | String,
+?   base_id?: StringFilter | String,
+?   vendor?: StringFilter | String,
+?   cost?: FloatFilter | Float,
+?   purchase_date?: DateTimeFilter | DateTime,
+?   created_at?: DateTimeFilter | DateTime,
+?   updated_at?: DateTimeFilter | DateTime,
+?   asset?: AssetScalarRelationFilter | AssetWhereInput,
+?   base?: BaseScalarRelationFilter | BaseWhereInput
+  }
+}
+
+Unknown argument `purchaseDate`. Did you mean `purchase_date`? Available options are marked with ?.
+2025-06-21 16:45:18 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:15:18 +0000] "GET /api/dashboard/metrics? HTTP/1.1" 500 24 "http://localhost:3000/dashboard" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:45:19 [31merror[39m: Error fetching dashboard metrics: 
+Invalid `prisma.purchase.aggregate()` invocation:
+
+{
+  select: {
+    _sum: {
+      select: {
+        quantity: true
+      }
+    }
+  },
+  where: {
+    purchaseDate: {},
+    ~~~~~~~~~~~~
+?   AND?: PurchaseWhereInput | PurchaseWhereInput[],
+?   OR?: PurchaseWhereInput[],
+?   NOT?: PurchaseWhereInput | PurchaseWhereInput[],
+?   id?: StringFilter | String,
+?   asset_id?: StringFilter | String,
+?   base_id?: StringFilter | String,
+?   vendor?: StringFilter | String,
+?   cost?: FloatFilter | Float,
+?   purchase_date?: DateTimeFilter | DateTime,
+?   created_at?: DateTimeFilter | DateTime,
+?   updated_at?: DateTimeFilter | DateTime,
+?   asset?: AssetScalarRelationFilter | AssetWhereInput,
+?   base?: BaseScalarRelationFilter | BaseWhereInput
+  }
+}
+
+Unknown argument `purchaseDate`. Did you mean `purchase_date`? Available options are marked with ?.
+2025-06-21 16:45:19 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:15:19 +0000] "GET /api/dashboard/metrics? HTTP/1.1" 500 24 "http://localhost:3000/dashboard" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:45:20 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:15:20 +0000] "GET /api/dashboard/filters HTTP/1.1" 200 2082 "http://localhost:3000/dashboard" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:45:22 [31merror[39m: Error fetching dashboard metrics: 
+Invalid `prisma.purchase.aggregate()` invocation:
+
+{
+  select: {
+    _sum: {
+      select: {
+        quantity: true
+      }
+    }
+  },
+  where: {
+    purchaseDate: {},
+    ~~~~~~~~~~~~
+?   AND?: PurchaseWhereInput | PurchaseWhereInput[],
+?   OR?: PurchaseWhereInput[],
+?   NOT?: PurchaseWhereInput | PurchaseWhereInput[],
+?   id?: StringFilter | String,
+?   asset_id?: StringFilter | String,
+?   base_id?: StringFilter | String,
+?   vendor?: StringFilter | String,
+?   cost?: FloatFilter | Float,
+?   purchase_date?: DateTimeFilter | DateTime,
+?   created_at?: DateTimeFilter | DateTime,
+?   updated_at?: DateTimeFilter | DateTime,
+?   asset?: AssetScalarRelationFilter | AssetWhereInput,
+?   base?: BaseScalarRelationFilter | BaseWhereInput
+  }
+}
+
+Unknown argument `purchaseDate`. Did you mean `purchase_date`? Available options are marked with ?.
+2025-06-21 16:45:22 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:15:22 +0000] "GET /api/dashboard/metrics? HTTP/1.1" 500 24 "http://localhost:3000/dashboard" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:45:26 [31merror[39m: Error fetching dashboard metrics: 
+Invalid `prisma.purchase.aggregate()` invocation:
+
+{
+  select: {
+    _sum: {
+      select: {
+        quantity: true
+      }
+    }
+  },
+  where: {
+    purchaseDate: {},
+    ~~~~~~~~~~~~
+?   AND?: PurchaseWhereInput | PurchaseWhereInput[],
+?   OR?: PurchaseWhereInput[],
+?   NOT?: PurchaseWhereInput | PurchaseWhereInput[],
+?   id?: StringFilter | String,
+?   asset_id?: StringFilter | String,
+?   base_id?: StringFilter | String,
+?   vendor?: StringFilter | String,
+?   cost?: FloatFilter | Float,
+?   purchase_date?: DateTimeFilter | DateTime,
+?   created_at?: DateTimeFilter | DateTime,
+?   updated_at?: DateTimeFilter | DateTime,
+?   asset?: AssetScalarRelationFilter | AssetWhereInput,
+?   base?: BaseScalarRelationFilter | BaseWhereInput
+  }
+}
+
+Unknown argument `purchaseDate`. Did you mean `purchase_date`? Available options are marked with ?.
+2025-06-21 16:45:26 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:15:26 +0000] "GET /api/dashboard/metrics? HTTP/1.1" 500 24 "http://localhost:3000/dashboard" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:45:39 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:15:39 +0000] "GET /api/auth/verify HTTP/1.1" 304 - "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:45:40 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:15:40 +0000] "GET /api/auth/verify HTTP/1.1" 304 - "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:45:52 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:15:52 +0000] "POST /api/auth/login HTTP/1.1" 200 704 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:45:52 [31merror[39m: Error fetching dashboard metrics: 
+Invalid `prisma.asset.findMany()` invocation:
+
+{
+  where: {
+    baseId: {
+    ~~~~~~
+      in: undefined
+    },
+?   AND?: AssetWhereInput | AssetWhereInput[],
+?   OR?: AssetWhereInput[],
+?   NOT?: AssetWhereInput | AssetWhereInput[],
+?   id?: StringFilter | String,
+?   name?: StringFilter | String,
+?   serial_number?: StringFilter | String,
+?   type_id?: StringFilter | String,
+?   base_id?: StringFilter | String,
+?   status?: EnumAssetStatusFilter | AssetStatus,
+?   created_at?: DateTimeFilter | DateTime,
+?   updated_at?: DateTimeFilter | DateTime,
+?   equipment_type?: EquipmentTypeScalarRelationFilter | EquipmentTypeWhereInput,
+?   base?: BaseScalarRelationFilter | BaseWhereInput,
+?   assignments?: AssignmentListRelationFilter,
+?   transfers?: TransferListRelationFilter,
+?   purchases?: PurchaseListRelationFilter,
+?   expenditures?: ExpenditureListRelationFilter
+  }
+}
+
+Unknown argument `baseId`. Did you mean `base_id`? Available options are marked with ?.
+2025-06-21 16:45:52 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:15:52 +0000] "GET /api/dashboard/metrics? HTTP/1.1" 500 24 "http://localhost:3000/dashboard" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:45:52 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:15:52 +0000] "GET /api/dashboard/filters HTTP/1.1" 304 - "http://localhost:3000/dashboard" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:45:53 [31merror[39m: Error fetching dashboard metrics: 
+Invalid `prisma.asset.findMany()` invocation:
+
+{
+  where: {
+    baseId: {
+    ~~~~~~
+      in: undefined
+    },
+?   AND?: AssetWhereInput | AssetWhereInput[],
+?   OR?: AssetWhereInput[],
+?   NOT?: AssetWhereInput | AssetWhereInput[],
+?   id?: StringFilter | String,
+?   name?: StringFilter | String,
+?   serial_number?: StringFilter | String,
+?   type_id?: StringFilter | String,
+?   base_id?: StringFilter | String,
+?   status?: EnumAssetStatusFilter | AssetStatus,
+?   created_at?: DateTimeFilter | DateTime,
+?   updated_at?: DateTimeFilter | DateTime,
+?   equipment_type?: EquipmentTypeScalarRelationFilter | EquipmentTypeWhereInput,
+?   base?: BaseScalarRelationFilter | BaseWhereInput,
+?   assignments?: AssignmentListRelationFilter,
+?   transfers?: TransferListRelationFilter,
+?   purchases?: PurchaseListRelationFilter,
+?   expenditures?: ExpenditureListRelationFilter
+  }
+}
+
+Unknown argument `baseId`. Did you mean `base_id`? Available options are marked with ?.
+2025-06-21 16:45:53 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:15:53 +0000] "GET /api/dashboard/metrics? HTTP/1.1" 500 24 "http://localhost:3000/dashboard" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:45:55 [31merror[39m: Error fetching dashboard metrics: 
+Invalid `prisma.asset.findMany()` invocation:
+
+{
+  where: {
+    baseId: {
+    ~~~~~~
+      in: undefined
+    },
+?   AND?: AssetWhereInput | AssetWhereInput[],
+?   OR?: AssetWhereInput[],
+?   NOT?: AssetWhereInput | AssetWhereInput[],
+?   id?: StringFilter | String,
+?   name?: StringFilter | String,
+?   serial_number?: StringFilter | String,
+?   type_id?: StringFilter | String,
+?   base_id?: StringFilter | String,
+?   status?: EnumAssetStatusFilter | AssetStatus,
+?   created_at?: DateTimeFilter | DateTime,
+?   updated_at?: DateTimeFilter | DateTime,
+?   equipment_type?: EquipmentTypeScalarRelationFilter | EquipmentTypeWhereInput,
+?   base?: BaseScalarRelationFilter | BaseWhereInput,
+?   assignments?: AssignmentListRelationFilter,
+?   transfers?: TransferListRelationFilter,
+?   purchases?: PurchaseListRelationFilter,
+?   expenditures?: ExpenditureListRelationFilter
+  }
+}
+
+Unknown argument `baseId`. Did you mean `base_id`? Available options are marked with ?.
+2025-06-21 16:45:55 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:15:55 +0000] "GET /api/dashboard/metrics? HTTP/1.1" 500 24 "http://localhost:3000/dashboard" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:45:59 [31merror[39m: Error fetching dashboard metrics: 
+Invalid `prisma.asset.findMany()` invocation:
+
+{
+  where: {
+    baseId: {
+    ~~~~~~
+      in: undefined
+    },
+?   AND?: AssetWhereInput | AssetWhereInput[],
+?   OR?: AssetWhereInput[],
+?   NOT?: AssetWhereInput | AssetWhereInput[],
+?   id?: StringFilter | String,
+?   name?: StringFilter | String,
+?   serial_number?: StringFilter | String,
+?   type_id?: StringFilter | String,
+?   base_id?: StringFilter | String,
+?   status?: EnumAssetStatusFilter | AssetStatus,
+?   created_at?: DateTimeFilter | DateTime,
+?   updated_at?: DateTimeFilter | DateTime,
+?   equipment_type?: EquipmentTypeScalarRelationFilter | EquipmentTypeWhereInput,
+?   base?: BaseScalarRelationFilter | BaseWhereInput,
+?   assignments?: AssignmentListRelationFilter,
+?   transfers?: TransferListRelationFilter,
+?   purchases?: PurchaseListRelationFilter,
+?   expenditures?: ExpenditureListRelationFilter
+  }
+}
+
+Unknown argument `baseId`. Did you mean `base_id`? Available options are marked with ?.
+2025-06-21 16:45:59 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:15:59 +0000] "GET /api/dashboard/metrics? HTTP/1.1" 500 24 "http://localhost:3000/dashboard" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:46:08 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:16:08 +0000] "GET /api/auth/verify HTTP/1.1" 200 158 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:46:09 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:16:09 +0000] "GET /api/auth/verify HTTP/1.1" 304 - "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:46:35 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:16:35 +0000] "POST /api/auth/login HTTP/1.1" 200 711 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:46:35 [31merror[39m: Error fetching dashboard metrics: 
+Invalid `prisma.asset.findMany()` invocation:
+
+{
+  where: {
+    baseId: {
+    ~~~~~~
+      in: undefined
+    },
+?   AND?: AssetWhereInput | AssetWhereInput[],
+?   OR?: AssetWhereInput[],
+?   NOT?: AssetWhereInput | AssetWhereInput[],
+?   id?: StringFilter | String,
+?   name?: StringFilter | String,
+?   serial_number?: StringFilter | String,
+?   type_id?: StringFilter | String,
+?   base_id?: StringFilter | String,
+?   status?: EnumAssetStatusFilter | AssetStatus,
+?   created_at?: DateTimeFilter | DateTime,
+?   updated_at?: DateTimeFilter | DateTime,
+?   equipment_type?: EquipmentTypeScalarRelationFilter | EquipmentTypeWhereInput,
+?   base?: BaseScalarRelationFilter | BaseWhereInput,
+?   assignments?: AssignmentListRelationFilter,
+?   transfers?: TransferListRelationFilter,
+?   purchases?: PurchaseListRelationFilter,
+?   expenditures?: ExpenditureListRelationFilter
+  }
+}
+
+Unknown argument `baseId`. Did you mean `base_id`? Available options are marked with ?.
+2025-06-21 16:46:35 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:16:35 +0000] "GET /api/dashboard/metrics? HTTP/1.1" 500 24 "http://localhost:3000/dashboard" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:46:36 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:16:36 +0000] "GET /api/dashboard/filters HTTP/1.1" 304 - "http://localhost:3000/dashboard" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:46:36 [31merror[39m: Error fetching dashboard metrics: 
+Invalid `prisma.asset.findMany()` invocation:
+
+{
+  where: {
+    baseId: {
+    ~~~~~~
+      in: undefined
+    },
+?   AND?: AssetWhereInput | AssetWhereInput[],
+?   OR?: AssetWhereInput[],
+?   NOT?: AssetWhereInput | AssetWhereInput[],
+?   id?: StringFilter | String,
+?   name?: StringFilter | String,
+?   serial_number?: StringFilter | String,
+?   type_id?: StringFilter | String,
+?   base_id?: StringFilter | String,
+?   status?: EnumAssetStatusFilter | AssetStatus,
+?   created_at?: DateTimeFilter | DateTime,
+?   updated_at?: DateTimeFilter | DateTime,
+?   equipment_type?: EquipmentTypeScalarRelationFilter | EquipmentTypeWhereInput,
+?   base?: BaseScalarRelationFilter | BaseWhereInput,
+?   assignments?: AssignmentListRelationFilter,
+?   transfers?: TransferListRelationFilter,
+?   purchases?: PurchaseListRelationFilter,
+?   expenditures?: ExpenditureListRelationFilter
+  }
+}
+
+Unknown argument `baseId`. Did you mean `base_id`? Available options are marked with ?.
+2025-06-21 16:46:36 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:16:36 +0000] "GET /api/dashboard/metrics? HTTP/1.1" 500 24 "http://localhost:3000/dashboard" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:46:38 [31merror[39m: Error fetching dashboard metrics: 
+Invalid `prisma.asset.findMany()` invocation:
+
+{
+  where: {
+    baseId: {
+    ~~~~~~
+      in: undefined
+    },
+?   AND?: AssetWhereInput | AssetWhereInput[],
+?   OR?: AssetWhereInput[],
+?   NOT?: AssetWhereInput | AssetWhereInput[],
+?   id?: StringFilter | String,
+?   name?: StringFilter | String,
+?   serial_number?: StringFilter | String,
+?   type_id?: StringFilter | String,
+?   base_id?: StringFilter | String,
+?   status?: EnumAssetStatusFilter | AssetStatus,
+?   created_at?: DateTimeFilter | DateTime,
+?   updated_at?: DateTimeFilter | DateTime,
+?   equipment_type?: EquipmentTypeScalarRelationFilter | EquipmentTypeWhereInput,
+?   base?: BaseScalarRelationFilter | BaseWhereInput,
+?   assignments?: AssignmentListRelationFilter,
+?   transfers?: TransferListRelationFilter,
+?   purchases?: PurchaseListRelationFilter,
+?   expenditures?: ExpenditureListRelationFilter
+  }
+}
+
+Unknown argument `baseId`. Did you mean `base_id`? Available options are marked with ?.
+2025-06-21 16:46:38 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:16:38 +0000] "GET /api/dashboard/metrics? HTTP/1.1" 500 24 "http://localhost:3000/dashboard" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:46:42 [31merror[39m: Error fetching dashboard metrics: 
+Invalid `prisma.asset.findMany()` invocation:
+
+{
+  where: {
+    baseId: {
+    ~~~~~~
+      in: undefined
+    },
+?   AND?: AssetWhereInput | AssetWhereInput[],
+?   OR?: AssetWhereInput[],
+?   NOT?: AssetWhereInput | AssetWhereInput[],
+?   id?: StringFilter | String,
+?   name?: StringFilter | String,
+?   serial_number?: StringFilter | String,
+?   type_id?: StringFilter | String,
+?   base_id?: StringFilter | String,
+?   status?: EnumAssetStatusFilter | AssetStatus,
+?   created_at?: DateTimeFilter | DateTime,
+?   updated_at?: DateTimeFilter | DateTime,
+?   equipment_type?: EquipmentTypeScalarRelationFilter | EquipmentTypeWhereInput,
+?   base?: BaseScalarRelationFilter | BaseWhereInput,
+?   assignments?: AssignmentListRelationFilter,
+?   transfers?: TransferListRelationFilter,
+?   purchases?: PurchaseListRelationFilter,
+?   expenditures?: ExpenditureListRelationFilter
+  }
+}
+
+Unknown argument `baseId`. Did you mean `base_id`? Available options are marked with ?.
+2025-06-21 16:46:42 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:16:42 +0000] "GET /api/dashboard/metrics? HTTP/1.1" 500 24 "http://localhost:3000/dashboard" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:49:04 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:19:04 +0000] "GET /api/auth/verify HTTP/1.1" 200 161 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:49:04 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:19:04 +0000] "GET /api/auth/verify HTTP/1.1" 304 - "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:49:45 [32minfo[39m: Server running on port 5003
+2025-06-21 16:49:45 [32minfo[39m: Environment: development
+2025-06-21 16:50:04 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:20:04 +0000] "POST /api/auth/login HTTP/1.1" 200 443 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:50:07 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:20:07 +0000] "GET /api/dashboard/metrics? HTTP/1.1" 200 145 "http://localhost:3000/dashboard" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:50:07 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:20:07 +0000] "GET /api/dashboard/filters HTTP/1.1" 304 - "http://localhost:3000/dashboard" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:50:20 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:20:20 +0000] "GET /api/assets/categories HTTP/1.1" 200 1380 "http://localhost:3000/purchases" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:50:20 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:20:20 +0000] "GET /api/bases HTTP/1.1" 200 673 "http://localhost:3000/purchases" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:50:21 [31merror[39m: Error fetching purchases: 
+Invalid `prisma.purchase.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    purchaseDate: "desc",
+    ~~~~~~~~~~~~
+?   id?: SortOrder,
+?   asset_id?: SortOrder,
+?   base_id?: SortOrder,
+?   vendor?: SortOrder,
+?   cost?: SortOrder,
+?   purchase_date?: SortOrder,
+?   created_at?: SortOrder,
+?   updated_at?: SortOrder,
+?   asset?: AssetOrderByWithRelationInput,
+?   base?: BaseOrderByWithRelationInput
+  },
+  include: {
+    equipmentType: true,
+    base: true,
+    createdBy: {
+      select: {
+        id: true,
+        username: true
+      }
+    }
+  }
+}
+
+Unknown argument `purchaseDate`. Did you mean `purchase_date`? Available options are marked with ?.
+2025-06-21 16:50:21 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:20:21 +0000] "GET /api/purchases?page=1&limit=10 HTTP/1.1" 500 24 "http://localhost:3000/purchases" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:50:22 [31merror[39m: Error fetching purchases: 
+Invalid `prisma.purchase.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    purchaseDate: "desc",
+    ~~~~~~~~~~~~
+?   id?: SortOrder,
+?   asset_id?: SortOrder,
+?   base_id?: SortOrder,
+?   vendor?: SortOrder,
+?   cost?: SortOrder,
+?   purchase_date?: SortOrder,
+?   created_at?: SortOrder,
+?   updated_at?: SortOrder,
+?   asset?: AssetOrderByWithRelationInput,
+?   base?: BaseOrderByWithRelationInput
+  },
+  include: {
+    equipmentType: true,
+    base: true,
+    createdBy: {
+      select: {
+        id: true,
+        username: true
+      }
+    }
+  }
+}
+
+Unknown argument `purchaseDate`. Did you mean `purchase_date`? Available options are marked with ?.
+2025-06-21 16:50:22 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:20:22 +0000] "GET /api/purchases?page=1&limit=10 HTTP/1.1" 500 24 "http://localhost:3000/purchases" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:50:45 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:20:45 +0000] "GET /api/auth/verify HTTP/1.1" 200 89 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:50:45 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:20:45 +0000] "GET /api/auth/verify HTTP/1.1" 304 - "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:51:01 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:21:01 +0000] "POST /api/auth/login HTTP/1.1" 200 704 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:51:02 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:21:02 +0000] "GET /api/dashboard/filters HTTP/1.1" 304 - "http://localhost:3000/dashboard" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:51:04 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:21:04 +0000] "GET /api/dashboard/metrics? HTTP/1.1" 304 - "http://localhost:3000/dashboard" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:51:46 [32minfo[39m: Server running on port 5003
+2025-06-21 16:51:46 [32minfo[39m: Environment: development
+2025-06-21 16:53:11 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:23:11 +0000] "GET /api/auth/verify HTTP/1.1" 200 158 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:53:12 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:23:12 +0000] "GET /api/auth/verify HTTP/1.1" 304 - "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:53:24 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:23:24 +0000] "POST /api/auth/login HTTP/1.1" 200 443 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:53:26 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:23:26 +0000] "GET /api/dashboard/filters HTTP/1.1" 304 - "http://localhost:3000/dashboard" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:53:27 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:23:27 +0000] "GET /api/dashboard/metrics? HTTP/1.1" 304 - "http://localhost:3000/dashboard" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:53:38 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:23:38 +0000] "GET /api/assets/categories HTTP/1.1" 304 - "http://localhost:3000/purchases" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:53:38 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:23:38 +0000] "GET /api/purchases?page=1&limit=10 HTTP/1.1" 200 66 "http://localhost:3000/purchases" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:53:39 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:23:39 +0000] "GET /api/dashboard/filters HTTP/1.1" 304 - "http://localhost:3000/dashboard" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:53:40 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:23:40 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/purchases" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:53:41 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:23:41 +0000] "GET /api/dashboard/metrics? HTTP/1.1" 304 - "http://localhost:3000/dashboard" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:54:41 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignmentDate: "desc",
+    ~~~~~~~~~~~~~~
+?   id?: SortOrder,
+?   asset_id?: SortOrder,
+?   user_id?: SortOrder,
+?   assignment_date?: SortOrder,
+?   return_date?: SortOrder | SortOrderInput,
+?   created_at?: SortOrder,
+?   updated_at?: SortOrder,
+?   asset?: AssetOrderByWithRelationInput,
+?   user?: UserOrderByWithRelationInput
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown argument `assignmentDate`. Did you mean `assignment_date`? Available options are marked with ?.
+2025-06-21 16:54:41 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:24:41 +0000] "GET /api/assignments?page=1&limit=10 HTTP/1.1" 500 24 "http://localhost:3000/assignments" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:54:42 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignmentDate: "desc",
+    ~~~~~~~~~~~~~~
+?   id?: SortOrder,
+?   asset_id?: SortOrder,
+?   user_id?: SortOrder,
+?   assignment_date?: SortOrder,
+?   return_date?: SortOrder | SortOrderInput,
+?   created_at?: SortOrder,
+?   updated_at?: SortOrder,
+?   asset?: AssetOrderByWithRelationInput,
+?   user?: UserOrderByWithRelationInput
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown argument `assignmentDate`. Did you mean `assignment_date`? Available options are marked with ?.
+2025-06-21 16:54:42 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:24:42 +0000] "GET /api/assignments?page=1&limit=10 HTTP/1.1" 500 24 "http://localhost:3000/assignments" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 16:54:44 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignmentDate: "desc",
+    ~~~~~~~~~~~~~~
+?   id?: SortOrder,
+?   asset_id?: SortOrder,
+?   user_id?: SortOrder,
+?   assignment_date?: SortOrder,
+?   return_date?: SortOrder | SortOrderInput,
+?   created_at?: SortOrder,
+?   updated_at?: SortOrder,
+?   asset?: AssetOrderByWithRelationInput,
+?   user?: UserOrderByWithRelationInput
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown argument `assignmentDate`. Did you mean `assignment_date`? Available options are marked with ?.
+2025-06-21 16:54:44 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:11:24:44 +0000] "GET /api/assignments?page=1&limit=10 HTTP/1.1" 500 24 "http://localhost:3000/assignments" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:43:12 [32minfo[39m: Server running on port 5003
+2025-06-21 22:43:12 [32minfo[39m: Environment: development
+2025-06-21 22:43:34 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:13:34 +0000] "GET /api/auth/verify HTTP/1.1" 200 89 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:43:34 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:13:34 +0000] "GET /api/auth/verify HTTP/1.1" 304 - "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:43:44 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:13:44 +0000] "POST /api/auth/login HTTP/1.1" 200 443 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:43:47 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:13:47 +0000] "GET /api/dashboard/filters HTTP/1.1" 304 - "http://localhost:3000/dashboard" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:43:47 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:13:47 +0000] "GET /api/dashboard/metrics? HTTP/1.1" 304 - "http://localhost:3000/dashboard" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:44:01 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:14:01 +0000] "GET /api/assets/categories HTTP/1.1" 304 - "http://localhost:3000/purchases" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:44:02 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:14:02 +0000] "GET /api/purchases?page=1&limit=10 HTTP/1.1" 304 - "http://localhost:3000/purchases" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:44:03 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:14:03 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/purchases" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:44:49 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:14:49 +0000] "GET /api/auth/verify HTTP/1.1" 304 - "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:44:50 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:14:50 +0000] "GET /api/auth/verify HTTP/1.1" 304 - "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:45:12 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:15:12 +0000] "POST /api/auth/login HTTP/1.1" 200 443 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:45:13 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:15:13 +0000] "GET /api/dashboard/filters HTTP/1.1" 304 - "http://localhost:3000/dashboard" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:45:15 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:15:15 +0000] "GET /api/dashboard/metrics? HTTP/1.1" 304 - "http://localhost:3000/dashboard" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:45:15 [31merror[39m: Error fetching transfers: 
+Invalid `prisma.transfer.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    transferDate: "desc",
+    ~~~~~~~~~~~~
+?   id?: SortOrder,
+?   asset_id?: SortOrder,
+?   from_base_id?: SortOrder,
+?   to_base_id?: SortOrder,
+?   transfer_date?: SortOrder,
+?   created_at?: SortOrder,
+?   updated_at?: SortOrder,
+?   asset?: AssetOrderByWithRelationInput,
+?   from_base?: BaseOrderByWithRelationInput,
+?   to_base?: BaseOrderByWithRelationInput
+  },
+  include: {
+    equipmentType: true,
+    fromBase: true,
+    toBase: true,
+    createdBy: {
+      select: {
+        id: true,
+        username: true
+      }
+    },
+    approvedBy: {
+      select: {
+        id: true,
+        username: true
+      }
+    }
+  }
+}
+
+Unknown argument `transferDate`. Did you mean `transfer_date`? Available options are marked with ?.
+2025-06-21 22:45:15 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:15:15 +0000] "GET /api/transfers?page=1&limit=10 HTTP/1.1" 500 24 "http://localhost:3000/transfers" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:45:15 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:15:15 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/transfers" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:45:16 [31merror[39m: Error fetching transfers: 
+Invalid `prisma.transfer.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    transferDate: "desc",
+    ~~~~~~~~~~~~
+?   id?: SortOrder,
+?   asset_id?: SortOrder,
+?   from_base_id?: SortOrder,
+?   to_base_id?: SortOrder,
+?   transfer_date?: SortOrder,
+?   created_at?: SortOrder,
+?   updated_at?: SortOrder,
+?   asset?: AssetOrderByWithRelationInput,
+?   from_base?: BaseOrderByWithRelationInput,
+?   to_base?: BaseOrderByWithRelationInput
+  },
+  include: {
+    equipmentType: true,
+    fromBase: true,
+    toBase: true,
+    createdBy: {
+      select: {
+        id: true,
+        username: true
+      }
+    },
+    approvedBy: {
+      select: {
+        id: true,
+        username: true
+      }
+    }
+  }
+}
+
+Unknown argument `transferDate`. Did you mean `transfer_date`? Available options are marked with ?.
+2025-06-21 22:45:16 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:15:16 +0000] "GET /api/transfers?page=1&limit=10 HTTP/1.1" 500 24 "http://localhost:3000/transfers" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:45:18 [31merror[39m: Error fetching transfers: 
+Invalid `prisma.transfer.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    transferDate: "desc",
+    ~~~~~~~~~~~~
+?   id?: SortOrder,
+?   asset_id?: SortOrder,
+?   from_base_id?: SortOrder,
+?   to_base_id?: SortOrder,
+?   transfer_date?: SortOrder,
+?   created_at?: SortOrder,
+?   updated_at?: SortOrder,
+?   asset?: AssetOrderByWithRelationInput,
+?   from_base?: BaseOrderByWithRelationInput,
+?   to_base?: BaseOrderByWithRelationInput
+  },
+  include: {
+    equipmentType: true,
+    fromBase: true,
+    toBase: true,
+    createdBy: {
+      select: {
+        id: true,
+        username: true
+      }
+    },
+    approvedBy: {
+      select: {
+        id: true,
+        username: true
+      }
+    }
+  }
+}
+
+Unknown argument `transferDate`. Did you mean `transfer_date`? Available options are marked with ?.
+2025-06-21 22:45:18 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:15:18 +0000] "GET /api/transfers?page=1&limit=10 HTTP/1.1" 500 24 "http://localhost:3000/transfers" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:45:22 [31merror[39m: Error fetching transfers: 
+Invalid `prisma.transfer.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    transferDate: "desc",
+    ~~~~~~~~~~~~
+?   id?: SortOrder,
+?   asset_id?: SortOrder,
+?   from_base_id?: SortOrder,
+?   to_base_id?: SortOrder,
+?   transfer_date?: SortOrder,
+?   created_at?: SortOrder,
+?   updated_at?: SortOrder,
+?   asset?: AssetOrderByWithRelationInput,
+?   from_base?: BaseOrderByWithRelationInput,
+?   to_base?: BaseOrderByWithRelationInput
+  },
+  include: {
+    equipmentType: true,
+    fromBase: true,
+    toBase: true,
+    createdBy: {
+      select: {
+        id: true,
+        username: true
+      }
+    },
+    approvedBy: {
+      select: {
+        id: true,
+        username: true
+      }
+    }
+  }
+}
+
+Unknown argument `transferDate`. Did you mean `transfer_date`? Available options are marked with ?.
+2025-06-21 22:45:22 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:15:22 +0000] "GET /api/transfers?page=1&limit=10 HTTP/1.1" 500 24 "http://localhost:3000/transfers" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:46:37 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:16:37 +0000] "GET /api/auth/verify HTTP/1.1" 304 - "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:46:38 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:16:38 +0000] "GET /api/auth/verify HTTP/1.1" 304 - "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:46:47 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:16:47 +0000] "POST /api/auth/login HTTP/1.1" 200 443 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:46:48 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:16:48 +0000] "GET /api/dashboard/filters HTTP/1.1" 304 - "http://localhost:3000/dashboard" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:46:49 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:16:49 +0000] "GET /api/dashboard/metrics? HTTP/1.1" 304 - "http://localhost:3000/dashboard" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:46:52 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:16:52 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/purchases" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:46:52 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:16:52 +0000] "GET /api/assets/categories HTTP/1.1" 304 - "http://localhost:3000/purchases" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:46:53 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:16:53 +0000] "GET /api/purchases?page=1&limit=10 HTTP/1.1" 304 - "http://localhost:3000/purchases" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:46:54 [31merror[39m: Error fetching transfers: 
+Invalid `prisma.transfer.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    transferDate: "desc",
+    ~~~~~~~~~~~~
+?   id?: SortOrder,
+?   asset_id?: SortOrder,
+?   from_base_id?: SortOrder,
+?   to_base_id?: SortOrder,
+?   transfer_date?: SortOrder,
+?   created_at?: SortOrder,
+?   updated_at?: SortOrder,
+?   asset?: AssetOrderByWithRelationInput,
+?   from_base?: BaseOrderByWithRelationInput,
+?   to_base?: BaseOrderByWithRelationInput
+  },
+  include: {
+    equipmentType: true,
+    fromBase: true,
+    toBase: true,
+    createdBy: {
+      select: {
+        id: true,
+        username: true
+      }
+    },
+    approvedBy: {
+      select: {
+        id: true,
+        username: true
+      }
+    }
+  }
+}
+
+Unknown argument `transferDate`. Did you mean `transfer_date`? Available options are marked with ?.
+2025-06-21 22:46:54 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:16:54 +0000] "GET /api/transfers?page=1&limit=10 HTTP/1.1" 500 24 "http://localhost:3000/transfers" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:46:54 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:16:54 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/transfers" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:46:55 [31merror[39m: Error fetching transfers: 
+Invalid `prisma.transfer.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    transferDate: "desc",
+    ~~~~~~~~~~~~
+?   id?: SortOrder,
+?   asset_id?: SortOrder,
+?   from_base_id?: SortOrder,
+?   to_base_id?: SortOrder,
+?   transfer_date?: SortOrder,
+?   created_at?: SortOrder,
+?   updated_at?: SortOrder,
+?   asset?: AssetOrderByWithRelationInput,
+?   from_base?: BaseOrderByWithRelationInput,
+?   to_base?: BaseOrderByWithRelationInput
+  },
+  include: {
+    equipmentType: true,
+    fromBase: true,
+    toBase: true,
+    createdBy: {
+      select: {
+        id: true,
+        username: true
+      }
+    },
+    approvedBy: {
+      select: {
+        id: true,
+        username: true
+      }
+    }
+  }
+}
+
+Unknown argument `transferDate`. Did you mean `transfer_date`? Available options are marked with ?.
+2025-06-21 22:46:55 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:16:55 +0000] "GET /api/transfers?page=1&limit=10 HTTP/1.1" 500 24 "http://localhost:3000/transfers" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:46:57 [31merror[39m: Error fetching transfers: 
+Invalid `prisma.transfer.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    transferDate: "desc",
+    ~~~~~~~~~~~~
+?   id?: SortOrder,
+?   asset_id?: SortOrder,
+?   from_base_id?: SortOrder,
+?   to_base_id?: SortOrder,
+?   transfer_date?: SortOrder,
+?   created_at?: SortOrder,
+?   updated_at?: SortOrder,
+?   asset?: AssetOrderByWithRelationInput,
+?   from_base?: BaseOrderByWithRelationInput,
+?   to_base?: BaseOrderByWithRelationInput
+  },
+  include: {
+    equipmentType: true,
+    fromBase: true,
+    toBase: true,
+    createdBy: {
+      select: {
+        id: true,
+        username: true
+      }
+    },
+    approvedBy: {
+      select: {
+        id: true,
+        username: true
+      }
+    }
+  }
+}
+
+Unknown argument `transferDate`. Did you mean `transfer_date`? Available options are marked with ?.
+2025-06-21 22:46:57 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:16:57 +0000] "GET /api/transfers?page=1&limit=10 HTTP/1.1" 500 24 "http://localhost:3000/transfers" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:47:00 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignmentDate: "desc",
+    ~~~~~~~~~~~~~~
+?   id?: SortOrder,
+?   asset_id?: SortOrder,
+?   user_id?: SortOrder,
+?   assignment_date?: SortOrder,
+?   return_date?: SortOrder | SortOrderInput,
+?   created_at?: SortOrder,
+?   updated_at?: SortOrder,
+?   asset?: AssetOrderByWithRelationInput,
+?   user?: UserOrderByWithRelationInput
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown argument `assignmentDate`. Did you mean `assignment_date`? Available options are marked with ?.
+2025-06-21 22:47:00 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:17:00 +0000] "GET /api/assignments?page=1&limit=10 HTTP/1.1" 500 24 "http://localhost:3000/assignments" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:47:01 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignmentDate: "desc",
+    ~~~~~~~~~~~~~~
+?   id?: SortOrder,
+?   asset_id?: SortOrder,
+?   user_id?: SortOrder,
+?   assignment_date?: SortOrder,
+?   return_date?: SortOrder | SortOrderInput,
+?   created_at?: SortOrder,
+?   updated_at?: SortOrder,
+?   asset?: AssetOrderByWithRelationInput,
+?   user?: UserOrderByWithRelationInput
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown argument `assignmentDate`. Did you mean `assignment_date`? Available options are marked with ?.
+2025-06-21 22:47:01 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:17:01 +0000] "GET /api/assignments?page=1&limit=10 HTTP/1.1" 500 24 "http://localhost:3000/assignments" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:48:09 [32minfo[39m: Server running on port 5003
+2025-06-21 22:48:09 [32minfo[39m: Environment: development
+2025-06-21 22:48:15 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:18:15 +0000] "GET /api/auth/verify HTTP/1.1" 304 - "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:48:16 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:18:16 +0000] "GET /api/auth/verify HTTP/1.1" 304 - "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:48:26 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:18:26 +0000] "POST /api/auth/login HTTP/1.1" 200 443 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:48:29 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:18:29 +0000] "GET /api/dashboard/metrics? HTTP/1.1" 304 - "http://localhost:3000/dashboard" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:48:29 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:18:29 +0000] "GET /api/dashboard/filters HTTP/1.1" 304 - "http://localhost:3000/dashboard" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:48:47 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:18:47 +0000] "GET /api/dashboard/metrics?base_id=cmc60tcqu0001vvd36lknw6jo HTTP/1.1" 200 145 "http://localhost:3000/dashboard" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:48:48 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:18:48 +0000] "GET /api/dashboard/metrics?base_id=cmc60tcqu0000vvd3dim2q2fy HTTP/1.1" 200 145 "http://localhost:3000/dashboard" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:48:49 [31merror[39m: Error fetching dashboard metrics: 
+Invalid `prisma.purchase.count()` invocation:
+
+{
+  select: {
+    _count: {
+      select: {
+        _all: true
+      }
+    }
+  },
+  where: {
+    base_id: "cmc60tcqu0000vvd3dim2q2fy",
+    type_id: "cmc60tdkc000avvd3f32o1wr3",
+    ~~~~~~~
+?   AND?: PurchaseWhereInput | PurchaseWhereInput[],
+?   OR?: PurchaseWhereInput[],
+?   NOT?: PurchaseWhereInput | PurchaseWhereInput[],
+?   id?: StringFilter | String,
+?   asset_id?: StringFilter | String,
+?   vendor?: StringFilter | String,
+?   cost?: FloatFilter | Float,
+?   purchase_date?: DateTimeFilter | DateTime,
+?   created_at?: DateTimeFilter | DateTime,
+?   updated_at?: DateTimeFilter | DateTime,
+?   asset?: AssetScalarRelationFilter | AssetWhereInput,
+?   base?: BaseScalarRelationFilter | BaseWhereInput
+  }
+}
+
+Unknown argument `type_id`. Did you mean `base_id`? Available options are marked with ?.
+2025-06-21 22:48:49 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:18:49 +0000] "GET /api/dashboard/metrics?base_id=cmc60tcqu0000vvd3dim2q2fy&equipment_type_id=cmc60tdkc000avvd3f32o1wr3 HTTP/1.1" 500 24 "http://localhost:3000/dashboard" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:48:49 [31merror[39m: Error fetching dashboard metrics: 
+Invalid `prisma.purchase.count()` invocation:
+
+{
+  select: {
+    _count: {
+      select: {
+        _all: true
+      }
+    }
+  },
+  where: {
+    base_id: "cmc60tcqu0000vvd3dim2q2fy",
+    type_id: "cmc60tdkc0006vvd3sxh009fh",
+    ~~~~~~~
+?   AND?: PurchaseWhereInput | PurchaseWhereInput[],
+?   OR?: PurchaseWhereInput[],
+?   NOT?: PurchaseWhereInput | PurchaseWhereInput[],
+?   id?: StringFilter | String,
+?   asset_id?: StringFilter | String,
+?   vendor?: StringFilter | String,
+?   cost?: FloatFilter | Float,
+?   purchase_date?: DateTimeFilter | DateTime,
+?   created_at?: DateTimeFilter | DateTime,
+?   updated_at?: DateTimeFilter | DateTime,
+?   asset?: AssetScalarRelationFilter | AssetWhereInput,
+?   base?: BaseScalarRelationFilter | BaseWhereInput
+  }
+}
+
+Unknown argument `type_id`. Did you mean `base_id`? Available options are marked with ?.
+2025-06-21 22:48:49 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:18:49 +0000] "GET /api/dashboard/metrics?base_id=cmc60tcqu0000vvd3dim2q2fy&equipment_type_id=cmc60tdkc0006vvd3sxh009fh HTTP/1.1" 500 24 "http://localhost:3000/dashboard" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:48:50 [31merror[39m: Error fetching dashboard metrics: 
+Invalid `prisma.purchase.count()` invocation:
+
+{
+  select: {
+    _count: {
+      select: {
+        _all: true
+      }
+    }
+  },
+  where: {
+    base_id: "cmc60tcqu0000vvd3dim2q2fy",
+    type_id: "cmc60tdkc000avvd3f32o1wr3",
+    ~~~~~~~
+?   AND?: PurchaseWhereInput | PurchaseWhereInput[],
+?   OR?: PurchaseWhereInput[],
+?   NOT?: PurchaseWhereInput | PurchaseWhereInput[],
+?   id?: StringFilter | String,
+?   asset_id?: StringFilter | String,
+?   vendor?: StringFilter | String,
+?   cost?: FloatFilter | Float,
+?   purchase_date?: DateTimeFilter | DateTime,
+?   created_at?: DateTimeFilter | DateTime,
+?   updated_at?: DateTimeFilter | DateTime,
+?   asset?: AssetScalarRelationFilter | AssetWhereInput,
+?   base?: BaseScalarRelationFilter | BaseWhereInput
+  }
+}
+
+Unknown argument `type_id`. Did you mean `base_id`? Available options are marked with ?.
+2025-06-21 22:48:50 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:18:50 +0000] "GET /api/dashboard/metrics?base_id=cmc60tcqu0000vvd3dim2q2fy&equipment_type_id=cmc60tdkc000avvd3f32o1wr3 HTTP/1.1" 500 24 "http://localhost:3000/dashboard" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:48:52 [31merror[39m: Error fetching dashboard metrics: 
+Invalid `prisma.purchase.count()` invocation:
+
+{
+  select: {
+    _count: {
+      select: {
+        _all: true
+      }
+    }
+  },
+  where: {
+    base_id: "cmc60tcqu0000vvd3dim2q2fy",
+    type_id: "cmc60tdkc000avvd3f32o1wr3",
+    ~~~~~~~
+?   AND?: PurchaseWhereInput | PurchaseWhereInput[],
+?   OR?: PurchaseWhereInput[],
+?   NOT?: PurchaseWhereInput | PurchaseWhereInput[],
+?   id?: StringFilter | String,
+?   asset_id?: StringFilter | String,
+?   vendor?: StringFilter | String,
+?   cost?: FloatFilter | Float,
+?   purchase_date?: DateTimeFilter | DateTime,
+?   created_at?: DateTimeFilter | DateTime,
+?   updated_at?: DateTimeFilter | DateTime,
+?   asset?: AssetScalarRelationFilter | AssetWhereInput,
+?   base?: BaseScalarRelationFilter | BaseWhereInput
+  }
+}
+
+Unknown argument `type_id`. Did you mean `base_id`? Available options are marked with ?.
+2025-06-21 22:48:52 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:18:52 +0000] "GET /api/dashboard/metrics?base_id=cmc60tcqu0000vvd3dim2q2fy&equipment_type_id=cmc60tdkc000avvd3f32o1wr3 HTTP/1.1" 500 24 "http://localhost:3000/dashboard" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:48:53 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:18:53 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/purchases" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:48:54 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:18:54 +0000] "GET /api/assets/categories HTTP/1.1" 304 - "http://localhost:3000/purchases" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:48:54 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:18:54 +0000] "GET /api/purchases?page=1&limit=10 HTTP/1.1" 304 - "http://localhost:3000/purchases" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:48:56 [31merror[39m: Error fetching assets: 
+Invalid `prisma.asset.findMany()` invocation:
+
+{
+  where: {
+    equipmentTypeId: NaN,
+    ~~~~~~~~~~~~~~~
+?   AND?: AssetWhereInput | AssetWhereInput[],
+?   OR?: AssetWhereInput[],
+?   NOT?: AssetWhereInput | AssetWhereInput[],
+?   id?: StringFilter | String,
+?   name?: StringFilter | String,
+?   serial_number?: StringFilter | String,
+?   type_id?: StringFilter | String,
+?   base_id?: StringFilter | String,
+?   status?: EnumAssetStatusFilter | AssetStatus,
+?   created_at?: DateTimeFilter | DateTime,
+?   updated_at?: DateTimeFilter | DateTime,
+?   equipment_type?: EquipmentTypeScalarRelationFilter | EquipmentTypeWhereInput,
+?   base?: BaseScalarRelationFilter | BaseWhereInput,
+?   assignments?: AssignmentListRelationFilter,
+?   transfers?: TransferListRelationFilter,
+?   purchases?: PurchaseListRelationFilter,
+?   expenditures?: ExpenditureListRelationFilter
+  },
+  skip: 0,
+  take: 10,
+  orderBy: {
+    createdAt: "desc"
+  },
+  include: {
+    equipmentType: true,
+    base: true
+  }
+}
+
+Unknown argument `equipmentTypeId`. Available options are marked with ?.
+2025-06-21 22:48:56 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:18:56 +0000] "GET /api/assets?equipmentTypeId=cmc60tdkc0007vvd3jwqp65cc HTTP/1.1" 500 24 "http://localhost:3000/purchases" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:48:57 [31merror[39m: Error fetching assets: 
+Invalid `prisma.asset.findMany()` invocation:
+
+{
+  where: {
+    equipmentTypeId: NaN,
+    ~~~~~~~~~~~~~~~
+?   AND?: AssetWhereInput | AssetWhereInput[],
+?   OR?: AssetWhereInput[],
+?   NOT?: AssetWhereInput | AssetWhereInput[],
+?   id?: StringFilter | String,
+?   name?: StringFilter | String,
+?   serial_number?: StringFilter | String,
+?   type_id?: StringFilter | String,
+?   base_id?: StringFilter | String,
+?   status?: EnumAssetStatusFilter | AssetStatus,
+?   created_at?: DateTimeFilter | DateTime,
+?   updated_at?: DateTimeFilter | DateTime,
+?   equipment_type?: EquipmentTypeScalarRelationFilter | EquipmentTypeWhereInput,
+?   base?: BaseScalarRelationFilter | BaseWhereInput,
+?   assignments?: AssignmentListRelationFilter,
+?   transfers?: TransferListRelationFilter,
+?   purchases?: PurchaseListRelationFilter,
+?   expenditures?: ExpenditureListRelationFilter
+  },
+  skip: 0,
+  take: 10,
+  orderBy: {
+    createdAt: "desc"
+  },
+  include: {
+    equipmentType: true,
+    base: true
+  }
+}
+
+Unknown argument `equipmentTypeId`. Available options are marked with ?.
+2025-06-21 22:48:57 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:18:57 +0000] "GET /api/assets?equipmentTypeId=cmc60tdkc0007vvd3jwqp65cc HTTP/1.1" 500 24 "http://localhost:3000/purchases" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:48:59 [31merror[39m: Error fetching assets: 
+Invalid `prisma.asset.findMany()` invocation:
+
+{
+  where: {
+    equipmentTypeId: NaN,
+    ~~~~~~~~~~~~~~~
+?   AND?: AssetWhereInput | AssetWhereInput[],
+?   OR?: AssetWhereInput[],
+?   NOT?: AssetWhereInput | AssetWhereInput[],
+?   id?: StringFilter | String,
+?   name?: StringFilter | String,
+?   serial_number?: StringFilter | String,
+?   type_id?: StringFilter | String,
+?   base_id?: StringFilter | String,
+?   status?: EnumAssetStatusFilter | AssetStatus,
+?   created_at?: DateTimeFilter | DateTime,
+?   updated_at?: DateTimeFilter | DateTime,
+?   equipment_type?: EquipmentTypeScalarRelationFilter | EquipmentTypeWhereInput,
+?   base?: BaseScalarRelationFilter | BaseWhereInput,
+?   assignments?: AssignmentListRelationFilter,
+?   transfers?: TransferListRelationFilter,
+?   purchases?: PurchaseListRelationFilter,
+?   expenditures?: ExpenditureListRelationFilter
+  },
+  skip: 0,
+  take: 10,
+  orderBy: {
+    createdAt: "desc"
+  },
+  include: {
+    equipmentType: true,
+    base: true
+  }
+}
+
+Unknown argument `equipmentTypeId`. Available options are marked with ?.
+2025-06-21 22:48:59 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:18:59 +0000] "GET /api/assets?equipmentTypeId=cmc60tdkc0007vvd3jwqp65cc HTTP/1.1" 500 24 "http://localhost:3000/purchases" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:49:04 [31merror[39m: Error fetching assets: 
+Invalid `prisma.asset.findMany()` invocation:
+
+{
+  where: {
+    equipmentTypeId: NaN,
+    ~~~~~~~~~~~~~~~
+?   AND?: AssetWhereInput | AssetWhereInput[],
+?   OR?: AssetWhereInput[],
+?   NOT?: AssetWhereInput | AssetWhereInput[],
+?   id?: StringFilter | String,
+?   name?: StringFilter | String,
+?   serial_number?: StringFilter | String,
+?   type_id?: StringFilter | String,
+?   base_id?: StringFilter | String,
+?   status?: EnumAssetStatusFilter | AssetStatus,
+?   created_at?: DateTimeFilter | DateTime,
+?   updated_at?: DateTimeFilter | DateTime,
+?   equipment_type?: EquipmentTypeScalarRelationFilter | EquipmentTypeWhereInput,
+?   base?: BaseScalarRelationFilter | BaseWhereInput,
+?   assignments?: AssignmentListRelationFilter,
+?   transfers?: TransferListRelationFilter,
+?   purchases?: PurchaseListRelationFilter,
+?   expenditures?: ExpenditureListRelationFilter
+  },
+  skip: 0,
+  take: 10,
+  orderBy: {
+    createdAt: "desc"
+  },
+  include: {
+    equipmentType: true,
+    base: true
+  }
+}
+
+Unknown argument `equipmentTypeId`. Available options are marked with ?.
+2025-06-21 22:49:04 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:19:04 +0000] "GET /api/assets?equipmentTypeId=cmc60tdkc0007vvd3jwqp65cc HTTP/1.1" 500 24 "http://localhost:3000/purchases" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:49:18 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:19:18 +0000] "GET /api/transfers?page=1&limit=10 HTTP/1.1" 200 66 "http://localhost:3000/transfers" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:49:18 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:19:18 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/transfers" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:49:19 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignmentDate: "desc",
+    ~~~~~~~~~~~~~~
+?   id?: SortOrder,
+?   asset_id?: SortOrder,
+?   user_id?: SortOrder,
+?   assignment_date?: SortOrder,
+?   return_date?: SortOrder | SortOrderInput,
+?   created_at?: SortOrder,
+?   updated_at?: SortOrder,
+?   asset?: AssetOrderByWithRelationInput,
+?   user?: UserOrderByWithRelationInput
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown argument `assignmentDate`. Did you mean `assignment_date`? Available options are marked with ?.
+2025-06-21 22:49:19 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:19:19 +0000] "GET /api/assignments?page=1&limit=10 HTTP/1.1" 500 24 "http://localhost:3000/assignments" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:49:20 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignmentDate: "desc",
+    ~~~~~~~~~~~~~~
+?   id?: SortOrder,
+?   asset_id?: SortOrder,
+?   user_id?: SortOrder,
+?   assignment_date?: SortOrder,
+?   return_date?: SortOrder | SortOrderInput,
+?   created_at?: SortOrder,
+?   updated_at?: SortOrder,
+?   asset?: AssetOrderByWithRelationInput,
+?   user?: UserOrderByWithRelationInput
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown argument `assignmentDate`. Did you mean `assignment_date`? Available options are marked with ?.
+2025-06-21 22:49:20 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:19:20 +0000] "GET /api/assignments?page=1&limit=10 HTTP/1.1" 500 24 "http://localhost:3000/assignments" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:49:22 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignmentDate: "desc",
+    ~~~~~~~~~~~~~~
+?   id?: SortOrder,
+?   asset_id?: SortOrder,
+?   user_id?: SortOrder,
+?   assignment_date?: SortOrder,
+?   return_date?: SortOrder | SortOrderInput,
+?   created_at?: SortOrder,
+?   updated_at?: SortOrder,
+?   asset?: AssetOrderByWithRelationInput,
+?   user?: UserOrderByWithRelationInput
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown argument `assignmentDate`. Did you mean `assignment_date`? Available options are marked with ?.
+2025-06-21 22:49:22 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:19:22 +0000] "GET /api/assignments?page=1&limit=10 HTTP/1.1" 500 24 "http://localhost:3000/assignments" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:51:04 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:21:04 +0000] "GET /api/auth/verify HTTP/1.1" 304 - "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:51:04 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:21:04 +0000] "GET /api/auth/verify HTTP/1.1" 304 - "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:51:15 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:21:15 +0000] "POST /api/auth/login HTTP/1.1" 200 704 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:51:16 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:21:16 +0000] "GET /api/dashboard/filters HTTP/1.1" 304 - "http://localhost:3000/dashboard" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 22:51:18 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:21:18 +0000] "GET /api/dashboard/metrics? HTTP/1.1" 304 - "http://localhost:3000/dashboard" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:03:07 [32minfo[39m: Server running on port 5003
+2025-06-21 23:03:07 [32minfo[39m: Environment: development
+2025-06-21 23:03:27 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:33:27 +0000] "POST /api/auth/login HTTP/1.1" 200 443 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:03:30 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:33:30 +0000] "GET /api/dashboard/metrics? HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:03:30 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:33:30 +0000] "GET /api/dashboard/filters HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:03:32 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:33:32 +0000] "GET /api/bases HTTP/1.1" 200 673 "http://localhost:3000/transfers" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:03:33 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:33:33 +0000] "GET /api/transfers?page=1&limit=10 HTTP/1.1" 200 66 "http://localhost:3000/transfers" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:03:36 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:33:36 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/purchases" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:03:36 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:33:36 +0000] "GET /api/assets/categories HTTP/1.1" 304 - "http://localhost:3000/purchases" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:03:36 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:33:36 +0000] "GET /api/purchases?page=1&limit=10 HTTP/1.1" 304 - "http://localhost:3000/purchases" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:03:37 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignment_date: "desc"
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true,
+        ~~~~~~~~~~~~~
+?       equipment_type?: true,
+?       assignments?: true,
+?       transfers?: true,
+?       purchases?: true,
+?       expenditures?: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Asset`. Available options are marked with ?.
+2025-06-21 23:03:37 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:33:37 +0000] "GET /api/assignments?page=1&limit=10 HTTP/1.1" 500 24 "http://localhost:3000/assignments" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:03:38 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignment_date: "desc"
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true,
+        ~~~~~~~~~~~~~
+?       equipment_type?: true,
+?       assignments?: true,
+?       transfers?: true,
+?       purchases?: true,
+?       expenditures?: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Asset`. Available options are marked with ?.
+2025-06-21 23:03:38 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:33:38 +0000] "GET /api/assignments?page=1&limit=10 HTTP/1.1" 500 24 "http://localhost:3000/assignments" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:04:10 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:34:10 +0000] "GET /api/auth/verify HTTP/1.1" 200 89 "http://localhost:3000/assets" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:04:10 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:34:10 +0000] "GET /api/auth/verify HTTP/1.1" 304 - "http://localhost:3000/assets" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:04:22 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:34:22 +0000] "GET /api/auth/verify HTTP/1.1" 304 - "http://localhost:3000/assets" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:04:22 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:34:22 +0000] "GET /api/auth/verify HTTP/1.1" 304 - "http://localhost:3000/assets" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:04:22 [31merror[39m: Error fetching assets: 
+Invalid `prisma.asset.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    name: "asc"
+  },
+  include: {
+    equipmentType: true,
+    ~~~~~~~~~~~~~
+    base: true,
+?   equipment_type?: true,
+?   assignments?: true,
+?   transfers?: true,
+?   purchases?: true,
+?   expenditures?: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Asset`. Available options are marked with ?.
+2025-06-21 23:04:22 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:34:22 +0000] "GET /api/assets?page=1&limit=10&sortBy=name&order=asc&search=&baseId=&equipmentTypeId= HTTP/1.1" 500 24 "http://localhost:3000/assets" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:04:22 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:34:22 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/assets" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:04:23 [31merror[39m: Error fetching assets: 
+Invalid `prisma.asset.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    name: "asc"
+  },
+  include: {
+    equipmentType: true,
+    ~~~~~~~~~~~~~
+    base: true,
+?   equipment_type?: true,
+?   assignments?: true,
+?   transfers?: true,
+?   purchases?: true,
+?   expenditures?: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Asset`. Available options are marked with ?.
+2025-06-21 23:04:23 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:34:23 +0000] "GET /api/assets?page=1&limit=10&sortBy=name&order=asc&search=&baseId=&equipmentTypeId= HTTP/1.1" 500 24 "http://localhost:3000/assets" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:04:32 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignment_date: "desc"
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true,
+        ~~~~~~~~~~~~~
+?       equipment_type?: true,
+?       assignments?: true,
+?       transfers?: true,
+?       purchases?: true,
+?       expenditures?: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Asset`. Available options are marked with ?.
+2025-06-21 23:04:32 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:34:32 +0000] "GET /api/assignments?page=1&limit=10 HTTP/1.1" 500 24 "http://localhost:3000/assignments" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:04:33 [31merror[39m: Error fetching assets: 
+Invalid `prisma.asset.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    name: "asc"
+  },
+  include: {
+    equipmentType: true,
+    ~~~~~~~~~~~~~
+    base: true,
+?   equipment_type?: true,
+?   assignments?: true,
+?   transfers?: true,
+?   purchases?: true,
+?   expenditures?: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Asset`. Available options are marked with ?.
+2025-06-21 23:04:33 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:34:33 +0000] "GET /api/assets?page=1&limit=10&sortBy=name&order=asc&search=&baseId=&equipmentTypeId= HTTP/1.1" 500 24 "http://localhost:3000/assets" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:04:33 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:34:33 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/assets" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:05:06 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:35:06 +0000] "GET /api/auth/verify HTTP/1.1" 304 - "http://localhost:3000/users" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:05:06 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:35:06 +0000] "GET /api/auth/verify HTTP/1.1" 304 - "http://localhost:3000/users" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:17:57 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:47:57 +0000] "POST /api/auth/login HTTP/1.1" 200 704 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:18:00 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:48:00 +0000] "GET /api/dashboard/metrics? HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:18:00 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:48:00 +0000] "GET /api/dashboard/filters HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:24:00 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:54:00 +0000] "GET /api/auth/verify HTTP/1.1" 200 158 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:24:01 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:54:01 +0000] "GET /api/auth/verify HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:24:04 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:54:04 +0000] "GET /api/dashboard/filters HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:24:06 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:54:06 +0000] "GET /api/dashboard/metrics? HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:24:07 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:54:07 +0000] "GET /api/assets/categories HTTP/1.1" 304 - "http://localhost:3000/transfers" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:24:07 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:54:07 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/transfers" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:24:07 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:54:07 +0000] "GET /api/transfers?page=1&limit=10 HTTP/1.1" 304 - "http://localhost:3000/transfers" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:24:09 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {
+    asset: {
+      baseId: {
+      ~~~~~~
+        in: undefined
+      },
+?     is?: AssetWhereInput,
+?     isNot?: AssetWhereInput
+    }
+  },
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignment_date: "desc"
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown argument `baseId`. Available options are marked with ?.
+2025-06-21 23:24:09 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:54:09 +0000] "GET /api/assignments?page=1&limit=10 HTTP/1.1" 500 24 "http://localhost:3000/assignments" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:24:10 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {
+    asset: {
+      baseId: {
+      ~~~~~~
+        in: undefined
+      },
+?     is?: AssetWhereInput,
+?     isNot?: AssetWhereInput
+    }
+  },
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignment_date: "desc"
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown argument `baseId`. Available options are marked with ?.
+2025-06-21 23:24:10 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:54:10 +0000] "GET /api/assignments?page=1&limit=10 HTTP/1.1" 500 24 "http://localhost:3000/assignments" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:24:12 [31merror[39m: Error fetching assets: 
+Invalid `prisma.asset.findMany()` invocation:
+
+{
+  where: {
+    baseId: {
+    ~~~~~~
+      in: undefined
+    },
+?   AND?: AssetWhereInput | AssetWhereInput[],
+?   OR?: AssetWhereInput[],
+?   NOT?: AssetWhereInput | AssetWhereInput[],
+?   id?: StringFilter | String,
+?   name?: StringFilter | String,
+?   serial_number?: StringFilter | String,
+?   type_id?: StringFilter | String,
+?   base_id?: StringFilter | String,
+?   status?: EnumAssetStatusFilter | AssetStatus,
+?   created_at?: DateTimeFilter | DateTime,
+?   updated_at?: DateTimeFilter | DateTime,
+?   equipment_type?: EquipmentTypeScalarRelationFilter | EquipmentTypeWhereInput,
+?   base?: BaseScalarRelationFilter | BaseWhereInput,
+?   assignments?: AssignmentListRelationFilter,
+?   transfers?: TransferListRelationFilter,
+?   purchases?: PurchaseListRelationFilter,
+?   expenditures?: ExpenditureListRelationFilter
+  },
+  skip: 0,
+  take: 10,
+  orderBy: {
+    name: "asc"
+  },
+  include: {
+    equipmentType: true,
+    base: true
+  }
+}
+
+Unknown argument `baseId`. Did you mean `base_id`? Available options are marked with ?.
+2025-06-21 23:24:12 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:54:12 +0000] "GET /api/assets?page=1&limit=10&sortBy=name&order=asc&search=&baseId=&equipmentTypeId= HTTP/1.1" 500 24 "http://localhost:3000/assets" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:24:12 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:54:12 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/assets" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:24:13 [31merror[39m: Error fetching assets: 
+Invalid `prisma.asset.findMany()` invocation:
+
+{
+  where: {
+    baseId: {
+    ~~~~~~
+      in: undefined
+    },
+?   AND?: AssetWhereInput | AssetWhereInput[],
+?   OR?: AssetWhereInput[],
+?   NOT?: AssetWhereInput | AssetWhereInput[],
+?   id?: StringFilter | String,
+?   name?: StringFilter | String,
+?   serial_number?: StringFilter | String,
+?   type_id?: StringFilter | String,
+?   base_id?: StringFilter | String,
+?   status?: EnumAssetStatusFilter | AssetStatus,
+?   created_at?: DateTimeFilter | DateTime,
+?   updated_at?: DateTimeFilter | DateTime,
+?   equipment_type?: EquipmentTypeScalarRelationFilter | EquipmentTypeWhereInput,
+?   base?: BaseScalarRelationFilter | BaseWhereInput,
+?   assignments?: AssignmentListRelationFilter,
+?   transfers?: TransferListRelationFilter,
+?   purchases?: PurchaseListRelationFilter,
+?   expenditures?: ExpenditureListRelationFilter
+  },
+  skip: 0,
+  take: 10,
+  orderBy: {
+    name: "asc"
+  },
+  include: {
+    equipmentType: true,
+    base: true
+  }
+}
+
+Unknown argument `baseId`. Did you mean `base_id`? Available options are marked with ?.
+2025-06-21 23:24:13 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:54:13 +0000] "GET /api/assets?page=1&limit=10&sortBy=name&order=asc&search=&baseId=&equipmentTypeId= HTTP/1.1" 500 24 "http://localhost:3000/assets" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:24:14 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {
+    asset: {
+      baseId: {
+      ~~~~~~
+        in: undefined
+      },
+?     is?: AssetWhereInput,
+?     isNot?: AssetWhereInput
+    }
+  },
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignment_date: "desc"
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown argument `baseId`. Available options are marked with ?.
+2025-06-21 23:24:14 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:54:14 +0000] "GET /api/assignments?page=1&limit=10 HTTP/1.1" 500 24 "http://localhost:3000/assignments" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:24:15 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:54:15 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/transfers" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:24:16 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:54:16 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/purchases" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:24:16 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:54:16 +0000] "GET /api/purchases?page=1&limit=10 HTTP/1.1" 304 - "http://localhost:3000/purchases" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:24:21 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:54:21 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/purchases" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:24:23 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:54:23 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/transfers" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:24:25 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:54:25 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/purchases" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:24:28 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:54:28 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/transfers" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:24:29 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {
+    asset: {
+      baseId: {
+      ~~~~~~
+        in: undefined
+      },
+?     is?: AssetWhereInput,
+?     isNot?: AssetWhereInput
+    }
+  },
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignment_date: "desc"
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown argument `baseId`. Available options are marked with ?.
+2025-06-21 23:24:29 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:54:29 +0000] "GET /api/assignments?page=1&limit=10 HTTP/1.1" 500 24 "http://localhost:3000/assignments" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:24:30 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {
+    asset: {
+      baseId: {
+      ~~~~~~
+        in: undefined
+      },
+?     is?: AssetWhereInput,
+?     isNot?: AssetWhereInput
+    }
+  },
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignment_date: "desc"
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown argument `baseId`. Available options are marked with ?.
+2025-06-21 23:24:30 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:54:30 +0000] "GET /api/assignments?page=1&limit=10 HTTP/1.1" 500 24 "http://localhost:3000/assignments" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:25:03 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:55:03 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/transfers" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:25:03 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:55:03 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/purchases" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:26:14 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:56:14 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/purchases" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:26:15 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:56:15 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/transfers" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:26:17 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {
+    asset: {
+      baseId: {
+      ~~~~~~
+        in: undefined
+      },
+?     is?: AssetWhereInput,
+?     isNot?: AssetWhereInput
+    }
+  },
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignment_date: "desc"
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown argument `baseId`. Available options are marked with ?.
+2025-06-21 23:26:17 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:56:17 +0000] "GET /api/assignments?page=1&limit=10 HTTP/1.1" 500 24 "http://localhost:3000/assignments" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:26:18 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {
+    asset: {
+      baseId: {
+      ~~~~~~
+        in: undefined
+      },
+?     is?: AssetWhereInput,
+?     isNot?: AssetWhereInput
+    }
+  },
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignment_date: "desc"
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown argument `baseId`. Available options are marked with ?.
+2025-06-21 23:26:18 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:56:18 +0000] "GET /api/assignments?page=1&limit=10 HTTP/1.1" 500 24 "http://localhost:3000/assignments" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:26:19 [31merror[39m: Error fetching assets: 
+Invalid `prisma.asset.findMany()` invocation:
+
+{
+  where: {
+    baseId: {
+    ~~~~~~
+      in: undefined
+    },
+?   AND?: AssetWhereInput | AssetWhereInput[],
+?   OR?: AssetWhereInput[],
+?   NOT?: AssetWhereInput | AssetWhereInput[],
+?   id?: StringFilter | String,
+?   name?: StringFilter | String,
+?   serial_number?: StringFilter | String,
+?   type_id?: StringFilter | String,
+?   base_id?: StringFilter | String,
+?   status?: EnumAssetStatusFilter | AssetStatus,
+?   created_at?: DateTimeFilter | DateTime,
+?   updated_at?: DateTimeFilter | DateTime,
+?   equipment_type?: EquipmentTypeScalarRelationFilter | EquipmentTypeWhereInput,
+?   base?: BaseScalarRelationFilter | BaseWhereInput,
+?   assignments?: AssignmentListRelationFilter,
+?   transfers?: TransferListRelationFilter,
+?   purchases?: PurchaseListRelationFilter,
+?   expenditures?: ExpenditureListRelationFilter
+  },
+  skip: 0,
+  take: 10,
+  orderBy: {
+    name: "asc"
+  },
+  include: {
+    equipmentType: true,
+    base: true
+  }
+}
+
+Unknown argument `baseId`. Did you mean `base_id`? Available options are marked with ?.
+2025-06-21 23:26:19 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:56:19 +0000] "GET /api/assets?page=1&limit=10&sortBy=name&order=asc&search=&baseId=&equipmentTypeId= HTTP/1.1" 500 24 "http://localhost:3000/assets" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:26:20 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:56:20 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/assets" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:26:20 [31merror[39m: Error fetching assets: 
+Invalid `prisma.asset.findMany()` invocation:
+
+{
+  where: {
+    baseId: {
+    ~~~~~~
+      in: undefined
+    },
+?   AND?: AssetWhereInput | AssetWhereInput[],
+?   OR?: AssetWhereInput[],
+?   NOT?: AssetWhereInput | AssetWhereInput[],
+?   id?: StringFilter | String,
+?   name?: StringFilter | String,
+?   serial_number?: StringFilter | String,
+?   type_id?: StringFilter | String,
+?   base_id?: StringFilter | String,
+?   status?: EnumAssetStatusFilter | AssetStatus,
+?   created_at?: DateTimeFilter | DateTime,
+?   updated_at?: DateTimeFilter | DateTime,
+?   equipment_type?: EquipmentTypeScalarRelationFilter | EquipmentTypeWhereInput,
+?   base?: BaseScalarRelationFilter | BaseWhereInput,
+?   assignments?: AssignmentListRelationFilter,
+?   transfers?: TransferListRelationFilter,
+?   purchases?: PurchaseListRelationFilter,
+?   expenditures?: ExpenditureListRelationFilter
+  },
+  skip: 0,
+  take: 10,
+  orderBy: {
+    name: "asc"
+  },
+  include: {
+    equipmentType: true,
+    base: true
+  }
+}
+
+Unknown argument `baseId`. Did you mean `base_id`? Available options are marked with ?.
+2025-06-21 23:26:20 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:56:20 +0000] "GET /api/assets?page=1&limit=10&sortBy=name&order=asc&search=&baseId=&equipmentTypeId= HTTP/1.1" 500 24 "http://localhost:3000/assets" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:26:21 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {
+    asset: {
+      baseId: {
+      ~~~~~~
+        in: undefined
+      },
+?     is?: AssetWhereInput,
+?     isNot?: AssetWhereInput
+    }
+  },
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignment_date: "desc"
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown argument `baseId`. Available options are marked with ?.
+2025-06-21 23:26:21 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:56:21 +0000] "GET /api/assignments?page=1&limit=10 HTTP/1.1" 500 24 "http://localhost:3000/assignments" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:26:22 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:56:22 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/transfers" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:26:26 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:56:26 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/purchases" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:26:27 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:56:27 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/transfers" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:26:28 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {
+    asset: {
+      baseId: {
+      ~~~~~~
+        in: undefined
+      },
+?     is?: AssetWhereInput,
+?     isNot?: AssetWhereInput
+    }
+  },
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignment_date: "desc"
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown argument `baseId`. Available options are marked with ?.
+2025-06-21 23:26:28 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:56:28 +0000] "GET /api/assignments?page=1&limit=10 HTTP/1.1" 500 24 "http://localhost:3000/assignments" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:26:29 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {
+    asset: {
+      baseId: {
+      ~~~~~~
+        in: undefined
+      },
+?     is?: AssetWhereInput,
+?     isNot?: AssetWhereInput
+    }
+  },
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignment_date: "desc"
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown argument `baseId`. Available options are marked with ?.
+2025-06-21 23:26:29 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:56:29 +0000] "GET /api/assignments?page=1&limit=10 HTTP/1.1" 500 24 "http://localhost:3000/assignments" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:28:25 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:58:25 +0000] "GET /api/auth/verify HTTP/1.1" 304 - "http://localhost:3000/assignments" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:28:26 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {
+    asset: {
+      baseId: {
+      ~~~~~~
+        in: undefined
+      },
+?     is?: AssetWhereInput,
+?     isNot?: AssetWhereInput
+    }
+  },
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignment_date: "desc"
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown argument `baseId`. Available options are marked with ?.
+2025-06-21 23:28:26 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:58:26 +0000] "GET /api/assignments?page=1&limit=10 HTTP/1.1" 500 24 "http://localhost:3000/assignments" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:28:26 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:58:26 +0000] "GET /api/auth/verify HTTP/1.1" 304 - "http://localhost:3000/assignments" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:28:27 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {
+    asset: {
+      baseId: {
+      ~~~~~~
+        in: undefined
+      },
+?     is?: AssetWhereInput,
+?     isNot?: AssetWhereInput
+    }
+  },
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignment_date: "desc"
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown argument `baseId`. Available options are marked with ?.
+2025-06-21 23:28:27 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:58:27 +0000] "GET /api/assignments?page=1&limit=10 HTTP/1.1" 500 24 "http://localhost:3000/assignments" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:29:05 [32minfo[39m: Server running on port 5003
+2025-06-21 23:29:05 [32minfo[39m: Environment: development
+2025-06-21 23:29:13 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:59:13 +0000] "GET /api/auth/verify HTTP/1.1" 304 - "http://localhost:3000/assignments" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:29:14 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:59:14 +0000] "GET /api/auth/verify HTTP/1.1" 304 - "http://localhost:3000/assignments" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:29:15 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {
+    asset: {
+      base_id: {
+        in: undefined
+      }
+    }
+  },
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignment_date: "desc"
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true,
+        ~~~~~~~~~~~~~
+?       equipment_type?: true,
+?       assignments?: true,
+?       transfers?: true,
+?       purchases?: true,
+?       expenditures?: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Asset`. Available options are marked with ?.
+2025-06-21 23:29:15 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:59:15 +0000] "GET /api/assignments?page=1&limit=10 HTTP/1.1" 500 24 "http://localhost:3000/assignments" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:29:16 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {
+    asset: {
+      base_id: {
+        in: undefined
+      }
+    }
+  },
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignment_date: "desc"
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true,
+        ~~~~~~~~~~~~~
+?       equipment_type?: true,
+?       assignments?: true,
+?       transfers?: true,
+?       purchases?: true,
+?       expenditures?: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Asset`. Available options are marked with ?.
+2025-06-21 23:29:16 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:59:16 +0000] "GET /api/assignments?page=1&limit=10 HTTP/1.1" 500 24 "http://localhost:3000/assignments" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:29:17 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:59:17 +0000] "GET /api/assets/categories HTTP/1.1" 304 - "http://localhost:3000/transfers" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:29:18 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:59:18 +0000] "GET /api/transfers?page=1&limit=10 HTTP/1.1" 304 - "http://localhost:3000/transfers" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:29:20 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:59:20 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/transfers" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:29:21 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:59:21 +0000] "GET /api/purchases?page=1&limit=10 HTTP/1.1" 304 - "http://localhost:3000/purchases" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:29:23 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:59:23 +0000] "GET /api/dashboard/filters HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:29:24 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:59:24 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/purchases" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:29:24 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:59:24 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/transfers" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:29:25 [31merror[39m: Error fetching assets: 
+Invalid `prisma.asset.findMany()` invocation:
+
+{
+  where: {
+    base_id: {
+      in: undefined
+    }
+  },
+  skip: 0,
+  take: 10,
+  orderBy: {
+    name: "asc"
+  },
+  include: {
+    equipmentType: true,
+    ~~~~~~~~~~~~~
+    base: true,
+?   equipment_type?: true,
+?   assignments?: true,
+?   transfers?: true,
+?   purchases?: true,
+?   expenditures?: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Asset`. Available options are marked with ?.
+2025-06-21 23:29:25 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:59:25 +0000] "GET /api/assets?page=1&limit=10&sortBy=name&order=asc&search=&baseId=&equipmentTypeId= HTTP/1.1" 500 24 "http://localhost:3000/assets" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:29:25 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:59:25 +0000] "GET /api/dashboard/metrics? HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:29:25 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:59:25 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/assets" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:29:26 [31merror[39m: Error fetching assets: 
+Invalid `prisma.asset.findMany()` invocation:
+
+{
+  where: {
+    base_id: {
+      in: undefined
+    }
+  },
+  skip: 0,
+  take: 10,
+  orderBy: {
+    name: "asc"
+  },
+  include: {
+    equipmentType: true,
+    ~~~~~~~~~~~~~
+    base: true,
+?   equipment_type?: true,
+?   assignments?: true,
+?   transfers?: true,
+?   purchases?: true,
+?   expenditures?: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Asset`. Available options are marked with ?.
+2025-06-21 23:29:26 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:59:26 +0000] "GET /api/assets?page=1&limit=10&sortBy=name&order=asc&search=&baseId=&equipmentTypeId= HTTP/1.1" 500 24 "http://localhost:3000/assets" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:29:27 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {
+    asset: {
+      base_id: {
+        in: undefined
+      }
+    }
+  },
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignment_date: "desc"
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true,
+        ~~~~~~~~~~~~~
+?       equipment_type?: true,
+?       assignments?: true,
+?       transfers?: true,
+?       purchases?: true,
+?       expenditures?: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Asset`. Available options are marked with ?.
+2025-06-21 23:29:27 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:59:27 +0000] "GET /api/assignments?page=1&limit=10 HTTP/1.1" 500 24 "http://localhost:3000/assignments" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:29:28 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {
+    asset: {
+      base_id: {
+        in: undefined
+      }
+    }
+  },
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignment_date: "desc"
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true,
+        ~~~~~~~~~~~~~
+?       equipment_type?: true,
+?       assignments?: true,
+?       transfers?: true,
+?       purchases?: true,
+?       expenditures?: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Asset`. Available options are marked with ?.
+2025-06-21 23:29:28 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:17:59:28 +0000] "GET /api/assignments?page=1&limit=10 HTTP/1.1" 500 24 "http://localhost:3000/assignments" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:30:49 [32minfo[39m: Server running on port 5003
+2025-06-21 23:30:49 [32minfo[39m: Environment: development
+2025-06-21 23:30:55 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:18:00:55 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/transfers" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:30:58 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:18:00:58 +0000] "GET /api/auth/verify HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:30:58 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:18:00:58 +0000] "GET /api/auth/verify HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:31:01 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:18:01:01 +0000] "GET /api/dashboard/filters HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:31:01 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:18:01:01 +0000] "GET /api/bases HTTP/1.1" 200 673 "http://localhost:3000/purchases" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:31:01 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:18:01:01 +0000] "GET /api/dashboard/metrics? HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:31:01 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:18:01:01 +0000] "GET /api/assets/categories HTTP/1.1" 304 - "http://localhost:3000/purchases" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:31:04 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:18:01:04 +0000] "GET /api/purchases?page=1&limit=10 HTTP/1.1" 304 - "http://localhost:3000/purchases" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:31:15 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:18:01:15 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/transfers" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:31:16 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:18:01:16 +0000] "GET /api/transfers?page=1&limit=10 HTTP/1.1" 304 - "http://localhost:3000/transfers" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:31:17 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {
+    asset: {
+      base_id: {
+        in: undefined
+      }
+    }
+  },
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignment_date: "desc"
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true,
+        ~~~~~~~~~~~~~
+?       equipment_type?: true,
+?       assignments?: true,
+?       transfers?: true,
+?       purchases?: true,
+?       expenditures?: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Asset`. Available options are marked with ?.
+2025-06-21 23:31:17 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:18:01:17 +0000] "GET /api/assignments?page=1&limit=10 HTTP/1.1" 500 24 "http://localhost:3000/assignments" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:31:18 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {
+    asset: {
+      base_id: {
+        in: undefined
+      }
+    }
+  },
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignment_date: "desc"
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true,
+        ~~~~~~~~~~~~~
+?       equipment_type?: true,
+?       assignments?: true,
+?       transfers?: true,
+?       purchases?: true,
+?       expenditures?: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Asset`. Available options are marked with ?.
+2025-06-21 23:31:18 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:18:01:18 +0000] "GET /api/assignments?page=1&limit=10 HTTP/1.1" 500 24 "http://localhost:3000/assignments" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:33:46 [32minfo[39m: Server running on port 5003
+2025-06-21 23:33:46 [32minfo[39m: Environment: development
+2025-06-21 23:33:52 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:18:03:52 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/purchases" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:33:55 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:18:03:55 +0000] "GET /api/auth/verify HTTP/1.1" 304 - "http://localhost:3000/purchases" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:33:55 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:18:03:55 +0000] "GET /api/bases HTTP/1.1" 200 673 "http://localhost:3000/purchases" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:33:55 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:18:03:55 +0000] "GET /api/auth/verify HTTP/1.1" 304 - "http://localhost:3000/purchases" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:33:57 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:18:03:57 +0000] "GET /api/assets/categories HTTP/1.1" 304 - "http://localhost:3000/purchases" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:33:58 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:18:03:58 +0000] "GET /api/purchases?page=1&limit=10 HTTP/1.1" 304 - "http://localhost:3000/purchases" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:33:59 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:18:03:59 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/transfers" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:34:00 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:18:04:00 +0000] "GET /api/transfers?page=1&limit=10 HTTP/1.1" 304 - "http://localhost:3000/transfers" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:34:01 [32minfo[39m: Executing findMany on assignments with where clause: {"asset":{"base_id":{}}}
+2025-06-21 23:34:01 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {
+    asset: {
+      base_id: {
+        in: undefined
+      }
+    }
+  },
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignment_date: "desc"
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true,
+        ~~~~~~~~~~~~~
+?       equipment_type?: true,
+?       assignments?: true,
+?       transfers?: true,
+?       purchases?: true,
+?       expenditures?: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Asset`. Available options are marked with ?.
+2025-06-21 23:34:01 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:18:04:01 +0000] "GET /api/assignments?page=1&limit=10 HTTP/1.1" 500 24 "http://localhost:3000/assignments" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:34:02 [32minfo[39m: Executing findMany on assignments with where clause: {"asset":{"base_id":{}}}
+2025-06-21 23:34:02 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {
+    asset: {
+      base_id: {
+        in: undefined
+      }
+    }
+  },
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignment_date: "desc"
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true,
+        ~~~~~~~~~~~~~
+?       equipment_type?: true,
+?       assignments?: true,
+?       transfers?: true,
+?       purchases?: true,
+?       expenditures?: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Asset`. Available options are marked with ?.
+2025-06-21 23:34:02 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:18:04:02 +0000] "GET /api/assignments?page=1&limit=10 HTTP/1.1" 500 24 "http://localhost:3000/assignments" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:36:05 [32minfo[39m: Server running on port 5003
+2025-06-21 23:36:05 [32minfo[39m: Environment: development
+2025-06-21 23:36:10 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:18:06:10 +0000] "GET /api/auth/verify HTTP/1.1" 401 30 "http://localhost:3000/transfers" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:36:10 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:18:06:10 +0000] "GET /api/auth/verify HTTP/1.1" 401 30 "http://localhost:3000/transfers" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:36:12 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:18:06:12 +0000] "GET /api/bases HTTP/1.1" 401 30 "http://localhost:3000/transfers" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:36:24 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:18:06:24 +0000] "POST /api/auth/login HTTP/1.1" 200 704 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:36:25 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:18:06:25 +0000] "GET /api/dashboard/filters HTTP/1.1" 401 30 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:36:25 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:18:06:25 +0000] "GET /api/dashboard/metrics? HTTP/1.1" 401 30 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:36:39 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:18:06:39 +0000] "POST /api/auth/login HTTP/1.1" 200 711 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:36:39 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:18:06:39 +0000] "GET /api/dashboard/metrics? HTTP/1.1" 401 30 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:36:39 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:18:06:39 +0000] "GET /api/dashboard/filters HTTP/1.1" 401 30 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:39:36 [32minfo[39m: Server running on port 5003
+2025-06-21 23:39:36 [32minfo[39m: Environment: development
+2025-06-21 23:39:56 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:18:09:56 +0000] "POST /api/auth/login HTTP/1.1" 200 443 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:39:57 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:18:09:57 +0000] "GET /api/dashboard/filters HTTP/1.1" 401 30 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:39:57 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:18:09:57 +0000] "GET /api/dashboard/metrics? HTTP/1.1" 401 30 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:40:11 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:18:10:11 +0000] "POST /api/auth/login HTTP/1.1" 200 443 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:40:11 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:18:10:11 +0000] "GET /api/dashboard/metrics? HTTP/1.1" 401 30 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:40:13 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:18:10:13 +0000] "GET /api/dashboard/filters HTTP/1.1" 401 30 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:41:11 [32minfo[39m: Server running on port 5003
+2025-06-21 23:41:11 [32minfo[39m: Environment: development
+2025-06-21 23:41:28 [32minfo[39m: Server running on port 5003
+2025-06-21 23:41:28 [32minfo[39m: Environment: development
+2025-06-21 23:43:08 [32minfo[39m: Server running on port 5003
+2025-06-21 23:43:08 [32minfo[39m: Environment: development
+2025-06-21 23:43:26 [32minfo[39m: Server running on port 5003
+2025-06-21 23:43:26 [32minfo[39m: Environment: development
+2025-06-21 23:44:21 [32minfo[39m: Server running on port 5003
+2025-06-21 23:44:21 [32minfo[39m: Environment: development
+2025-06-21 23:44:49 [32minfo[39m: Server running on port 5003
+2025-06-21 23:44:49 [32minfo[39m: Environment: development
+2025-06-21 23:44:53 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:18:14:53 +0000] "POST /api/auth/login HTTP/1.1" 200 443 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:44:53 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:18:14:53 +0000] "GET /api/dashboard/filters HTTP/1.1" 401 30 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:44:53 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:18:14:53 +0000] "GET /api/dashboard/metrics? HTTP/1.1" 401 30 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-21 23:58:47 [32minfo[39m: Server running on port 5003
+2025-06-21 23:58:47 [32minfo[39m: Environment: development
+2025-06-21 23:59:14 [32minfo[39m: Server running on port 5003
+2025-06-21 23:59:14 [32minfo[39m: Environment: development
+2025-06-22 00:42:08 [32minfo[39m: Server running on port 5003
+2025-06-22 00:42:08 [32minfo[39m: Environment: development
+2025-06-22 00:42:25 [31merror[39m: Login error: 
+Invalid `prisma.user.findUnique()` invocation:
+
+
+Can't reach database server at `ep-soft-sky-a5qzuv0v-pooler.us-east-2.aws.neon.tech:5432`
+
+Please make sure your database server is running at `ep-soft-sky-a5qzuv0v-pooler.us-east-2.aws.neon.tech:5432`.
+2025-06-22 00:42:25 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:19:12:25 +0000] "POST /api/auth/login HTTP/1.1" 500 24 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 00:42:47 [31merror[39m: Login error: 
+Invalid `prisma.user.findUnique()` invocation:
+
+
+Can't reach database server at `ep-soft-sky-a5qzuv0v-pooler.us-east-2.aws.neon.tech:5432`
+
+Please make sure your database server is running at `ep-soft-sky-a5qzuv0v-pooler.us-east-2.aws.neon.tech:5432`.
+2025-06-22 00:42:47 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:19:12:47 +0000] "POST /api/auth/login HTTP/1.1" 500 24 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 00:46:45 [32minfo[39m: Server running on port 5003
+2025-06-22 00:46:45 [32minfo[39m: Environment: development
+2025-06-22 00:46:57 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:19:16:57 +0000] "POST /api/auth/login HTTP/1.1" 200 704 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 00:46:57 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:19:16:57 +0000] "GET /api/dashboard/filters HTTP/1.1" 401 30 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 00:46:57 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:19:16:57 +0000] "GET /api/dashboard/metrics? HTTP/1.1" 401 30 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 00:49:21 [32minfo[39m: Server running on port 5003
+2025-06-22 00:49:21 [32minfo[39m: Environment: development
+2025-06-22 00:49:38 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:19:19:38 +0000] "POST /api/auth/login HTTP/1.1" 200 443 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 00:49:38 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:19:19:38 +0000] "GET /api/dashboard/filters HTTP/1.1" 401 30 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 00:49:38 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:19:19:38 +0000] "GET /api/dashboard/metrics? HTTP/1.1" 401 30 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 00:50:14 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:19:20:14 +0000] "POST /api/auth/login HTTP/1.1" 200 704 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 00:50:14 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:19:20:14 +0000] "GET /api/dashboard/filters HTTP/1.1" 401 30 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 00:50:14 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:19:20:14 +0000] "GET /api/dashboard/metrics? HTTP/1.1" 401 30 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 00:53:26 [32minfo[39m: Server running on port 5003
+2025-06-22 00:53:26 [32minfo[39m: Environment: development
+2025-06-22 00:54:02 [31merror[39m: Login error: 
+Invalid `prisma.user.findUnique()` invocation:
+
+
+Can't reach database server at `ep-soft-sky-a5qzuv0v-pooler.us-east-2.aws.neon.tech:5432`
+
+Please make sure your database server is running at `ep-soft-sky-a5qzuv0v-pooler.us-east-2.aws.neon.tech:5432`.
+2025-06-22 00:54:02 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:19:24:02 +0000] "POST /api/auth/login HTTP/1.1" 500 24 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 00:56:50 [32minfo[39m: Server running on port 5003
+2025-06-22 00:56:50 [32minfo[39m: Environment: development
+2025-06-22 00:59:07 [32minfo[39m: Server running on port 5003
+2025-06-22 00:59:07 [32minfo[39m: Environment: development
+2025-06-22 01:00:12 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:19:30:12 +0000] "POST /api/auth/login HTTP/1.1" 200 443 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:00:24 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:19:30:24 +0000] "POST /api/auth/login HTTP/1.1" 200 443 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:00:25 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:19:30:25 +0000] "GET /api/dashboard/filters HTTP/1.1" 401 30 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:00:25 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:19:30:25 +0000] "GET /api/dashboard/metrics? HTTP/1.1" 401 30 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:00:38 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:19:30:38 +0000] "POST /api/auth/login HTTP/1.1" 200 443 "http://localhost:3000/login" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:00:38 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:19:30:38 +0000] "GET /api/dashboard/filters HTTP/1.1" 401 30 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:00:38 [32minfo[39m: 127.0.0.1 - - [21/Jun/2025:19:30:38 +0000] "GET /api/dashboard/metrics? HTTP/1.1" 401 30 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:03:25 [32minfo[39m: Server running on port 5003
+2025-06-22 01:03:25 [32minfo[39m: Environment: development
+2025-06-22 01:03:41 [32minfo[39m: ::1 - - [21/Jun/2025:19:33:41 +0000] "POST /api/auth/login HTTP/1.1" 200 443 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:03:42 [32minfo[39m: ::1 - - [21/Jun/2025:19:33:42 +0000] "GET /api/dashboard/metrics? HTTP/1.1" 401 30 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:03:42 [32minfo[39m: ::1 - - [21/Jun/2025:19:33:42 +0000] "GET /api/dashboard/filters HTTP/1.1" 401 30 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:05:07 [32minfo[39m: Server running on port 5003
+2025-06-22 01:05:07 [32minfo[39m: Environment: development
+2025-06-22 01:05:36 [32minfo[39m: ::1 - - [21/Jun/2025:19:35:36 +0000] "POST /api/auth/login HTTP/1.1" 200 443 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:05:39 [32minfo[39m: ::1 - - [21/Jun/2025:19:35:39 +0000] "GET /api/dashboard/metrics? HTTP/1.1" 200 145 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:05:40 [32minfo[39m: ::1 - - [21/Jun/2025:19:35:40 +0000] "GET /api/dashboard/filters HTTP/1.1" 200 2082 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:05:46 [32minfo[39m: ::1 - - [21/Jun/2025:19:35:46 +0000] "GET /api/assets/categories HTTP/1.1" 200 1380 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:05:46 [32minfo[39m: ::1 - - [21/Jun/2025:19:35:46 +0000] "GET /api/bases HTTP/1.1" 200 673 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:05:49 [32minfo[39m: ::1 - - [21/Jun/2025:19:35:49 +0000] "GET /api/purchases?page=1&limit=10 HTTP/1.1" 200 66 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:05:51 [32minfo[39m: ::1 - - [21/Jun/2025:19:35:51 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:05:51 [32minfo[39m: ::1 - - [21/Jun/2025:19:35:51 +0000] "GET /api/transfers?page=1&limit=10 HTTP/1.1" 200 66 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:05:53 [32minfo[39m: Executing findMany on assignments with where clause: {}
+2025-06-22 01:05:53 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignment_date: "desc"
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true,
+        ~~~~~~~~~~~~~
+?       equipment_type?: true,
+?       assignments?: true,
+?       transfers?: true,
+?       purchases?: true,
+?       expenditures?: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Asset`. Available options are marked with ?.
+2025-06-22 01:05:53 [32minfo[39m: ::1 - - [21/Jun/2025:19:35:53 +0000] "GET /api/assignments?page=1&limit=10 HTTP/1.1" 500 24 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:05:53 [32minfo[39m: ::1 - - [21/Jun/2025:19:35:53 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:05:54 [32minfo[39m: Executing findMany on assignments with where clause: {}
+2025-06-22 01:05:54 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignment_date: "desc"
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true,
+        ~~~~~~~~~~~~~
+?       equipment_type?: true,
+?       assignments?: true,
+?       transfers?: true,
+?       purchases?: true,
+?       expenditures?: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Asset`. Available options are marked with ?.
+2025-06-22 01:05:54 [32minfo[39m: ::1 - - [21/Jun/2025:19:35:54 +0000] "GET /api/assignments?page=1&limit=10 HTTP/1.1" 500 24 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:05:56 [32minfo[39m: Executing findMany on assets with where clause: {}
+2025-06-22 01:05:56 [31merror[39m: Error fetching assets: 
+Invalid `prisma.asset.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    name: "asc"
+  },
+  include: {
+    equipmentType: true,
+    ~~~~~~~~~~~~~
+    base: true,
+?   equipment_type?: true,
+?   assignments?: true,
+?   transfers?: true,
+?   purchases?: true,
+?   expenditures?: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Asset`. Available options are marked with ?.
+2025-06-22 01:05:56 [32minfo[39m: ::1 - - [21/Jun/2025:19:35:56 +0000] "GET /api/assets?page=1&limit=10&sortBy=name&order=asc&search=&baseId=&equipmentTypeId= HTTP/1.1" 500 24 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:05:56 [32minfo[39m: ::1 - - [21/Jun/2025:19:35:56 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:05:57 [32minfo[39m: Executing findMany on assets with where clause: {}
+2025-06-22 01:05:57 [31merror[39m: Error fetching assets: 
+Invalid `prisma.asset.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    name: "asc"
+  },
+  include: {
+    equipmentType: true,
+    ~~~~~~~~~~~~~
+    base: true,
+?   equipment_type?: true,
+?   assignments?: true,
+?   transfers?: true,
+?   purchases?: true,
+?   expenditures?: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Asset`. Available options are marked with ?.
+2025-06-22 01:05:57 [32minfo[39m: ::1 - - [21/Jun/2025:19:35:57 +0000] "GET /api/assets?page=1&limit=10&sortBy=name&order=asc&search=&baseId=&equipmentTypeId= HTTP/1.1" 500 24 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:05:58 [31merror[39m: Error fetching users: 
+Invalid `prisma.user.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    createdAt: "desc",
+    ~~~~~~~~~
+?   id?: SortOrder,
+?   username?: SortOrder,
+?   password?: SortOrder,
+?   role?: SortOrder,
+?   base_id?: SortOrder | SortOrderInput,
+?   created_at?: SortOrder,
+?   updated_at?: SortOrder,
+?   base?: BaseOrderByWithRelationInput,
+?   assignments?: AssignmentOrderByRelationAggregateInput
+  },
+  include: {
+    bases: {
+      include: {
+        base: true
+      }
+    }
+  }
+}
+
+Unknown argument `createdAt`. Did you mean `created_at`? Available options are marked with ?.
+2025-06-22 01:05:58 [32minfo[39m: ::1 - - [21/Jun/2025:19:35:58 +0000] "GET /api/users?page=1&limit=10&search=&baseId= HTTP/1.1" 500 24 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:05:59 [32minfo[39m: ::1 - - [21/Jun/2025:19:35:59 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:06:00 [31merror[39m: Error fetching users: 
+Invalid `prisma.user.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    createdAt: "desc",
+    ~~~~~~~~~
+?   id?: SortOrder,
+?   username?: SortOrder,
+?   password?: SortOrder,
+?   role?: SortOrder,
+?   base_id?: SortOrder | SortOrderInput,
+?   created_at?: SortOrder,
+?   updated_at?: SortOrder,
+?   base?: BaseOrderByWithRelationInput,
+?   assignments?: AssignmentOrderByRelationAggregateInput
+  },
+  include: {
+    bases: {
+      include: {
+        base: true
+      }
+    }
+  }
+}
+
+Unknown argument `createdAt`. Did you mean `created_at`? Available options are marked with ?.
+2025-06-22 01:06:00 [32minfo[39m: ::1 - - [21/Jun/2025:19:36:00 +0000] "GET /api/users?page=1&limit=10&search=&baseId= HTTP/1.1" 500 24 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:06:01 [32minfo[39m: Executing findMany on assets with where clause: {}
+2025-06-22 01:06:01 [31merror[39m: Error fetching assets: 
+Invalid `prisma.asset.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    name: "asc"
+  },
+  include: {
+    equipmentType: true,
+    ~~~~~~~~~~~~~
+    base: true,
+?   equipment_type?: true,
+?   assignments?: true,
+?   transfers?: true,
+?   purchases?: true,
+?   expenditures?: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Asset`. Available options are marked with ?.
+2025-06-22 01:06:01 [32minfo[39m: ::1 - - [21/Jun/2025:19:36:01 +0000] "GET /api/assets?page=1&limit=10&sortBy=name&order=asc&search=&baseId=&equipmentTypeId= HTTP/1.1" 500 24 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:06:02 [32minfo[39m: ::1 - - [21/Jun/2025:19:36:02 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:06:02 [32minfo[39m: Executing findMany on assignments with where clause: {}
+2025-06-22 01:06:02 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignment_date: "desc"
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true,
+        ~~~~~~~~~~~~~
+?       equipment_type?: true,
+?       assignments?: true,
+?       transfers?: true,
+?       purchases?: true,
+?       expenditures?: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Asset`. Available options are marked with ?.
+2025-06-22 01:06:02 [32minfo[39m: ::1 - - [21/Jun/2025:19:36:02 +0000] "GET /api/assignments?page=1&limit=10 HTTP/1.1" 500 24 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:06:03 [32minfo[39m: Executing findMany on assignments with where clause: {}
+2025-06-22 01:06:03 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignment_date: "desc"
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true,
+        ~~~~~~~~~~~~~
+?       equipment_type?: true,
+?       assignments?: true,
+?       transfers?: true,
+?       purchases?: true,
+?       expenditures?: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Asset`. Available options are marked with ?.
+2025-06-22 01:06:03 [32minfo[39m: ::1 - - [21/Jun/2025:19:36:03 +0000] "GET /api/assignments?page=1&limit=10 HTTP/1.1" 500 24 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:06:17 [32minfo[39m: ::1 - - [21/Jun/2025:19:36:17 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:06:17 [32minfo[39m: Executing findMany on assignments with where clause: {}
+2025-06-22 01:06:17 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignment_date: "desc"
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true,
+        ~~~~~~~~~~~~~
+?       equipment_type?: true,
+?       assignments?: true,
+?       transfers?: true,
+?       purchases?: true,
+?       expenditures?: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Asset`. Available options are marked with ?.
+2025-06-22 01:06:17 [32minfo[39m: ::1 - - [21/Jun/2025:19:36:17 +0000] "GET /api/assignments?page=1&limit=10 HTTP/1.1" 500 24 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:06:18 [32minfo[39m: ::1 - - [21/Jun/2025:19:36:18 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:06:18 [32minfo[39m: Executing findMany on assignments with where clause: {}
+2025-06-22 01:06:18 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignment_date: "desc"
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true,
+        ~~~~~~~~~~~~~
+?       equipment_type?: true,
+?       assignments?: true,
+?       transfers?: true,
+?       purchases?: true,
+?       expenditures?: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Asset`. Available options are marked with ?.
+2025-06-22 01:06:18 [32minfo[39m: ::1 - - [21/Jun/2025:19:36:18 +0000] "GET /api/assignments?page=1&limit=10 HTTP/1.1" 500 24 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:06:50 [32minfo[39m: ::1 - - [21/Jun/2025:19:36:50 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:07:22 [32minfo[39m: ::1 - - [21/Jun/2025:19:37:22 +0000] "GET /api/dashboard/metrics?base_id=cmc60tcqu0001vvd36lknw6jo HTTP/1.1" 200 145 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:07:24 [32minfo[39m: ::1 - - [21/Jun/2025:19:37:24 +0000] "GET /api/dashboard/metrics?base_id=cmc60tcqu0002vvd3akdtfnb4 HTTP/1.1" 200 145 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:07:28 [32minfo[39m: ::1 - - [21/Jun/2025:19:37:28 +0000] "GET /api/dashboard/metrics?base_id=cmc60tcqu0003vvd32hjoen9c HTTP/1.1" 200 145 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:07:30 [32minfo[39m: ::1 - - [21/Jun/2025:19:37:30 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:08:04 [32minfo[39m: ::1 - - [21/Jun/2025:19:38:04 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:08:20 [32minfo[39m: Executing findMany on assignments with where clause: {}
+2025-06-22 01:08:20 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignment_date: "desc"
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true,
+        ~~~~~~~~~~~~~
+?       equipment_type?: true,
+?       assignments?: true,
+?       transfers?: true,
+?       purchases?: true,
+?       expenditures?: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Asset`. Available options are marked with ?.
+2025-06-22 01:08:20 [32minfo[39m: ::1 - - [21/Jun/2025:19:38:20 +0000] "GET /api/assignments?page=1&limit=10 HTTP/1.1" 500 24 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:08:20 [32minfo[39m: ::1 - - [21/Jun/2025:19:38:20 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:08:21 [32minfo[39m: Executing findMany on assignments with where clause: {}
+2025-06-22 01:08:21 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignment_date: "desc"
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true,
+        ~~~~~~~~~~~~~
+?       equipment_type?: true,
+?       assignments?: true,
+?       transfers?: true,
+?       purchases?: true,
+?       expenditures?: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Asset`. Available options are marked with ?.
+2025-06-22 01:08:21 [32minfo[39m: ::1 - - [21/Jun/2025:19:38:21 +0000] "GET /api/assignments?page=1&limit=10 HTTP/1.1" 500 24 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:08:22 [32minfo[39m: Executing findMany on assets with where clause: {}
+2025-06-22 01:08:22 [31merror[39m: Error fetching assets: 
+Invalid `prisma.asset.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    name: "asc"
+  },
+  include: {
+    equipmentType: true,
+    ~~~~~~~~~~~~~
+    base: true,
+?   equipment_type?: true,
+?   assignments?: true,
+?   transfers?: true,
+?   purchases?: true,
+?   expenditures?: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Asset`. Available options are marked with ?.
+2025-06-22 01:08:22 [32minfo[39m: ::1 - - [21/Jun/2025:19:38:22 +0000] "GET /api/assets?page=1&limit=10&sortBy=name&order=asc&search=&baseId=&equipmentTypeId= HTTP/1.1" 500 24 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:08:23 [32minfo[39m: ::1 - - [21/Jun/2025:19:38:23 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:08:24 [32minfo[39m: Executing findMany on assets with where clause: {}
+2025-06-22 01:08:24 [31merror[39m: Error fetching assets: 
+Invalid `prisma.asset.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    name: "asc"
+  },
+  include: {
+    equipmentType: true,
+    ~~~~~~~~~~~~~
+    base: true,
+?   equipment_type?: true,
+?   assignments?: true,
+?   transfers?: true,
+?   purchases?: true,
+?   expenditures?: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Asset`. Available options are marked with ?.
+2025-06-22 01:08:24 [32minfo[39m: ::1 - - [21/Jun/2025:19:38:24 +0000] "GET /api/assets?page=1&limit=10&sortBy=name&order=asc&search=&baseId=&equipmentTypeId= HTTP/1.1" 500 24 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:08:24 [31merror[39m: Error fetching users: 
+Invalid `prisma.user.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    createdAt: "desc",
+    ~~~~~~~~~
+?   id?: SortOrder,
+?   username?: SortOrder,
+?   password?: SortOrder,
+?   role?: SortOrder,
+?   base_id?: SortOrder | SortOrderInput,
+?   created_at?: SortOrder,
+?   updated_at?: SortOrder,
+?   base?: BaseOrderByWithRelationInput,
+?   assignments?: AssignmentOrderByRelationAggregateInput
+  },
+  include: {
+    bases: {
+      include: {
+        base: true
+      }
+    }
+  }
+}
+
+Unknown argument `createdAt`. Did you mean `created_at`? Available options are marked with ?.
+2025-06-22 01:08:24 [32minfo[39m: ::1 - - [21/Jun/2025:19:38:24 +0000] "GET /api/users?page=1&limit=10&search=&baseId= HTTP/1.1" 500 24 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:08:25 [32minfo[39m: ::1 - - [21/Jun/2025:19:38:25 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:08:26 [31merror[39m: Error fetching users: 
+Invalid `prisma.user.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    createdAt: "desc",
+    ~~~~~~~~~
+?   id?: SortOrder,
+?   username?: SortOrder,
+?   password?: SortOrder,
+?   role?: SortOrder,
+?   base_id?: SortOrder | SortOrderInput,
+?   created_at?: SortOrder,
+?   updated_at?: SortOrder,
+?   base?: BaseOrderByWithRelationInput,
+?   assignments?: AssignmentOrderByRelationAggregateInput
+  },
+  include: {
+    bases: {
+      include: {
+        base: true
+      }
+    }
+  }
+}
+
+Unknown argument `createdAt`. Did you mean `created_at`? Available options are marked with ?.
+2025-06-22 01:08:26 [32minfo[39m: ::1 - - [21/Jun/2025:19:38:26 +0000] "GET /api/users?page=1&limit=10&search=&baseId= HTTP/1.1" 500 24 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:09:08 [32minfo[39m: Server running on port 5003
+2025-06-22 01:09:08 [32minfo[39m: Environment: development
+2025-06-22 01:09:14 [32minfo[39m: ::1 - - [21/Jun/2025:19:39:14 +0000] "GET /api/auth/verify HTTP/1.1" 200 89 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:09:15 [32minfo[39m: ::1 - - [21/Jun/2025:19:39:15 +0000] "GET /api/auth/verify HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:09:17 [31merror[39m: Error fetching users: 
+Invalid `prisma.user.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    createdAt: "desc",
+    ~~~~~~~~~
+?   id?: SortOrder,
+?   username?: SortOrder,
+?   password?: SortOrder,
+?   role?: SortOrder,
+?   base_id?: SortOrder | SortOrderInput,
+?   created_at?: SortOrder,
+?   updated_at?: SortOrder,
+?   base?: BaseOrderByWithRelationInput,
+?   assignments?: AssignmentOrderByRelationAggregateInput
+  },
+  include: {
+    bases: {
+      include: {
+        base: true
+      }
+    }
+  }
+}
+
+Unknown argument `createdAt`. Did you mean `created_at`? Available options are marked with ?.
+2025-06-22 01:09:17 [32minfo[39m: ::1 - - [21/Jun/2025:19:39:17 +0000] "GET /api/users?page=1&limit=10&search=&baseId= HTTP/1.1" 500 24 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:09:18 [32minfo[39m: ::1 - - [21/Jun/2025:19:39:18 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:09:18 [31merror[39m: Error fetching users: 
+Invalid `prisma.user.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    createdAt: "desc",
+    ~~~~~~~~~
+?   id?: SortOrder,
+?   username?: SortOrder,
+?   password?: SortOrder,
+?   role?: SortOrder,
+?   base_id?: SortOrder | SortOrderInput,
+?   created_at?: SortOrder,
+?   updated_at?: SortOrder,
+?   base?: BaseOrderByWithRelationInput,
+?   assignments?: AssignmentOrderByRelationAggregateInput
+  },
+  include: {
+    bases: {
+      include: {
+        base: true
+      }
+    }
+  }
+}
+
+Unknown argument `createdAt`. Did you mean `created_at`? Available options are marked with ?.
+2025-06-22 01:09:18 [32minfo[39m: ::1 - - [21/Jun/2025:19:39:18 +0000] "GET /api/users?page=1&limit=10&search=&baseId= HTTP/1.1" 500 24 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:09:20 [32minfo[39m: ::1 - - [21/Jun/2025:19:39:20 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:09:20 [32minfo[39m: ::1 - - [21/Jun/2025:19:39:20 +0000] "GET /api/assets/categories HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:09:21 [32minfo[39m: ::1 - - [21/Jun/2025:19:39:21 +0000] "GET /api/transfers?page=1&limit=10 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:09:22 [32minfo[39m: Executing findMany on assignments with where clause: {}
+2025-06-22 01:09:22 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignmentDate: "desc",
+    ~~~~~~~~~~~~~~
+?   id?: SortOrder,
+?   asset_id?: SortOrder,
+?   user_id?: SortOrder,
+?   assignment_date?: SortOrder,
+?   return_date?: SortOrder | SortOrderInput,
+?   created_at?: SortOrder,
+?   updated_at?: SortOrder,
+?   asset?: AssetOrderByWithRelationInput,
+?   user?: UserOrderByWithRelationInput
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown argument `assignmentDate`. Did you mean `assignment_date`? Available options are marked with ?.
+2025-06-22 01:09:22 [32minfo[39m: ::1 - - [21/Jun/2025:19:39:22 +0000] "GET /api/assignments?page=1&limit=10 HTTP/1.1" 500 24 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:09:22 [32minfo[39m: ::1 - - [21/Jun/2025:19:39:22 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:09:23 [32minfo[39m: Executing findMany on assignments with where clause: {}
+2025-06-22 01:09:23 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignmentDate: "desc",
+    ~~~~~~~~~~~~~~
+?   id?: SortOrder,
+?   asset_id?: SortOrder,
+?   user_id?: SortOrder,
+?   assignment_date?: SortOrder,
+?   return_date?: SortOrder | SortOrderInput,
+?   created_at?: SortOrder,
+?   updated_at?: SortOrder,
+?   asset?: AssetOrderByWithRelationInput,
+?   user?: UserOrderByWithRelationInput
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown argument `assignmentDate`. Did you mean `assignment_date`? Available options are marked with ?.
+2025-06-22 01:09:23 [32minfo[39m: ::1 - - [21/Jun/2025:19:39:23 +0000] "GET /api/assignments?page=1&limit=10 HTTP/1.1" 500 24 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:13:32 [32minfo[39m: ::1 - - [21/Jun/2025:19:43:32 +0000] "GET /api/bases HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:13:32 [32minfo[39m: ::1 - - [21/Jun/2025:19:43:32 +0000] "GET /api/purchases?page=1&limit=10 HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:13:33 [32minfo[39m: ::1 - - [21/Jun/2025:19:43:33 +0000] "GET /api/dashboard/filters HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-22 01:13:35 [32minfo[39m: ::1 - - [21/Jun/2025:19:43:35 +0000] "GET /api/dashboard/metrics? HTTP/1.1" - - "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
