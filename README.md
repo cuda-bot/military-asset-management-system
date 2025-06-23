@@ -49,10 +49,7 @@ This app helps you keep track of military assets—like vehicles, equipment, and
    ```
    The frontend runs at [http://localhost:3000](http://localhost:3000)
 
-## Demo Logins
-- **Admin:** `admin` / `admin123`
-- **Base Commander:** `commander_bragg` / `commander123`
-- **Logistics Officer:** `logistics_bragg` / `logistics123`
+
 
 ## Need Help?
 If you get stuck, open an issue or ask a teammate. We're happy to help.
