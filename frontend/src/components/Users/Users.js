@@ -60,11 +60,11 @@ const Users = () => {
 
     const { data: bases } = useQuery({
         queryKey: ['bases'],
-        queryFn: () => api.get('/bases').then(res => res.data.bases),
+        queryFn: () => api.get('/bases').then(res => res.data?.bases || []),
     });
 
     if (error) {
-        return <Alert severity="error">Error loading users: {error.message}</Alert>;
+        return <Alert severity="error">Sorry, we couldn't load the users right now. Please check your connection or try again in a moment.<br />({error.message})</Alert>;
     }
 
     const handleFilterChange = (e) => {
@@ -92,7 +92,10 @@ const Users = () => {
 
     return (
         <Box>
-            <Typography variant="h4" gutterBottom>User Management</Typography>
+            <Typography variant="h4" gutterBottom>Welcome to User Management</Typography>
+            <Typography variant="body1" gutterBottom>
+                Here you can browse, search, and manage all users. Use the filters below to find exactly who you need.
+            </Typography>
             <Paper sx={{ p: 2, mb: 3 }}>
                 <Grid container spacing={2} alignItems="center">
                     <Grid item xs={12} sm={6}>
@@ -102,6 +105,8 @@ const Users = () => {
                             name="search"
                             value={filters.search}
                             onChange={handleFilterChange}
+                            placeholder="Type a username..."
+                            helperText="Find users by their username."
                         />
                     </Grid>
                     <Grid item xs={12} sm={4}>
@@ -109,12 +114,13 @@ const Users = () => {
                             <InputLabel>Base</InputLabel>
                             <Select name="baseId" value={filters.baseId} label="Base" onChange={handleFilterChange}>
                                 <MenuItem value=""><em>All Bases</em></MenuItem>
-                                {bases?.map(b => <MenuItem key={b.id} value={b.id}>{b.name}</MenuItem>)}
+                                {bases?.map((b, idx) => <MenuItem key={b.id || idx} value={b.id}>{b.name}</MenuItem>)}
                             </Select>
+                            <Typography variant="caption">Filter users by base location.</Typography>
                         </FormControl>
                     </Grid>
                     <Grid item xs={12} sm={2}>
-                        <Button fullWidth variant="contained" startIcon={<AddIcon />} onClick={() => handleOpenModal('create')}>New User</Button>
+                        <Button fullWidth variant="contained" startIcon={<AddIcon />} onClick={() => handleOpenModal('create')}>Add New User</Button>
                     </Grid>
                 </Grid>
             </Paper>
@@ -132,9 +138,11 @@ const Users = () => {
                         </TableHead>
                         <TableBody>
                             {isLoading ? (
-                                <TableRow><TableCell colSpan={5} align="center"><CircularProgress /></TableCell></TableRow>
-                            ) : users.map(user => (
-                                <TableRow key={user.id}>
+                                <TableRow><TableCell colSpan={5} align="center"><CircularProgress /><Typography sx={{ ml: 2 }}>Loading users...</Typography></TableCell></TableRow>
+                            ) : users.length === 0 ? (
+                                <TableRow><TableCell colSpan={5} align="center">No users found. Try adjusting your filters or add a new user to get started!</TableCell></TableRow>
+                            ) : users.map((user, idx) => (
+                                <TableRow key={user.id || idx}>
                                     <TableCell>{user.username}</TableCell>
                                     <TableCell>
                                         <Chip label={user.role.replace('_', ' ')} color={roleColors[user.role]} size="small" />
@@ -142,7 +150,7 @@ const Users = () => {
                                     <TableCell>{user.base?.name || 'N/A'}</TableCell>
                                     <TableCell>{new Date(user.created_at).toLocaleDateString()}</TableCell>
                                     <TableCell>
-                                        <IconButton size="small" onClick={() => handleOpenModal('edit', user)}><EditIcon /></IconButton>
+                                        <IconButton size="small" onClick={() => handleOpenModal('edit', user)} title="Edit this user"><EditIcon /></IconButton>
                                     </TableCell>
                                 </TableRow>
                             ))}
@@ -157,6 +165,7 @@ const Users = () => {
                     page={page}
                     onPageChange={(e, newPage) => setPage(newPage)}
                     onRowsPerPageChange={(e) => { setRowsPerPage(parseInt(e.target.value, 10)); setPage(0); }}
+                    labelRowsPerPage="Users per page:"
                 />
             </Paper>
             <CreateUser open={isCreateModalOpen} onClose={handleCloseModals} onSuccess={handleShowSnackbar} />

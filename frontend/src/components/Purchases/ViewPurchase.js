@@ -35,7 +35,7 @@ const ViewPurchase = ({ open, onClose, purchase }) => {
                         <DetailItem title="Purchase Date" value={new Date(purchase.purchaseDate).toLocaleDateString()} halfWidth />
                         <DetailItem title="Supplier" value={purchase.supplier} halfWidth />
                         <DetailItem title="Invoice Number" value={purchase.invoiceNumber} halfWidth />
-                        <DetailItem title="Created By" value={purchase.createdBy.username} halfWidth />
+                        <DetailItem title="Created By" value={purchase.createdBy?.username || 'N/A'} halfWidth />
                         <DetailItem title="Created At" value={new Date(purchase.createdAt).toLocaleString()} halfWidth />
                         <DetailItem title="Notes" value={purchase.notes} />
                     </Grid>

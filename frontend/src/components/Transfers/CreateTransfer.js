@@ -28,7 +28,7 @@ const CreateTransfer = ({ open, onClose, onSuccess }) => {
 
     const { data: basesData, isLoading: basesLoading } = useQuery({
         queryKey: ['bases'],
-        queryFn: () => api.get('/bases').then(res => res.data.bases),
+        queryFn: () => api.get('/bases').then(res => res.data?.bases || []),
     });
 
     const { data: equipmentTypesData, isLoading: equipmentTypesLoading } = useQuery({
@@ -72,7 +72,7 @@ const CreateTransfer = ({ open, onClose, onSuccess }) => {
                                         rules={{ required: 'Equipment type is required' }}
                                         render={({ field }) => (
                                             <Select {...field} label="Equipment Type *" disabled={equipmentTypesLoading}>
-                                                {equipmentTypesLoading && <MenuItem value=""><em>Loading...</em></MenuItem>}
+                                                {equipmentTypesLoading && <MenuItem key="loading-equipment-type" value=""><em>Loading...</em></MenuItem>}
                                                 {equipmentTypesData?.map((type) => (
                                                     <MenuItem key={type.id} value={type.id}>{type.name}</MenuItem>
                                                 ))}
@@ -110,7 +110,7 @@ const CreateTransfer = ({ open, onClose, onSuccess }) => {
                                         rules={{ required: 'Destination base is required' }}
                                         render={({ field }) => (
                                             <Select {...field} label="To Base *" disabled={basesLoading}>
-                                                {basesLoading && <MenuItem value=""><em>Loading...</em></MenuItem>}
+                                                {basesLoading && <MenuItem key="loading-to-base" value=""><em>Loading...</em></MenuItem>}
                                                 {basesData?.filter(b => b.id !== userBaseId).map((base) => (
                                                     <MenuItem key={base.id} value={base.id}>{base.name}</MenuItem>
                                                 ))}

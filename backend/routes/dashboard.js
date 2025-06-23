@@ -1,5 +1,6 @@
 import { Router } from 'express';
-import prisma from '../config/prisma.js';
+import { ObjectId } from 'mongodb';
+import { connectToMongo } from '../config/mongodb.js';
 import logger from '../utils/logger.js';
 import { verifyToken } from '../middleware/auth.js';
 
@@ -10,58 +11,72 @@ router.use(verifyToken);
 // @desc    Get dashboard metrics
 // @access  Private
 router.get('/metrics', async (req, res) => {
-    const { start_date, end_date, base_id, equipment_type_id } = req.query;
-    const user = req.user;
+    // Accept both camelCase and snake_case query params
+    const startDate = req.query.start_date || req.query.startDate;
+    const endDate = req.query.end_date || req.query.endDate;
+    const baseId = req.query.base_id || req.query.baseId;
+    const equipmentTypeId = req.query.equipment_type_id || req.query.equipmentTypeId;
+    const { user } = req;
 
     try {
-        const whereClause = {};
-        if (user.role !== 'admin' && user.base_id) {
-            whereClause.base_id = user.base_id;
-        } else if (base_id) {
-            whereClause.base_id = base_id;
+        const db = await connectToMongo();
+
+        // Authorization & Base Filtering
+        let baseFilter = {};
+        if (user.role !== 'admin' && user.base_ids && user.base_ids.length > 0) {
+            const userBases = user.base_ids.map(id => new ObjectId(id));
+            if (baseId && ObjectId.isValid(baseId) && user.base_ids.includes(baseId)) {
+                baseFilter = { _id: new ObjectId(baseId) };
+            } else {
+                baseFilter = { _id: { $in: userBases } };
+            }
+        } else if (baseId && ObjectId.isValid(baseId)) {
+            baseFilter = { _id: new ObjectId(baseId) };
         }
 
-        if (equipment_type_id) {
-            whereClause.type_id = equipment_type_id;
-        }
+        const baseIds = await db.collection('bases').find(baseFilter).project({ _id: 1 }).toArray();
+        const authorizedBaseIds = baseIds.map(b => b._id);
 
+        // Date Filtering
         const dateFilter = {};
-        if (start_date) dateFilter.gte = new Date(start_date);
-        if (end_date) dateFilter.lte = new Date(end_date);
-
+        if (startDate) dateFilter.$gte = new Date(startDate);
+        if (endDate) dateFilter.$lte = new Date(endDate);
         const hasDateFilter = Object.keys(dateFilter).length > 0;
 
-        // For this simplified example, we'll just count assets.
-        // A real implementation would require more complex logic for balances.
-        const opening_balance = await prisma.asset.count({ where: whereClause });
-        const closing_balance = opening_balance; // Placeholder
+        // Aggregations
+        const opening_balance = await db.collection('assets').countDocuments({ base_id: { $in: authorizedBaseIds } });
 
-        // Purchases
-        const purchases = await prisma.purchase.count({
-            where: { ...whereClause, ...(hasDateFilter && { purchase_date: dateFilter }) },
-        });
+        const purchasesFilter = { base_id: { $in: authorizedBaseIds } };
+        if (hasDateFilter) purchasesFilter.purchaseDate = dateFilter;
+        const purchasesAgg = await db.collection('purchases').aggregate([
+            { $match: purchasesFilter },
+            { $group: { _id: null, total: { $sum: "$quantity" } } }
+        ]).toArray();
+        const purchases = purchasesAgg[0]?.total || 0;
 
-        // Transfers In
-        const transfers_in = await prisma.transfer.count({
-            where: { to_base_id: whereClause.base_id, ...(hasDateFilter && { transfer_date: dateFilter }) },
-        });
+        const transfersInFilter = { to_base_id: { $in: authorizedBaseIds }, status: 'approved' };
+        if (hasDateFilter) transfersInFilter.approvedAt = dateFilter;
+        const transfersInAgg = await db.collection('transfers').aggregate([
+            { $match: transfersInFilter },
+            { $group: { _id: null, total: { $sum: "$quantity" } } }
+        ]).toArray();
+        const transfers_in = transfersInAgg[0]?.total || 0;
 
-        // Transfers Out
-        const transfers_out = await prisma.transfer.count({
-            where: { from_base_id: whereClause.base_id, ...(hasDateFilter && { transfer_date: dateFilter }) },
-        });
+        const transfersOutFilter = { from_base_id: { $in: authorizedBaseIds }, status: 'approved' };
+        if (hasDateFilter) transfersOutFilter.approvedAt = dateFilter;
+        const transfersOutAgg = await db.collection('transfers').aggregate([
+            { $match: transfersOutFilter },
+            { $group: { _id: null, total: { $sum: "$quantity" } } }
+        ]).toArray();
+        const transfers_out = transfersOutAgg[0]?.total || 0;
 
-        // Assignments
-        const assigned = await prisma.assignment.count({
-            where: { asset: { ...whereClause }, ...(hasDateFilter && { assignment_date: dateFilter }) },
-        });
+        // For now, assigned and expended are set to 0 (implement as needed)
+        const assigned = 0;
+        const expended = 0;
 
-        // Expenditures
-        const expended = await prisma.expenditure.count({
-            where: { asset: { ...whereClause }, ...(hasDateFilter && { expenditure_date: dateFilter }) },
-        });
-
-        const net_movement = purchases + transfers_in - transfers_out - expended;
+        // Calculate net movement and closing balance
+        const net_movement = purchases + transfers_in - transfers_out;
+        const closing_balance = opening_balance + net_movement;
 
         res.json({
             metrics: {
@@ -72,10 +87,9 @@ router.get('/metrics', async (req, res) => {
                 transfers_in,
                 transfers_out,
                 assigned,
-                expended,
+                expended
             }
         });
-
     } catch (error) {
         logger.error('Error fetching dashboard metrics:', error);
         res.status(500).json({ error: 'Server error' });
@@ -88,21 +102,16 @@ router.get('/metrics', async (req, res) => {
 // @access  Private
 router.get('/filters', async (req, res) => {
     try {
-        let baseWhere = {};
-        if (req.user.role !== 'admin' && req.user.base_id) {
-            baseWhere.id = req.user.base_id;
+        const db = await connectToMongo();
+        let baseFilter = {};
+        if (req.user.role !== 'admin' && req.user.base_ids && req.user.base_ids.length > 0) {
+            baseFilter._id = { $in: req.user.base_ids.map(id => new ObjectId(id)) };
         }
 
-        const bases = await prisma.base.findMany({
-            where: baseWhere,
-            orderBy: { name: 'asc' }
-        });
+        const bases = await db.collection('bases').find(baseFilter).sort({ name: 1 }).toArray();
+        const equipmentTypes = await db.collection('equipment_types').find().sort({ name: 1 }).toArray();
 
-        const equipment_types = await prisma.equipmentType.findMany({
-            orderBy: { name: 'asc' }
-        });
-
-        res.json({ bases, equipment_types });
+        res.json({ bases, equipmentTypes });
     } catch (error) {
         logger.error('Error fetching dashboard filters:', error);
         res.status(500).json({ error: 'Server error' });

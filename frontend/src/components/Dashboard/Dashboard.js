@@ -16,6 +16,11 @@ import {
     Chip,
     CircularProgress,
     Alert,
+    Dialog,
+    DialogTitle,
+    DialogContent,
+    DialogActions,
+    IconButton,
 } from '@mui/material';
 import {
     TrendingUp,
@@ -30,6 +35,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import api from '../../services/api';
+import CloseIcon from '@mui/icons-material/Close';
 
 const Dashboard = () => {
     const [filters, setFilters] = useState({
@@ -38,6 +44,8 @@ const Dashboard = () => {
         baseId: '',
         equipmentTypeId: '',
     });
+
+    const [netMovementOpen, setNetMovementOpen] = useState(false);
 
     // Fetch dashboard metrics
     const { data: metricsData, isLoading: metricsLoading, error: metricsError } = useQuery({
@@ -144,6 +152,12 @@ const Dashboard = () => {
         { name: 'Closing', value: metrics.closing_balance || 0 },
     ];
 
+    const handleOpenNetMovement = () => setNetMovementOpen(true);
+    const handleCloseNetMovement = () => setNetMovementOpen(false);
+
+    // Find the Net Movement card index
+    const netMovementIndex = metricCards.findIndex(card => card.title === 'Net Movement');
+
     if (metricsError) {
         return (
             <Alert severity="error" sx={{ mb: 2 }}>
@@ -191,7 +205,7 @@ const Dashboard = () => {
                                 >
                                     <MenuItem value="">All Bases</MenuItem>
                                     {bases.map((base) => (
-                                        <MenuItem key={base.id} value={base.id}>
+                                        <MenuItem key={base._id} value={base._id}>
                                             {base.name}
                                         </MenuItem>
                                     ))}
@@ -208,7 +222,7 @@ const Dashboard = () => {
                                 >
                                     <MenuItem value="">All Types</MenuItem>
                                     {equipmentTypes.map((type) => (
-                                        <MenuItem key={type.id} value={type.id}>
+                                        <MenuItem key={type._id} value={type._id}>
                                             {type.name}
                                         </MenuItem>
                                     ))}
@@ -231,7 +245,9 @@ const Dashboard = () => {
                 <Grid container spacing={3} sx={{ mb: 3 }}>
                     {metricCards.map((card, index) => (
                         <Grid item xs={12} sm={6} md={3} key={index}>
-                            <Card>
+                            <Card
+                                {...(index === netMovementIndex ? { onClick: handleOpenNetMovement, sx: { cursor: 'pointer', boxShadow: 6 } } : {})}
+                            >
                                 <CardContent>
                                     <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
                                         {card.icon}
@@ -307,6 +323,42 @@ const Dashboard = () => {
                         </Paper>
                     </Grid>
                 </Grid>
+
+                {/* Net Movement Pop-up Dialog */}
+                <Dialog open={netMovementOpen} onClose={handleCloseNetMovement} maxWidth="xs" fullWidth>
+                    <DialogTitle sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                        Net Movement Details
+                        <IconButton onClick={handleCloseNetMovement} size="small">
+                            <CloseIcon />
+                        </IconButton>
+                    </DialogTitle>
+                    <DialogContent dividers>
+                        <Box sx={{ mb: 2 }}>
+                            <Typography variant="subtitle1" gutterBottom>Breakdown</Typography>
+                            <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
+                                <Typography>Purchases</Typography>
+                                <Typography color="primary.main">+{metrics.purchases || 0}</Typography>
+                            </Box>
+                            <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
+                                <Typography>Transfers In</Typography>
+                                <Typography color="success.main">+{metrics.transfers_in || 0}</Typography>
+                            </Box>
+                            <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
+                                <Typography>Transfers Out</Typography>
+                                <Typography color="error.main">-{metrics.transfers_out || 0}</Typography>
+                            </Box>
+                            <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2, pt: 1, borderTop: '1px solid #eee' }}>
+                                <Typography fontWeight="bold">Net Movement</Typography>
+                                <Typography fontWeight="bold" color={metrics.net_movement >= 0 ? 'success.main' : 'error.main'}>
+                                    {metrics.net_movement >= 0 ? '+' : ''}{metrics.net_movement || 0}
+                                </Typography>
+                            </Box>
+                        </Box>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleCloseNetMovement} color="primary">Close</Button>
+                    </DialogActions>
+                </Dialog>
             </Box>
         </LocalizationProvider>
     );

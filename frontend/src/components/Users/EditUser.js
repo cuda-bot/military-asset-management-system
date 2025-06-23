@@ -36,7 +36,7 @@ const EditUser = ({ open, onClose, onSuccess, user }) => {
 
     const { data: bases } = useQuery({
         queryKey: ['bases'],
-        queryFn: () => api.get('/bases').then(res => res.data.bases)
+        queryFn: () => api.get('/bases').then(res => res.data?.bases || []),
     });
 
     const editUserMutation = useMutation({
@@ -112,7 +112,7 @@ const EditUser = ({ open, onClose, onSuccess, user }) => {
                                     render={({ field }) => (
                                         <Select {...field} label="Base (optional)">
                                             <MenuItem value=""><em>None</em></MenuItem>
-                                            {bases?.map((b) => <MenuItem key={b.id} value={b.id}>{b.name}</MenuItem>)}
+                                            {bases?.map((b, idx) => <MenuItem key={b.id || idx} value={b.id}>{b.name}</MenuItem>)}
                                         </Select>
                                     )}
                                 />

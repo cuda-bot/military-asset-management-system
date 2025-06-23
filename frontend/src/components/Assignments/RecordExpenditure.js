@@ -31,7 +31,7 @@ const RecordExpenditure = ({ open, onClose, onSuccess }) => {
 
     const { data: bases } = useQuery({
         queryKey: ['bases'],
-        queryFn: () => api.get('/bases').then(res => res.data.bases),
+        queryFn: () => api.get('/bases').then(res => res.data?.bases || []),
         enabled: user?.role === 'admin',
     });
 
@@ -78,8 +78,8 @@ const RecordExpenditure = ({ open, onClose, onSuccess }) => {
                                             onChange={(e) => setSelectedBase(e.target.value)}
                                             label="Base"
                                         >
-                                            {bases?.map((base) => (
-                                                <MenuItem key={base.id} value={base.id}>{base.name}</MenuItem>
+                                            {bases?.map((base, idx) => (
+                                                <MenuItem key={base.id || idx} value={base.id}>{base.name}</MenuItem>
                                             ))}
                                         </Select>
                                     </FormControl>

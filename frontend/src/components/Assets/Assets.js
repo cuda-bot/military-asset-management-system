@@ -45,7 +45,7 @@ const Assets = () => {
     const [isViewModalOpen, setViewModalOpen] = useState(false);
     const [selectedAsset, setSelectedAsset] = useState(null);
     const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
-    const { user } = useAuth();
+    const { user, loading } = useAuth();
 
     const { data, isLoading, error, isSuccess } = useQuery({
         queryKey: ['assets', page, rowsPerPage, sortBy, order, search, baseId, equipmentTypeId],
@@ -53,16 +53,23 @@ const Assets = () => {
         placeholderData: (previousData) => previousData,
     });
 
-    const { data: basesData } = useQuery({
+    const { data: basesData, refetch: refetchBases, error: basesError } = useQuery({
         queryKey: ['bases'],
-        queryFn: () => api.get('/bases').then(res => res.data.bases),
-        enabled: user?.role === 'admin'
+        queryFn: () => api.get('/bases').then(res => res.data?.bases || []),
+        enabled: !loading && user?.role === 'admin'
     });
 
     const { data: equipmentTypesData } = useQuery({
         queryKey: ['equipmentTypes'],
         queryFn: () => api.get('/assets/categories').then(res => res.data),
     });
+
+    // Debug: Log data to check for undefined or duplicate ids
+    // console.log('basesData:', basesData);
+    // console.log('equipmentTypesData:', equipmentTypesData);
+    // if (basesError) {
+    //     console.error('basesError:', basesError);
+    // }
 
     const handleSort = (property) => {
         const isAsc = sortBy === property && order === 'asc';
@@ -74,22 +81,36 @@ const Assets = () => {
         setSnackbar({ open: true, message, severity });
     };
 
-    if (error) {
-        return <Alert severity="error">Error loading assets: {error.message}</Alert>;
+    if (loading) {
+        // Show a friendly loading message
+        return <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 200 }}><CircularProgress /><Typography sx={{ ml: 2 }}>Loading your assets...</Typography></Box>;
     }
+
+    if (error) {
+        // Show a more human error message
+        return <Alert severity="error">Sorry, we couldn't load your assets right now. Please check your connection or try again in a moment.<br />({error.message})</Alert>;
+    }
+
+    // Show a message if there are no assets to display
+    const isEmpty = isSuccess && data?.assets?.length === 0;
 
     return (
         <Box>
-            <Typography variant="h4" gutterBottom>Asset Management</Typography>
+            <Typography variant="h4" gutterBottom>Welcome to Asset Management</Typography>
+            <Typography variant="body1" gutterBottom>
+                Here you can browse, search, and manage all your assets. Use the filters below to find exactly what you need.
+            </Typography>
             <Paper>
                 <Box sx={{ p: 2 }}>
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={4}>
                             <TextField
                                 fullWidth
-                                label="Search by Name/Serial"
+                                label="Search by Name or Serial Number"
                                 value={search}
                                 onChange={(e) => setSearch(e.target.value)}
+                                placeholder="Type to search..."
+                                helperText="Find assets by name or serial number."
                             />
                         </Grid>
                         {user?.role === 'admin' && (
@@ -97,11 +118,12 @@ const Assets = () => {
                                 <FormControl fullWidth>
                                     <InputLabel>Base</InputLabel>
                                     <Select value={baseId} label="Base" onChange={(e) => setBaseId(e.target.value)}>
-                                        <MenuItem value=""><em>All Bases</em></MenuItem>
-                                        {basesData?.map(base => (
-                                            <MenuItem key={base.id} value={base.id}>{base.name}</MenuItem>
+                                        <MenuItem key="all-bases" value=""><em>All Bases</em></MenuItem>
+                                        {Array.isArray(basesData) && basesData.map((base, idx) => (
+                                            <MenuItem key={base._id || base.id || idx} value={base._id || base.id}>{base.name}</MenuItem>
                                         ))}
                                     </Select>
+                                    <Typography variant="caption">Filter assets by base location.</Typography>
                                 </FormControl>
                             </Grid>
                         )}
@@ -109,16 +131,17 @@ const Assets = () => {
                             <FormControl fullWidth>
                                 <InputLabel>Equipment Type</InputLabel>
                                 <Select value={equipmentTypeId} label="Equipment Type" onChange={(e) => setEquipmentTypeId(e.target.value)}>
-                                    <MenuItem value=""><em>All Types</em></MenuItem>
-                                    {equipmentTypesData?.map(type => (
-                                        <MenuItem key={type.id} value={type.id}>{type.name}</MenuItem>
+                                    <MenuItem key="all-types" value=""><em>All Types</em></MenuItem>
+                                    {Array.isArray(equipmentTypesData) && equipmentTypesData.map(type => (
+                                        <MenuItem key={type._id || type.id} value={type._id || type.id}>{type.name}</MenuItem>
                                     ))}
                                 </Select>
+                                <Typography variant="caption">Filter by equipment category.</Typography>
                             </FormControl>
                         </Grid>
                         <Grid item xs={12} sm={2} sx={{ textAlign: 'right' }}>
                             <Button variant="contained" startIcon={<AddIcon />} onClick={() => setCreateModalOpen(true)}>
-                                New Asset
+                                Add New Asset
                             </Button>
                         </Grid>
                     </Grid>
@@ -127,7 +150,7 @@ const Assets = () => {
                     <Table>
                         <TableHead>
                             <TableRow>
-                                <TableCell onClick={() => handleSort('name')}>Name</TableCell>
+                                <TableCell onClick={() => handleSort('name')} style={{ cursor: 'pointer' }} title="Sort by Name">Name</TableCell>
                                 <TableCell>Serial Number</TableCell>
                                 <TableCell>Base</TableCell>
                                 <TableCell>Quantity</TableCell>
@@ -138,21 +161,23 @@ const Assets = () => {
                         <TableBody>
                             {isLoading ? (
                                 <TableRow><TableCell colSpan={6} align="center"><CircularProgress /></TableCell></TableRow>
+                            ) : isEmpty ? (
+                                <TableRow><TableCell colSpan={6} align="center">No assets found. Try adjusting your filters or add a new asset to get started!</TableCell></TableRow>
                             ) : (
                                 data?.assets.map((asset) => (
                                     <TableRow key={asset.id}>
-                                        <TableCell>{asset.equipmentType.name}</TableCell>
-                                        <TableCell>{asset.serialNumber || 'N/A'}</TableCell>
-                                        <TableCell>{asset.base.name}</TableCell>
+                                        <TableCell>{asset.equipmentType?.name || asset.name}</TableCell>
+                                        <TableCell>{asset.serialNumber || asset.serial_number || 'N/A'}</TableCell>
+                                        <TableCell>{asset.base?.name || 'N/A'}</TableCell>
                                         <TableCell>{asset.quantity}</TableCell>
                                         <TableCell>{asset.status}</TableCell>
                                         <TableCell>
-                                            <Tooltip title="View Details">
+                                            <Tooltip title="View asset details">
                                                 <IconButton onClick={() => { setSelectedAsset(asset); setViewModalOpen(true); }}>
                                                     <ViewIcon />
                                                 </IconButton>
                                             </Tooltip>
-                                            <Tooltip title="Edit Asset">
+                                            <Tooltip title="Edit this asset">
                                                 <IconButton onClick={() => { setSelectedAsset(asset); setEditModalOpen(true); }}>
                                                     <EditIcon />
                                                 </IconButton>
@@ -176,6 +201,7 @@ const Assets = () => {
                             setRowsPerPage(parseInt(e.target.value, 10));
                             setPage(0);
                         }}
+                        labelRowsPerPage="Assets per page:"
                     />
                 )}
             </Paper>
@@ -209,6 +235,15 @@ const Assets = () => {
                     {snackbar.message}
                 </Alert>
             </Snackbar>
+            {/* Debug: Manual refetch and error display */}
+            <Button onClick={() => refetchBases()} variant="outlined" color="secondary" sx={{ mb: 2 }}>
+                Refetch Bases (Debug)
+            </Button>
+            {basesError && (
+                <Alert severity="error" sx={{ mb: 2 }}>
+                    Error fetching bases: {basesError.message}
+                </Alert>
+            )}
         </Box>
     );
 };

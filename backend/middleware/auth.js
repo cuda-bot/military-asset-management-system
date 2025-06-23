@@ -1,28 +1,29 @@
 import jwt from 'jsonwebtoken';
-import prisma from '../config/prisma.js';
+import { connectToMongo } from '../config/mongodb.js';
 import logger from '../utils/logger.js';
+import { ObjectId } from 'mongodb';
 
 export const logTransaction = async (req, { action, tableName, recordId, oldData, newData }) => {
     try {
-        const userId = req.user ? req.user.id : null;
-        await prisma.auditLog.create({
-            data: {
-                userId,
-                action,
-                tableName,
-                recordId,
-                oldValues: oldData ? JSON.stringify(oldData) : undefined,
-                newValues: newData ? JSON.stringify(newData) : undefined,
-                ipAddress: req.ip,
-                userAgent: req.get('User-Agent'),
-            },
+        const db = await connectToMongo();
+        const userId = req.user ? new ObjectId(req.user.id) : null;
+        await db.collection('audit_logs').insertOne({
+            userId,
+            action,
+            tableName,
+            recordId: recordId ? recordId.toString() : null,
+            oldValues: oldData ? JSON.stringify(oldData) : null,
+            newValues: newData ? JSON.stringify(newData) : null,
+            ipAddress: req.ip,
+            userAgent: req.get('User-Agent'),
+            createdAt: new Date(),
         });
     } catch (error) {
         logger.error('Failed to log transaction:', error);
     }
 };
 
-export const verifyToken = async (req, res, next) => {
+export const verifyToken = (req, res, next) => {
     const token = req.header('Authorization')?.replace('Bearer ', '');
 
     if (!token) {
@@ -31,17 +32,7 @@ export const verifyToken = async (req, res, next) => {
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        const user = await prisma.user.findUnique({
-            where: { id: decoded.user.id },
-            include: { base: true },
-        });
-
-        if (!user) {
-            return res.status(401).json({ error: 'User not found' });
-        }
-
-        req.user = user;
-
+        req.user = decoded.user; // Trust the JWT payload
         next();
     } catch (error) {
         res.status(401).json({ error: 'Token is not valid' });
@@ -55,15 +46,14 @@ export const hasRole = (roles) => (req, res, next) => {
     next();
 };
 
-export const hasBaseAccess = async (req, res, next) => {
+export const hasBaseAccess = (req, res, next) => {
     const { baseId } = req.params.baseId ? req.params : req.body;
 
     if (!baseId) {
-        // If no baseId is specified, proceed if user is admin, otherwise deny
-        return req.user.role === 'admin' ? next() : res.status(403).json({ error: 'Forbidden: Base access required' });
+        return req.user.role === 'admin' ? next() : res.status(403).json({ error: 'Forbidden: Base ID is required' });
     }
 
-    if (req.user.role === 'admin' || req.user.bases.includes(parseInt(baseId))) {
+    if (req.user.role === 'admin' || (req.user.base_ids && req.user.base_ids.includes(baseId))) {
         return next();
     }
 

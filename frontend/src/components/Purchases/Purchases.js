@@ -66,24 +66,28 @@ const Purchases = () => {
     };
 
     if (error) {
-        return <Alert severity="error">Error loading purchases: {error.message}</Alert>;
+        return <Alert severity="error">Sorry, we couldn't load the purchases right now. Please check your connection or try again in a moment.<br />({error.message})</Alert>;
     }
+
+    const isEmpty = !isLoading && purchases.length === 0;
 
     return (
         <Box>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
-                <Typography variant="h4">Purchases</Typography>
+                <Typography variant="h4">Welcome to Purchases</Typography>
                 {(user?.role === 'admin' || user?.role === 'logistics_officer') && (
                     <Button
                         variant="contained"
                         startIcon={<AddIcon />}
                         onClick={() => setCreateModalOpen(true)}
                     >
-                        New Purchase
+                        Add New Purchase
                     </Button>
                 )}
             </Box>
-
+            <Typography variant="body1" gutterBottom>
+                Here you can browse, search, and manage all purchases. Use the table below to see recent activity or add a new purchase.
+            </Typography>
             <Paper>
                 <TableContainer>
                     <Table>
@@ -101,15 +105,15 @@ const Purchases = () => {
                         <TableBody>
                             {isLoading ? (
                                 <TableRow>
-                                    <TableCell colSpan={7} align="center"><CircularProgress /></TableCell>
+                                    <TableCell colSpan={7} align="center"><CircularProgress /><Typography sx={{ ml: 2 }}>Loading purchases...</Typography></TableCell>
                                 </TableRow>
-                            ) : purchases.length === 0 ? (
+                            ) : isEmpty ? (
                                 <TableRow>
-                                    <TableCell colSpan={7} align="center">No purchases found</TableCell>
+                                    <TableCell colSpan={7} align="center">No purchases found. Try adjusting your filters or add a new purchase to get started!</TableCell>
                                 </TableRow>
                             ) : (
                                 purchases.map((purchase) => (
-                                    <TableRow key={purchase.id} hover>
+                                    <TableRow key={purchase._id} hover>
                                         <TableCell>{new Date(purchase.purchaseDate).toLocaleDateString()}</TableCell>
                                         <TableCell>{purchase.equipmentType.name}</TableCell>
                                         <TableCell>{purchase.quantity}</TableCell>
@@ -117,7 +121,7 @@ const Purchases = () => {
                                         <TableCell>{purchase.supplier || 'N/A'}</TableCell>
                                         <TableCell>${purchase.totalAmount.toLocaleString()}</TableCell>
                                         <TableCell>
-                                            <Tooltip title="View Details">
+                                            <Tooltip title="View purchase details">
                                                 <IconButton size="small" onClick={() => handleOpenViewModal(purchase)}>
                                                     <ViewIcon />
                                                 </IconButton>
@@ -137,6 +141,7 @@ const Purchases = () => {
                     page={page}
                     onPageChange={handleChangePage}
                     onRowsPerPageChange={handleChangeRowsPerPage}
+                    labelRowsPerPage="Purchases per page:"
                 />
             </Paper>
             <CreatePurchase

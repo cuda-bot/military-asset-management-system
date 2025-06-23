@@ -1,144 +1,96 @@
-import { PrismaClient } from '@prisma/client';
+import { MongoClient } from 'mongodb';
 import bcrypt from 'bcryptjs';
-import logger from '../utils/logger.js';
+import dotenv from 'dotenv';
 
-const prisma = new PrismaClient();
+dotenv.config();
+
+const client = new MongoClient(process.env.MONGODB_URI);
 
 async function main() {
-    logger.info('Start seeding...');
+    try {
+        await client.connect();
+        console.log('Connected to MongoDB');
+        const db = client.db();
 
-    // Seed bases
-    const bases = await prisma.base.createMany({
-        data: [
-            { name: 'Fort Bragg', location: 'North Carolina, USA' },
-            { name: 'Camp Pendleton', location: 'California, USA' },
-            { name: 'Fort Hood', location: 'Texas, USA' },
-            { name: 'Joint Base Lewis-McChord', location: 'Washington, USA' }
-        ],
-        skipDuplicates: true,
-    });
-    logger.info(`Created ${bases.count} bases.`);
+        console.log('Clearing existing collections...');
+        await Promise.all([
+            db.collection('users').deleteMany({}),
+            db.collection('bases').deleteMany({}),
+            db.collection('equipment_types').deleteMany({}),
+            db.collection('assets').deleteMany({}),
+            db.collection('purchases').deleteMany({}),
+            db.collection('transfers').deleteMany({}),
+            db.collection('assignments').deleteMany({}),
+        ]);
 
-    // Seed equipment types
-    const equipmentTypes = await prisma.equipmentType.createMany({
-        data: [
-            { name: 'M4 Carbine' },
-            { name: 'M249 SAW' },
-            { name: '5.56mm Ammunition' },
-            { name: '7.62mm Ammunition' },
-            { name: 'HMMWV' },
-            { name: 'M1A2 Abrams' },
-            { name: 'Body Armor' },
-            { name: 'Night Vision Goggles' },
-            { name: 'Radio Equipment' },
-            { name: 'Medical Supplies' }
-        ],
-        skipDuplicates: true,
-    });
-    logger.info(`Created ${equipmentTypes.count} equipment types.`);
+        console.log('Seeding new data...');
 
-    // Seed users
-    const users = [
-        {
-            username: 'admin',
-            password: await bcrypt.hash('admin123', 12),
-            role: 'admin'
-        },
-        {
-            username: 'commander_bragg',
-            password: await bcrypt.hash('commander123', 12),
-            role: 'base_commander'
-        },
-        {
-            username: 'commander_pendleton',
-            password: await bcrypt.hash('commander123', 12),
-            role: 'base_commander'
-        },
-        {
-            username: 'logistics_bragg',
-            password: await bcrypt.hash('logistics123', 12),
-            role: 'logistics_officer'
-        },
-        {
-            username: 'logistics_pendleton',
-            password: await bcrypt.hash('logistics123', 12),
-            role: 'logistics_officer'
-        }
-    ];
+        // Users
+        const passwordHash = await bcrypt.hash('password123', 12);
+        const usersResult = await db.collection('users').insertMany([
+            {
+                username: 'admin',
+                email: 'admin@example.com',
+                password: passwordHash,
+                firstName: 'Admin',
+                lastName: 'User',
+                role: 'admin',
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                username: 'commander',
+                email: 'commander@example.com',
+                password: passwordHash,
+                firstName: 'Base',
+                lastName: 'Commander',
+                role: 'base_commander',
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+        ]);
+        console.log(`${usersResult.insertedCount} users created.`);
+        const adminUser = await db.collection('users').findOne({ username: 'admin' });
+        const commanderUser = await db.collection('users').findOne({ username: 'commander' });
 
-    for (const user of users) {
-        await prisma.user.upsert({
-            where: { username: user.username },
-            update: {},
-            create: user,
-        });
+        // Bases
+        const basesResult = await db.collection('bases').insertMany([
+            { name: 'Fort Courage', location: 'USA', createdAt: new Date(), updatedAt: new Date() },
+            { name: 'Camp Victory', location: 'USA', createdAt: new Date(), updatedAt: new Date() },
+        ]);
+        console.log(`${basesResult.insertedCount} bases created.`);
+        const fortCourage = await db.collection('bases').findOne({ name: 'Fort Courage' });
+        const campVictory = await db.collection('bases').findOne({ name: 'Camp Victory' });
+
+        // Assign commander to Fort Courage
+        await db.collection('users').updateOne(
+            { _id: commanderUser._id },
+            { $set: { base_ids: [fortCourage._id] } }
+        );
+        console.log('Assigned commander to base.');
+
+        // Equipment Types
+        const eqTypesResult = await db.collection('equipment_types').insertMany([
+            { name: 'Rifle', category: 'Weapon' },
+            { name: 'Helmet', category: 'Armor' },
+            { name: 'Jeep', category: 'Vehicle' },
+        ]);
+        console.log(`${eqTypesResult.insertedCount} equipment types created.`);
+        const rifle = await db.collection('equipment_types').findOne({ name: 'Rifle' });
+
+        // Assets
+        const assetsResult = await db.collection('assets').insertMany([
+            { base_id: fortCourage._id, equipment_type_id: rifle._id, quantity: 100, openingBalance: 100, createdAt: new Date() },
+        ]);
+        console.log(`${assetsResult.insertedCount} assets created.`);
+
+        console.log('Database seeded successfully!');
+    } catch (e) {
+        console.error('Failed to seed database:', e);
+        process.exit(1);
+    } finally {
+        await client.close();
     }
-    logger.info(`Created/updated ${users.length} users.`);
-
-    // Assign users to bases
-    const userBragg = await prisma.user.findUnique({ where: { username: 'commander_bragg' } });
-    const baseBragg = await prisma.base.findUnique({ where: { name: 'Fort Bragg' } });
-
-    if (userBragg && baseBragg) {
-        await prisma.user.update({
-            where: { id: userBragg.id },
-            data: { base_id: baseBragg.id }
-        });
-    }
-
-    const logisticsBragg = await prisma.user.findUnique({ where: { username: 'logistics_bragg' } });
-    if (logisticsBragg && baseBragg) {
-        await prisma.user.update({
-            where: { id: logisticsBragg.id },
-            data: { base_id: baseBragg.id }
-        });
-    }
-
-    const userPendleton = await prisma.user.findUnique({ where: { username: 'commander_pendleton' } });
-    const basePendleton = await prisma.base.findUnique({ where: { name: 'Camp Pendleton' } });
-
-    if (userPendleton && basePendleton) {
-        await prisma.user.update({
-            where: { id: userPendleton.id },
-            data: { base_id: basePendleton.id }
-        });
-    }
-
-    const logisticsPendleton = await prisma.user.findUnique({ where: { username: 'logistics_pendleton' } });
-    if (logisticsPendleton && basePendleton) {
-        await prisma.user.update({
-            where: { id: logisticsPendleton.id },
-            data: { base_id: basePendleton.id }
-        });
-    }
-    logger.info('Assigned users to bases.');
-
-    // Seed initial assets
-    const m4Carbine = await prisma.equipmentType.findUnique({ where: { name: 'M4 Carbine' } });
-    const ammo556 = await prisma.equipmentType.findUnique({ where: { name: '5.56mm Ammunition' } });
-    const hmmwv = await prisma.equipmentType.findUnique({ where: { name: 'HMMWV' } });
-
-    const assetsData = [
-        { name: 'M4-A1', serial_number: 'WPN-001', type_id: m4Carbine.id, base_id: baseBragg.id, status: 'in_storage' },
-        { name: 'M4-A2', serial_number: 'WPN-002', type_id: m4Carbine.id, base_id: baseBragg.id, status: 'in_use' },
-        { name: 'HMMWV-01', serial_number: 'VEH-001', type_id: hmmwv.id, base_id: basePendleton.id, status: 'under_maintenance' }
-    ];
-
-    for (const asset of assetsData) {
-        await prisma.asset.create({
-            data: asset
-        });
-    }
-    logger.info(`Created ${assetsData.length} initial assets.`);
-
-    logger.info('Seeding finished.');
 }
 
-main()
-    .catch((e) => {
-        logger.error(e);
-        process.exit(1);
-    })
-    .finally(async () => {
-        await prisma.$disconnect();
-    }); 
+main();

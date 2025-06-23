@@ -26,7 +26,7 @@ const CreateUser = ({ open, onClose, onSuccess }) => {
 
     const { data: bases } = useQuery({
         queryKey: ['bases'],
-        queryFn: () => api.get('/bases').then(res => res.data.bases)
+        queryFn: () => api.get('/bases').then(res => res.data?.bases || []),
     });
 
     const createUserMutation = useMutation({
@@ -39,7 +39,12 @@ const CreateUser = ({ open, onClose, onSuccess }) => {
     });
 
     const onSubmit = (data) => {
-        createUserMutation.mutate(data);
+        const payload = {
+            ...data,
+            base_ids: data.base_id ? [data.base_id] : [],
+        };
+        delete payload.base_id;
+        createUserMutation.mutate(payload);
     };
 
     return (
@@ -69,6 +74,33 @@ const CreateUser = ({ open, onClose, onSuccess }) => {
                                 defaultValue=""
                                 rules={{ required: 'Password is required', minLength: { value: 6, message: 'Password must be at least 6 characters' } }}
                                 render={({ field }) => <TextField {...field} type="password" label="Password" fullWidth error={!!errors.password} helperText={errors.password?.message} />}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Controller
+                                name="email"
+                                control={control}
+                                defaultValue=""
+                                rules={{ required: 'Email is required' }}
+                                render={({ field }) => <TextField {...field} label="Email" fullWidth error={!!errors.email} helperText={errors.email?.message} />}
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <Controller
+                                name="firstName"
+                                control={control}
+                                defaultValue=""
+                                rules={{ required: 'First name is required' }}
+                                render={({ field }) => <TextField {...field} label="First Name" fullWidth error={!!errors.firstName} helperText={errors.firstName?.message} />}
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <Controller
+                                name="lastName"
+                                control={control}
+                                defaultValue=""
+                                rules={{ required: 'Last name is required' }}
+                                render={({ field }) => <TextField {...field} label="Last Name" fullWidth error={!!errors.lastName} helperText={errors.lastName?.message} />}
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -101,7 +133,7 @@ const CreateUser = ({ open, onClose, onSuccess }) => {
                                     render={({ field }) => (
                                         <Select {...field} label="Base (optional)">
                                             <MenuItem value=""><em>None</em></MenuItem>
-                                            {bases?.map((b) => <MenuItem key={b.id} value={b.id}>{b.name}</MenuItem>)}
+                                            {bases?.map((b, idx) => <MenuItem key={b.id || idx} value={b.id}>{b.name}</MenuItem>)}
                                         </Select>
                                     )}
                                 />

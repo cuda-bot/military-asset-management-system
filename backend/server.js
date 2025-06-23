@@ -1,12 +1,10 @@
 import express from 'express';
 import cors from 'cors';
-import helmet from 'helmet';
-import rateLimit from 'express-rate-limit';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
 
 import logger from './utils/logger.js';
-import prisma from './config/prisma.js';
+import { connectToMongo } from './config/mongodb.js';
 import authRoutes from './routes/auth.js';
 import dashboardRoutes from './routes/dashboard.js';
 import purchaseRoutes from './routes/purchases.js';
@@ -19,21 +17,7 @@ import userRoutes from './routes/users.js';
 dotenv.config();
 
 const app = express();
-const PORT = 5003;
-
-// Trust proxy to allow rate limiting to work correctly behind a proxy
-app.set('trust proxy', 1);
-
-// Security middleware
-app.use(helmet());
-
-// Rate limiting
-const limiter = rateLimit({
-    windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MS) || 15 * 60 * 1000, // 15 minutes
-    max: parseInt(process.env.RATE_LIMIT_MAX_REQUESTS) || 100, // limit each IP to 100 requests per windowMs
-    message: 'Too many requests from this IP, please try again later.'
-});
-app.use(limiter);
+const PORT = process.env.PORT || 5003;
 
 // CORS configuration
 app.use(cors({
@@ -86,14 +70,7 @@ app.use((err, req, res, next) => {
         return res.status(401).json({ error: 'Invalid token' });
     }
 
-    if (err instanceof prisma.PrismaClientKnownRequestError) {
-        // Handle Prisma-specific errors
-        if (err.code === 'P2002') {
-            return res.status(409).json({
-                error: `Duplicate field value: ${err.meta.target.join(', ')}`,
-            });
-        }
-    }
+    // Add any Mongo-specific error handling here if needed
 
     res.status(500).json({
         error: process.env.NODE_ENV === 'production'
@@ -105,28 +82,17 @@ app.use((err, req, res, next) => {
 // Server startup
 async function startServer() {
     try {
+        await connectToMongo();
+        logger.info('Successfully connected to MongoDB.');
+
         app.listen(PORT, () => {
             logger.info(`Server running on port ${PORT}`);
             logger.info(`Environment: ${process.env.NODE_ENV}`);
         });
     } catch (error) {
         logger.error('Failed to start server:', error);
-        prisma.$disconnect();
         process.exit(1);
     }
 }
-
-// Graceful shutdown
-process.on('SIGTERM', async () => {
-    logger.info('SIGTERM received, shutting down gracefully');
-    await prisma.$disconnect();
-    process.exit(0);
-});
-
-process.on('SIGINT', async () => {
-    logger.info('SIGINT received, shutting down gracefully');
-    await prisma.$disconnect();
-    process.exit(0);
-});
 
 startServer(); 

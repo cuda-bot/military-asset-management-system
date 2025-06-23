@@ -2,7 +2,8 @@ import { Router } from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { body, validationResult } from 'express-validator';
-import prisma from '../config/prisma.js';
+import { ObjectId } from 'mongodb';
+import { connectToMongo } from '../config/mongodb.js';
 import logger from '../utils/logger.js';
 import { verifyToken, logTransaction } from '../middleware/auth.js';
 
@@ -22,6 +23,10 @@ router.post(
         body('role').isIn(['admin', 'base_commander', 'logistics_officer']),
     ],
     async (req, res) => {
+        if (process.env.NODE_ENV === 'production') {
+            return res.status(403).json({ error: 'Registration is disabled in production' });
+        }
+
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
@@ -30,29 +35,36 @@ router.post(
         const { username, email, password, firstName, lastName, role } = req.body;
 
         try {
-            let user = await prisma.user.findUnique({ where: { email } });
+            const db = await connectToMongo();
+            const collection = db.collection('users');
+
+            let user = await collection.findOne({ email });
             if (user) {
                 return res.status(400).json({ error: 'User already exists' });
             }
 
             const passwordHash = await bcrypt.hash(password, 12);
 
-            user = await prisma.user.create({
-                data: {
-                    username,
-                    email,
-                    passwordHash,
-                    firstName,
-                    lastName,
-                    role,
-                },
-            });
+            const newUser = {
+                username,
+                email,
+                password: passwordHash,
+                firstName,
+                lastName,
+                role,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            };
+
+            const result = await collection.insertOne(newUser);
+            const insertedUser = { _id: result.insertedId, ...newUser };
+
 
             logTransaction(req, {
                 action: 'register',
                 tableName: 'users',
-                recordId: user.id,
-                newData: { username: user.username, email: user.email, role: user.role }
+                recordId: insertedUser._id,
+                newData: { username: insertedUser.username, email: insertedUser.email, role: insertedUser.role },
             });
 
             res.status(201).json({ message: 'User registered successfully' });
@@ -81,10 +93,8 @@ router.post(
         const { username, password } = req.body;
 
         try {
-            const user = await prisma.user.findUnique({
-                where: { username },
-                include: { base: true },
-            });
+            const db = await connectToMongo();
+            const user = await db.collection('users').findOne({ username });
 
             if (!user) {
                 return res.status(401).json({ error: 'Invalid credentials' });
@@ -97,10 +107,10 @@ router.post(
 
             const payload = {
                 user: {
-                    id: user.id,
+                    id: user._id.toString(),
                     username: user.username,
                     role: user.role,
-                    baseId: user.base_id,
+                    base_ids: user.base_ids || [],
                 },
             };
 
@@ -108,7 +118,7 @@ router.post(
                 expiresIn: process.env.JWT_EXPIRES_IN || '24h',
             });
 
-            const { password: passwordHash, ...userWithoutPassword } = user;
+            const { password: _, ...userWithoutPassword } = user;
 
             res.json({
                 token,
@@ -126,20 +136,14 @@ router.post(
 // @access  Private
 router.get('/verify', verifyToken, async (req, res) => {
     try {
-        const user = await prisma.user.findUnique({
-            where: { id: req.user.id },
-            select: {
-                id: true,
-                username: true,
-                role: true,
-                base: {
-                    select: {
-                        id: true,
-                        name: true
-                    }
-                }
-            }
-        });
+        if (!ObjectId.isValid(req.user.id)) {
+            return res.status(400).json({ error: 'Invalid user ID in token' });
+        }
+        const db = await connectToMongo();
+        const user = await db.collection('users').findOne(
+            { _id: new ObjectId(req.user.id) },
+            { projection: { password: 0 } }
+        );
 
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
@@ -157,19 +161,14 @@ router.get('/verify', verifyToken, async (req, res) => {
 // @access  Private
 router.get('/profile', verifyToken, async (req, res) => {
     try {
-        const user = await prisma.user.findUnique({
-            where: { id: req.user.id },
-            select: {
-                id: true,
-                username: true,
-                email: true,
-                firstName: true,
-                lastName: true,
-                role: true,
-                createdAt: true,
-                bases: { include: { base: true } },
-            },
-        });
+        if (!ObjectId.isValid(req.user.id)) {
+            return res.status(400).json({ error: 'Invalid user ID in token' });
+        }
+        const db = await connectToMongo();
+        const user = await db.collection('users').findOne(
+            { _id: new ObjectId(req.user.id) },
+            { projection: { password: 0 } }
+        );
 
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
@@ -199,19 +198,34 @@ router.put(
         }
 
         const { email, firstName, lastName } = req.body;
-        const updateData = {};
+        const updateData = { updatedAt: new Date() };
         if (email) updateData.email = email;
         if (firstName) updateData.firstName = firstName;
         if (lastName) updateData.lastName = lastName;
 
         try {
-            const updatedUser = await prisma.user.update({
-                where: { id: req.user.id },
-                data: updateData,
+            if (!ObjectId.isValid(req.user.id)) {
+                return res.status(400).json({ error: 'Invalid user ID in token' });
+            }
+            const db = await connectToMongo();
+            const result = await db.collection('users').findOneAndUpdate(
+                { _id: new ObjectId(req.user.id) },
+                { $set: updateData },
+                { returnDocument: 'after', projection: { password: 0 } }
+            );
+
+            if (!result.value) {
+                return res.status(404).json({ error: 'User not found' });
+            }
+
+            logTransaction(req, {
+                action: 'update-profile',
+                tableName: 'users',
+                recordId: result.value._id,
+                newData: updateData
             });
 
-            const { passwordHash, ...userWithoutPassword } = updatedUser;
-            res.json(userWithoutPassword);
+            res.json(result.value);
         } catch (error) {
             logger.error('Profile update error:', error);
             res.status(500).json({ error: 'Server error' });
@@ -243,15 +257,21 @@ router.put(
                 return res.status(404).json({ error: 'User not found' });
             }
 
-            const isMatch = await bcrypt.compare(currentPassword, user.passwordHash);
+            const isMatch = await bcrypt.compare(currentPassword, user.password);
             if (!isMatch) {
                 return res.status(401).json({ error: 'Incorrect current password' });
             }
 
-            const passwordHash = await bcrypt.hash(newPassword, 12);
+            const newPasswordHash = await bcrypt.hash(newPassword, 12);
             await prisma.user.update({
                 where: { id: req.user.id },
-                data: { passwordHash },
+                data: { password: newPasswordHash },
+            });
+
+            logTransaction(req, {
+                action: 'change-password',
+                tableName: 'users',
+                recordId: user.id
             });
 
             res.json({ message: 'Password changed successfully' });

@@ -136,13 +136,10 @@ const Login = () => {
                             Demo Credentials:
                         </Typography>
                         <Typography variant="body2" color="text.secondary" sx={{ fontFamily: 'monospace' }}>
-                            Admin: admin / admin123
+                            Admin: admin / password123
                         </Typography>
                         <Typography variant="body2" color="text.secondary" sx={{ fontFamily: 'monospace' }}>
-                            Commander: commander_bragg / commander123
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary" sx={{ fontFamily: 'monospace' }}>
-                            Logistics: logistics_bragg / logistics123
+                            Commander: commander / password123
                         </Typography>
                     </Box>
                 </Paper>

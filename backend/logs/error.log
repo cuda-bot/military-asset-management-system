@@ -3330,3 +3330,1308 @@ Invalid `prisma.assignment.findMany()` invocation:
 }
 
 Unknown argument `assignmentDate`. Did you mean `assignment_date`? Available options are marked with ?.
+2025-06-22 14:03:45 [31merror[39m: Login error: Illegal arguments: string, undefined
+2025-06-22 14:04:05 [31merror[39m: Login error: Illegal arguments: string, undefined
+2025-06-22 14:04:28 [31merror[39m: Login error: Illegal arguments: string, undefined
+2025-06-22 14:13:13 [31merror[39m: Login error: Illegal arguments: string, undefined
+2025-06-22 14:18:04 [31merror[39m: Login error: 
+Invalid `prisma.user.findUnique()` invocation:
+
+{
+  where: {
+    username: "admin"
+  },
+  include: {
+    bases: true,
+    ~~~~~
+?   base?: true,
+?   assignments?: true
+  }
+}
+
+Unknown field `bases` for include statement on model `User`. Available options are marked with ?.
+2025-06-22 14:19:47 [31merror[39m: Login error: 
+Invalid `prisma.user.findUnique()` invocation:
+
+{
+  where: {
+    username: "admin"
+  },
+  include: {
+    bases: {
+    ~~~~~
+      include: {
+        base: true
+      }
+    },
+?   base?: true,
+?   assignments?: true
+  }
+}
+
+Unknown field `bases` for include statement on model `User`. Available options are marked with ?.
+2025-06-22 14:19:49 [31merror[39m: Login error: 
+Invalid `prisma.user.findUnique()` invocation:
+
+{
+  where: {
+    username: "admin"
+  },
+  include: {
+    bases: {
+    ~~~~~
+      include: {
+        base: true
+      }
+    },
+?   base?: true,
+?   assignments?: true
+  }
+}
+
+Unknown field `bases` for include statement on model `User`. Available options are marked with ?.
+2025-06-22 14:22:12 [31merror[39m: Login error: 
+Invalid `prisma.user.findUnique()` invocation:
+
+{
+  where: {
+    username: "admin"
+  },
+  include: {
+    bases: {
+    ~~~~~
+      include: {
+        base: true
+      }
+    },
+?   base?: true,
+?   assignments?: true
+  }
+}
+
+Unknown field `bases` for include statement on model `User`. Available options are marked with ?.
+2025-06-22 14:23:04 [31merror[39m: Login error: 
+Invalid `prisma.user.findUnique()` invocation:
+
+{
+  where: {
+    username: "admin"
+  },
+  include: {
+    bases: {
+    ~~~~~
+      include: {
+        base: true
+      }
+    },
+?   base?: true,
+?   assignments?: true
+  }
+}
+
+Unknown field `bases` for include statement on model `User`. Available options are marked with ?.
+2025-06-22 14:26:58 [31merror[39m: Login error: Illegal arguments: string, undefined
+2025-06-22 14:29:42 [31merror[39m: Login error: Illegal arguments: string, undefined
+2025-06-22 14:32:17 [31merror[39m: Login error: Illegal arguments: string, undefined
+2025-06-22 14:34:44 [31merror[39m: Error fetching purchases: 
+Invalid `prisma.purchase.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    purchaseDate: "desc",
+    ~~~~~~~~~~~~
+?   id?: SortOrder,
+?   asset_id?: SortOrder,
+?   base_id?: SortOrder,
+?   vendor?: SortOrder,
+?   cost?: SortOrder,
+?   purchase_date?: SortOrder,
+?   created_at?: SortOrder,
+?   updated_at?: SortOrder,
+?   asset?: AssetOrderByWithRelationInput,
+?   base?: BaseOrderByWithRelationInput
+  },
+  include: {
+    equipmentType: true,
+    base: true
+  }
+}
+
+Unknown argument `purchaseDate`. Did you mean `purchase_date`? Available options are marked with ?.
+2025-06-22 14:34:46 [31merror[39m: Error fetching purchases: 
+Invalid `prisma.purchase.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    purchaseDate: "desc",
+    ~~~~~~~~~~~~
+?   id?: SortOrder,
+?   asset_id?: SortOrder,
+?   base_id?: SortOrder,
+?   vendor?: SortOrder,
+?   cost?: SortOrder,
+?   purchase_date?: SortOrder,
+?   created_at?: SortOrder,
+?   updated_at?: SortOrder,
+?   asset?: AssetOrderByWithRelationInput,
+?   base?: BaseOrderByWithRelationInput
+  },
+  include: {
+    equipmentType: true,
+    base: true
+  }
+}
+
+Unknown argument `purchaseDate`. Did you mean `purchase_date`? Available options are marked with ?.
+2025-06-22 14:34:48 [31merror[39m: Error fetching transfers: 
+Invalid `prisma.transfer.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    transferDate: "desc",
+    ~~~~~~~~~~~~
+?   id?: SortOrder,
+?   asset_id?: SortOrder,
+?   from_base_id?: SortOrder,
+?   to_base_id?: SortOrder,
+?   transfer_date?: SortOrder,
+?   created_at?: SortOrder,
+?   updated_at?: SortOrder,
+?   asset?: AssetOrderByWithRelationInput,
+?   from_base?: BaseOrderByWithRelationInput,
+?   to_base?: BaseOrderByWithRelationInput
+  },
+  include: {
+    equipmentType: true,
+    fromBase: true,
+    toBase: true
+  }
+}
+
+Unknown argument `transferDate`. Did you mean `transfer_date`? Available options are marked with ?.
+2025-06-22 14:34:49 [31merror[39m: Error fetching transfers: 
+Invalid `prisma.transfer.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    transferDate: "desc",
+    ~~~~~~~~~~~~
+?   id?: SortOrder,
+?   asset_id?: SortOrder,
+?   from_base_id?: SortOrder,
+?   to_base_id?: SortOrder,
+?   transfer_date?: SortOrder,
+?   created_at?: SortOrder,
+?   updated_at?: SortOrder,
+?   asset?: AssetOrderByWithRelationInput,
+?   from_base?: BaseOrderByWithRelationInput,
+?   to_base?: BaseOrderByWithRelationInput
+  },
+  include: {
+    equipmentType: true,
+    fromBase: true,
+    toBase: true
+  }
+}
+
+Unknown argument `transferDate`. Did you mean `transfer_date`? Available options are marked with ?.
+2025-06-22 14:34:51 [31merror[39m: Error fetching assignments: Cannot read properties of undefined (reading 'map')
+2025-06-22 14:34:53 [31merror[39m: Error fetching assignments: Cannot read properties of undefined (reading 'map')
+2025-06-22 14:34:55 [31merror[39m: Error fetching assets: 
+Invalid `prisma.asset.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    name: "asc"
+  },
+  include: {
+    equipmentType: true,
+    ~~~~~~~~~~~~~
+    base: true,
+?   equipment_type?: true,
+?   assignments?: true,
+?   transfers?: true,
+?   purchases?: true,
+?   expenditures?: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Asset`. Available options are marked with ?.
+2025-06-22 14:34:56 [31merror[39m: Error fetching assets: 
+Invalid `prisma.asset.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    name: "asc"
+  },
+  include: {
+    equipmentType: true,
+    ~~~~~~~~~~~~~
+    base: true,
+?   equipment_type?: true,
+?   assignments?: true,
+?   transfers?: true,
+?   purchases?: true,
+?   expenditures?: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Asset`. Available options are marked with ?.
+2025-06-22 14:38:57 [31merror[39m: Error fetching purchases: 
+Invalid `prisma.purchase.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    purchase_date: "desc"
+  },
+  include: {
+    equipmentType: true,
+    ~~~~~~~~~~~~~
+    base: true,
+?   asset?: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Purchase`. Available options are marked with ?.
+2025-06-22 14:38:59 [31merror[39m: Error fetching purchases: 
+Invalid `prisma.purchase.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    purchase_date: "desc"
+  },
+  include: {
+    equipmentType: true,
+    ~~~~~~~~~~~~~
+    base: true,
+?   asset?: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Purchase`. Available options are marked with ?.
+2025-06-22 14:39:01 [31merror[39m: Error fetching transfers: 
+Invalid `prisma.transfer.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    transfer_date: "desc"
+  },
+  include: {
+    equipmentType: true,
+    ~~~~~~~~~~~~~
+    fromBase: true,
+    toBase: true,
+?   asset?: true,
+?   from_base?: true,
+?   to_base?: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Transfer`. Available options are marked with ?.
+2025-06-22 14:39:03 [31merror[39m: Error fetching transfers: 
+Invalid `prisma.transfer.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    transfer_date: "desc"
+  },
+  include: {
+    equipmentType: true,
+    ~~~~~~~~~~~~~
+    fromBase: true,
+    toBase: true,
+?   asset?: true,
+?   from_base?: true,
+?   to_base?: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Transfer`. Available options are marked with ?.
+2025-06-22 14:39:05 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignmentDate: "desc",
+    ~~~~~~~~~~~~~~
+?   id?: SortOrder,
+?   asset_id?: SortOrder,
+?   user_id?: SortOrder,
+?   assignment_date?: SortOrder,
+?   return_date?: SortOrder | SortOrderInput,
+?   created_at?: SortOrder,
+?   updated_at?: SortOrder,
+?   asset?: AssetOrderByWithRelationInput,
+?   user?: UserOrderByWithRelationInput
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown argument `assignmentDate`. Did you mean `assignment_date`? Available options are marked with ?.
+2025-06-22 14:39:07 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignmentDate: "desc",
+    ~~~~~~~~~~~~~~
+?   id?: SortOrder,
+?   asset_id?: SortOrder,
+?   user_id?: SortOrder,
+?   assignment_date?: SortOrder,
+?   return_date?: SortOrder | SortOrderInput,
+?   created_at?: SortOrder,
+?   updated_at?: SortOrder,
+?   asset?: AssetOrderByWithRelationInput,
+?   user?: UserOrderByWithRelationInput
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown argument `assignmentDate`. Did you mean `assignment_date`? Available options are marked with ?.
+2025-06-22 14:39:17 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignmentDate: "desc",
+    ~~~~~~~~~~~~~~
+?   id?: SortOrder,
+?   asset_id?: SortOrder,
+?   user_id?: SortOrder,
+?   assignment_date?: SortOrder,
+?   return_date?: SortOrder | SortOrderInput,
+?   created_at?: SortOrder,
+?   updated_at?: SortOrder,
+?   asset?: AssetOrderByWithRelationInput,
+?   user?: UserOrderByWithRelationInput
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown argument `assignmentDate`. Did you mean `assignment_date`? Available options are marked with ?.
+2025-06-22 14:39:19 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignmentDate: "desc",
+    ~~~~~~~~~~~~~~
+?   id?: SortOrder,
+?   asset_id?: SortOrder,
+?   user_id?: SortOrder,
+?   assignment_date?: SortOrder,
+?   return_date?: SortOrder | SortOrderInput,
+?   created_at?: SortOrder,
+?   updated_at?: SortOrder,
+?   asset?: AssetOrderByWithRelationInput,
+?   user?: UserOrderByWithRelationInput
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown argument `assignmentDate`. Did you mean `assignment_date`? Available options are marked with ?.
+2025-06-22 14:39:33 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignmentDate: "desc",
+    ~~~~~~~~~~~~~~
+?   id?: SortOrder,
+?   asset_id?: SortOrder,
+?   user_id?: SortOrder,
+?   assignment_date?: SortOrder,
+?   return_date?: SortOrder | SortOrderInput,
+?   created_at?: SortOrder,
+?   updated_at?: SortOrder,
+?   asset?: AssetOrderByWithRelationInput,
+?   user?: UserOrderByWithRelationInput
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown argument `assignmentDate`. Did you mean `assignment_date`? Available options are marked with ?.
+2025-06-22 14:39:34 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignmentDate: "desc",
+    ~~~~~~~~~~~~~~
+?   id?: SortOrder,
+?   asset_id?: SortOrder,
+?   user_id?: SortOrder,
+?   assignment_date?: SortOrder,
+?   return_date?: SortOrder | SortOrderInput,
+?   created_at?: SortOrder,
+?   updated_at?: SortOrder,
+?   asset?: AssetOrderByWithRelationInput,
+?   user?: UserOrderByWithRelationInput
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown argument `assignmentDate`. Did you mean `assignment_date`? Available options are marked with ?.
+2025-06-22 21:02:18 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignmentDate: "desc",
+    ~~~~~~~~~~~~~~
+?   id?: SortOrder,
+?   asset_id?: SortOrder,
+?   user_id?: SortOrder,
+?   assignment_date?: SortOrder,
+?   return_date?: SortOrder | SortOrderInput,
+?   created_at?: SortOrder,
+?   updated_at?: SortOrder,
+?   asset?: AssetOrderByWithRelationInput,
+?   user?: UserOrderByWithRelationInput
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown argument `assignmentDate`. Did you mean `assignment_date`? Available options are marked with ?.
+2025-06-22 21:02:19 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignmentDate: "desc",
+    ~~~~~~~~~~~~~~
+?   id?: SortOrder,
+?   asset_id?: SortOrder,
+?   user_id?: SortOrder,
+?   assignment_date?: SortOrder,
+?   return_date?: SortOrder | SortOrderInput,
+?   created_at?: SortOrder,
+?   updated_at?: SortOrder,
+?   asset?: AssetOrderByWithRelationInput,
+?   user?: UserOrderByWithRelationInput
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown argument `assignmentDate`. Did you mean `assignment_date`? Available options are marked with ?.
+2025-06-22 21:02:27 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignmentDate: "desc",
+    ~~~~~~~~~~~~~~
+?   id?: SortOrder,
+?   asset_id?: SortOrder,
+?   user_id?: SortOrder,
+?   assignment_date?: SortOrder,
+?   return_date?: SortOrder | SortOrderInput,
+?   created_at?: SortOrder,
+?   updated_at?: SortOrder,
+?   asset?: AssetOrderByWithRelationInput,
+?   user?: UserOrderByWithRelationInput
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown argument `assignmentDate`. Did you mean `assignment_date`? Available options are marked with ?.
+2025-06-22 21:02:39 [31merror[39m: Error fetching purchases: 
+Invalid `prisma.purchase.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    purchase_date: "desc"
+  },
+  include: {
+    equipmentType: true,
+    ~~~~~~~~~~~~~
+    base: true,
+?   asset?: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Purchase`. Available options are marked with ?.
+2025-06-22 21:02:41 [31merror[39m: Error fetching purchases: 
+Invalid `prisma.purchase.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    purchase_date: "desc"
+  },
+  include: {
+    equipmentType: true,
+    ~~~~~~~~~~~~~
+    base: true,
+?   asset?: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Purchase`. Available options are marked with ?.
+2025-06-22 21:02:43 [31merror[39m: Error fetching transfers: 
+Invalid `prisma.transfer.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    transfer_date: "desc"
+  },
+  include: {
+    equipmentType: true,
+    ~~~~~~~~~~~~~
+    fromBase: true,
+    toBase: true,
+?   asset?: true,
+?   from_base?: true,
+?   to_base?: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Transfer`. Available options are marked with ?.
+2025-06-22 21:02:45 [31merror[39m: Error fetching transfers: 
+Invalid `prisma.transfer.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    transfer_date: "desc"
+  },
+  include: {
+    equipmentType: true,
+    ~~~~~~~~~~~~~
+    fromBase: true,
+    toBase: true,
+?   asset?: true,
+?   from_base?: true,
+?   to_base?: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Transfer`. Available options are marked with ?.
+2025-06-22 21:02:46 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignmentDate: "desc",
+    ~~~~~~~~~~~~~~
+?   id?: SortOrder,
+?   asset_id?: SortOrder,
+?   user_id?: SortOrder,
+?   assignment_date?: SortOrder,
+?   return_date?: SortOrder | SortOrderInput,
+?   created_at?: SortOrder,
+?   updated_at?: SortOrder,
+?   asset?: AssetOrderByWithRelationInput,
+?   user?: UserOrderByWithRelationInput
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown argument `assignmentDate`. Did you mean `assignment_date`? Available options are marked with ?.
+2025-06-22 21:02:47 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignmentDate: "desc",
+    ~~~~~~~~~~~~~~
+?   id?: SortOrder,
+?   asset_id?: SortOrder,
+?   user_id?: SortOrder,
+?   assignment_date?: SortOrder,
+?   return_date?: SortOrder | SortOrderInput,
+?   created_at?: SortOrder,
+?   updated_at?: SortOrder,
+?   asset?: AssetOrderByWithRelationInput,
+?   user?: UserOrderByWithRelationInput
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown argument `assignmentDate`. Did you mean `assignment_date`? Available options are marked with ?.
+2025-06-22 21:03:30 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignmentDate: "desc",
+    ~~~~~~~~~~~~~~
+?   id?: SortOrder,
+?   asset_id?: SortOrder,
+?   user_id?: SortOrder,
+?   assignment_date?: SortOrder,
+?   return_date?: SortOrder | SortOrderInput,
+?   created_at?: SortOrder,
+?   updated_at?: SortOrder,
+?   asset?: AssetOrderByWithRelationInput,
+?   user?: UserOrderByWithRelationInput
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown argument `assignmentDate`. Did you mean `assignment_date`? Available options are marked with ?.
+2025-06-22 21:03:32 [31merror[39m: Error fetching assignments: 
+Invalid `prisma.assignment.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    assignmentDate: "desc",
+    ~~~~~~~~~~~~~~
+?   id?: SortOrder,
+?   asset_id?: SortOrder,
+?   user_id?: SortOrder,
+?   assignment_date?: SortOrder,
+?   return_date?: SortOrder | SortOrderInput,
+?   created_at?: SortOrder,
+?   updated_at?: SortOrder,
+?   asset?: AssetOrderByWithRelationInput,
+?   user?: UserOrderByWithRelationInput
+  },
+  include: {
+    asset: {
+      include: {
+        base: true,
+        equipmentType: true
+      }
+    },
+    assignedBy: true
+  }
+}
+
+Unknown argument `assignmentDate`. Did you mean `assignment_date`? Available options are marked with ?.
+2025-06-22 21:03:36 [31merror[39m: Error fetching purchases: 
+Invalid `prisma.purchase.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    purchase_date: "desc"
+  },
+  include: {
+    equipmentType: true,
+    ~~~~~~~~~~~~~
+    base: true,
+?   asset?: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Purchase`. Available options are marked with ?.
+2025-06-22 21:03:37 [31merror[39m: Error fetching purchases: 
+Invalid `prisma.purchase.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    purchase_date: "desc"
+  },
+  include: {
+    equipmentType: true,
+    ~~~~~~~~~~~~~
+    base: true,
+?   asset?: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Purchase`. Available options are marked with ?.
+2025-06-22 21:04:06 [31merror[39m: Error fetching purchases: 
+Invalid `prisma.purchase.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    purchase_date: "desc"
+  },
+  include: {
+    equipmentType: true,
+    ~~~~~~~~~~~~~
+    base: true,
+?   asset?: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Purchase`. Available options are marked with ?.
+2025-06-22 21:04:08 [31merror[39m: Error fetching purchases: 
+Invalid `prisma.purchase.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    purchase_date: "desc"
+  },
+  include: {
+    equipmentType: true,
+    ~~~~~~~~~~~~~
+    base: true,
+?   asset?: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Purchase`. Available options are marked with ?.
+2025-06-22 21:06:35 [31merror[39m: Error fetching purchases: 
+Invalid `prisma.purchase.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    purchase_date: "desc"
+  },
+  include: {
+    equipment_type: true,
+    ~~~~~~~~~~~~~~
+    base: true,
+?   asset?: true
+  }
+}
+
+Unknown field `equipment_type` for include statement on model `Purchase`. Available options are marked with ?.
+2025-06-22 21:06:37 [31merror[39m: Error fetching purchases: 
+Invalid `prisma.purchase.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    purchase_date: "desc"
+  },
+  include: {
+    equipment_type: true,
+    ~~~~~~~~~~~~~~
+    base: true,
+?   asset?: true
+  }
+}
+
+Unknown field `equipment_type` for include statement on model `Purchase`. Available options are marked with ?.
+2025-06-22 21:15:24 [31merror[39m: Error fetching purchases: 
+Invalid `prisma.purchase.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    purchase_date: "desc"
+  },
+  include: {
+    equipment_type: true,
+    ~~~~~~~~~~~~~~
+    base: true,
+?   asset?: true
+  }
+}
+
+Unknown field `equipment_type` for include statement on model `Purchase`. Available options are marked with ?.
+2025-06-22 22:31:31 [31merror[39m: Error fetching purchases: 
+Invalid `prisma.purchase.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    purchase_date: "desc"
+  },
+  include: {
+    equipment_type: true,
+    ~~~~~~~~~~~~~~
+    base: true,
+?   asset?: true
+  }
+}
+
+Unknown field `equipment_type` for include statement on model `Purchase`. Available options are marked with ?.
+2025-06-22 22:31:33 [31merror[39m: Error fetching purchases: 
+Invalid `prisma.purchase.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    purchase_date: "desc"
+  },
+  include: {
+    equipment_type: true,
+    ~~~~~~~~~~~~~~
+    base: true,
+?   asset?: true
+  }
+}
+
+Unknown field `equipment_type` for include statement on model `Purchase`. Available options are marked with ?.
+2025-06-22 22:34:59 [31merror[39m: Error fetching purchases: 
+Invalid `prisma.purchase.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    purchase_date: "desc"
+  },
+  include: {
+    equipment_type: true,
+    ~~~~~~~~~~~~~~
+    base: true,
+?   asset?: true
+  }
+}
+
+Unknown field `equipment_type` for include statement on model `Purchase`. Available options are marked with ?.
+2025-06-22 22:35:01 [31merror[39m: Error fetching purchases: 
+Invalid `prisma.purchase.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    purchase_date: "desc"
+  },
+  include: {
+    equipment_type: true,
+    ~~~~~~~~~~~~~~
+    base: true,
+?   asset?: true
+  }
+}
+
+Unknown field `equipment_type` for include statement on model `Purchase`. Available options are marked with ?.
+2025-06-22 22:35:03 [31merror[39m: Error fetching transfers: 
+Invalid `prisma.transfer.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    transfer_date: "desc"
+  },
+  include: {
+    equipmentType: true,
+    ~~~~~~~~~~~~~
+    fromBase: true,
+    toBase: true,
+?   asset?: true,
+?   from_base?: true,
+?   to_base?: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Transfer`. Available options are marked with ?.
+2025-06-22 22:35:04 [31merror[39m: Error fetching transfers: 
+Invalid `prisma.transfer.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    transfer_date: "desc"
+  },
+  include: {
+    equipmentType: true,
+    ~~~~~~~~~~~~~
+    fromBase: true,
+    toBase: true,
+?   asset?: true,
+?   from_base?: true,
+?   to_base?: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Transfer`. Available options are marked with ?.
+2025-06-22 22:37:28 [31merror[39m: Error fetching purchases: 
+Invalid `prisma.purchase.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    purchase_date: "desc"
+  },
+  include: {
+    equipmentType: true,
+    ~~~~~~~~~~~~~
+    base: true,
+?   asset?: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Purchase`. Available options are marked with ?.
+2025-06-22 22:37:29 [31merror[39m: Error fetching purchases: 
+Invalid `prisma.purchase.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    purchase_date: "desc"
+  },
+  include: {
+    equipmentType: true,
+    ~~~~~~~~~~~~~
+    base: true,
+?   asset?: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Purchase`. Available options are marked with ?.
+2025-06-22 22:40:19 [31merror[39m: Error fetching purchases: 
+Invalid `prisma.purchase.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    purchase_date: "desc"
+  },
+  include: {
+    equipmentType: true,
+    ~~~~~~~~~~~~~
+    base: true,
+?   asset?: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Purchase`. Available options are marked with ?.
+2025-06-22 22:40:21 [31merror[39m: Error fetching purchases: 
+Invalid `prisma.purchase.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    purchase_date: "desc"
+  },
+  include: {
+    equipmentType: true,
+    ~~~~~~~~~~~~~
+    base: true,
+?   asset?: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Purchase`. Available options are marked with ?.
+2025-06-22 22:45:46 [31merror[39m: Error fetching purchases: 
+Invalid `prisma.purchase.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    purchase_date: "desc"
+  },
+  include: {
+    equipmentType: true,
+    ~~~~~~~~~~~~~
+    base: true,
+?   asset?: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Purchase`. Available options are marked with ?.
+2025-06-22 22:45:48 [31merror[39m: Error fetching purchases: 
+Invalid `prisma.purchase.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    purchase_date: "desc"
+  },
+  include: {
+    equipmentType: true,
+    ~~~~~~~~~~~~~
+    base: true,
+?   asset?: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Purchase`. Available options are marked with ?.
+2025-06-22 22:48:11 [31merror[39m: Error fetching purchases: 
+Invalid `prisma.purchase.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    purchase_date: "desc"
+  },
+  include: {
+    equipmentType: true,
+    ~~~~~~~~~~~~~
+    base: true,
+?   asset?: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Purchase`. Available options are marked with ?.
+2025-06-22 22:48:12 [31merror[39m: Error fetching purchases: 
+Invalid `prisma.purchase.findMany()` invocation:
+
+{
+  where: {},
+  skip: 0,
+  take: 10,
+  orderBy: {
+    purchase_date: "desc"
+  },
+  include: {
+    equipmentType: true,
+    ~~~~~~~~~~~~~
+    base: true,
+?   asset?: true
+  }
+}
+
+Unknown field `equipmentType` for include statement on model `Purchase`. Available options are marked with ?.
+2025-06-22 22:58:57 [31merror[39m: Login error: 
+Invalid `prisma.user.findUnique()` invocation:
+
+
+Inconsistent column data: Could not convert value "cmc60v4qe000evvfcojm8whzq" of the field `id` to type `Int`.
+2025-06-22 22:58:59 [31merror[39m: Login error: 
+Invalid `prisma.user.findUnique()` invocation:
+
+
+Inconsistent column data: Could not convert value "cmc60v4qe000evvfcojm8whzq" of the field `id` to type `Int`.
+2025-06-22 22:59:40 [31merror[39m: Login error: 
+Invalid `prisma.user.findUnique()` invocation:
+
+
+Inconsistent column data: Could not convert value "cmc60v4qe000evvfcojm8whzq" of the field `id` to type `Int`.
+2025-06-22 23:01:23 [31merror[39m: 
+Invalid `prisma.base.createMany()` invocation:
+
+
+Null constraint violation on the fields: (`id`)
+2025-06-22 23:02:02 [31merror[39m: 
+Invalid `prisma.base.createMany()` invocation:
+
+
+Null constraint violation on the fields: (`id`)
+2025-06-22 23:08:02 [31merror[39m: 
+Invalid `prisma.base.createMany()` invocation:
+
+
+Null constraint violation on the fields: (`id`)
+2025-06-22 23:10:41 [31merror[39m: 
+Invalid `prisma.base.createMany()` invocation:
+
+
+Null constraint violation on the fields: (`id`)
+2025-06-23 01:32:32 [31merror[39m: Error fetching transfers: prisma is not defined
+2025-06-23 01:32:33 [31merror[39m: Error fetching transfers: prisma is not defined
+2025-06-23 01:32:48 [31merror[39m: Error fetching transfers: prisma is not defined
+2025-06-23 01:32:49 [31merror[39m: Error fetching transfers: prisma is not defined
+2025-06-23 01:35:14 [31merror[39m: Error fetching transfers: prisma is not defined
+2025-06-23 01:35:15 [31merror[39m: Error fetching transfers: prisma is not defined
+2025-06-23 01:35:34 [31merror[39m: Error fetching transfers: prisma is not defined
+2025-06-23 01:35:35 [31merror[39m: Error fetching transfers: prisma is not defined
+2025-06-23 01:35:37 [31merror[39m: Error fetching transfers: prisma is not defined
+2025-06-23 01:35:38 [31merror[39m: Error fetching transfers: prisma is not defined
+2025-06-23 09:21:50 [31merror[39m: Error fetching dashboard metrics: getaddrinfo ENOTFOUND cuda-shard-00-00.i5hng.mongodb.net
+2025-06-23 09:21:50 [31merror[39m: Error fetching dashboard filters: getaddrinfo ENOTFOUND cuda-shard-00-00.i5hng.mongodb.net
+2025-06-23 13:01:57 [31merror[39m: Error creating purchase: Cannot increment with non-numeric argument: {quantity: "34"}
+2025-06-23 13:01:59 [31merror[39m: Error creating purchase: Cannot increment with non-numeric argument: {quantity: "34"}
+2025-06-23 13:01:59 [31merror[39m: Error creating purchase: Cannot increment with non-numeric argument: {quantity: "34"}
+2025-06-23 13:02:01 [31merror[39m: Error creating purchase: Cannot increment with non-numeric argument: {quantity: "34"}
+2025-06-23 13:02:09 [31merror[39m: Error creating purchase: Cannot increment with non-numeric argument: {quantity: "34"}
+2025-06-23 13:11:41 [31merror[39m: Error creating purchase: db is not defined
+2025-06-23 15:38:17 [31merror[39m: Admin user creation error: bcrypt.hash is not a function
+2025-06-23 15:38:24 [31merror[39m: Admin user creation error: bcrypt.hash is not a function

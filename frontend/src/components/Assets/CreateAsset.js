@@ -26,7 +26,7 @@ const CreateAsset = ({ open, onClose, onSuccess }) => {
 
     const { data: bases } = useQuery({
         queryKey: ['bases'],
-        queryFn: () => api.get('/bases').then(res => res.data.bases)
+        queryFn: () => api.get('/bases').then(res => res.data?.bases || []),
     });
     const { data: equipmentTypes } = useQuery({
         queryKey: ['equipmentTypes'],
@@ -85,7 +85,7 @@ const CreateAsset = ({ open, onClose, onSuccess }) => {
                                     rules={{ required: 'Type is required' }}
                                     render={({ field }) => (
                                         <Select {...field} label="Equipment Type">
-                                            {equipmentTypes?.map((et) => <MenuItem key={et.id} value={et.id}>{et.name}</MenuItem>)}
+                                            {equipmentTypes?.map((et) => <MenuItem key={et._id || et.id} value={et._id || et.id}>{et.name}</MenuItem>)}
                                         </Select>
                                     )}
                                 />
@@ -101,7 +101,7 @@ const CreateAsset = ({ open, onClose, onSuccess }) => {
                                     rules={{ required: 'Base is required' }}
                                     render={({ field }) => (
                                         <Select {...field} label="Base">
-                                            {bases?.map((b) => <MenuItem key={b.id} value={b.id}>{b.name}</MenuItem>)}
+                                            {bases?.map((b, idx) => <MenuItem key={b.id || idx} value={b.id}>{b.name}</MenuItem>)}
                                         </Select>
                                     )}
                                 />

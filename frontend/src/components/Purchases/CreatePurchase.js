@@ -31,7 +31,7 @@ const CreatePurchase = ({ open, onClose, onSuccess }) => {
 
     const { data: bases, isLoading: basesLoading } = useQuery({
         queryKey: ['bases'],
-        queryFn: () => api.get('/bases').then(res => res.data.bases),
+        queryFn: () => api.get('/bases').then(res => res.data?.bases || []),
     });
 
     const createPurchaseMutation = useMutation({
@@ -39,6 +39,7 @@ const CreatePurchase = ({ open, onClose, onSuccess }) => {
         onSuccess: (data) => {
             queryClient.invalidateQueries({ queryKey: ['purchases'] });
             queryClient.invalidateQueries({ queryKey: ['assets'] });
+            queryClient.invalidateQueries({ queryKey: ['dashboard-metrics'] });
             onSuccess(`Purchase for ${data.data.quantity}x ${data.data.equipmentType.name} recorded successfully!`);
             handleClose();
         },
@@ -50,6 +51,7 @@ const CreatePurchase = ({ open, onClose, onSuccess }) => {
     const onSubmit = (data) => {
         const payload = {
             ...data,
+            quantity: parseInt(data.quantity, 10),
             unitPrice: parseFloat(data.unitPrice),
             totalAmount: parseFloat(data.quantity) * parseFloat(data.unitPrice),
         };
@@ -83,9 +85,9 @@ const CreatePurchase = ({ open, onClose, onSuccess }) => {
                                         rules={{ required: 'Base is required' }}
                                         render={({ field }) => (
                                             <Select {...field} label="Base" disabled={basesLoading}>
-                                                {basesLoading ? <MenuItem><em>Loading...</em></MenuItem> :
-                                                    bases?.map((base) => (
-                                                        <MenuItem key={base.id} value={base.id}>{base.name}</MenuItem>
+                                                {basesLoading ? <MenuItem key="loading"><em>Loading...</em></MenuItem> :
+                                                    bases?.map((base, idx) => (
+                                                        <MenuItem key={base._id || base.id || idx} value={base._id || base.id}>{base.name}</MenuItem>
                                                     ))}
                                             </Select>
                                         )}
@@ -104,7 +106,7 @@ const CreatePurchase = ({ open, onClose, onSuccess }) => {
                                             <Select {...field} label="Equipment Type" disabled={typesLoading}>
                                                 {typesLoading ? <MenuItem><em>Loading...</em></MenuItem> :
                                                     equipmentTypes?.map((type) => (
-                                                        <MenuItem key={type.id} value={type.id}>{type.name}</MenuItem>
+                                                        <MenuItem key={type._id} value={type._id}>{type.name}</MenuItem>
                                                     ))}
                                             </Select>
                                         )}
@@ -150,7 +152,20 @@ const CreatePurchase = ({ open, onClose, onSuccess }) => {
                                     name="purchaseDate"
                                     control={control}
                                     rules={{ required: 'Purchase date is required' }}
-                                    render={({ field }) => <DatePicker {...field} label="Purchase Date" slotProps={{ textField: { fullWidth: true, error: !!errors.purchaseDate, helperText: errors.purchaseDate?.message } }} />}
+                                    render={({ field }) => (
+                                        <DatePicker
+                                            {...field}
+                                            value={field.value ?? null}
+                                            label="Purchase Date"
+                                            slotProps={{
+                                                textField: {
+                                                    fullWidth: true,
+                                                    error: !!errors.purchaseDate,
+                                                    helperText: errors.purchaseDate?.message
+                                                }
+                                            }}
+                                        />
+                                    )}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
